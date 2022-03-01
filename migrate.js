@@ -1,51 +1,59 @@
-const sequelize = require("sequelize");
+const Sequelize = require("sequelize");
 
-const sequelize = new Sequelize(
-  "mysql://davidliv:50336553@oceanus.cse.buffalo.edu:3306/"
+const sql = new Sequelize(
+  "mysql://davidliv:50336553@oceanus.cse.buffalo.edu:3306/davidliv_db"
 );
 
 try {
-  sequelize.authenticate();
+  sql.authenticate();
   console.log("Connection has been established successfully.");
 } catch (error) {
   console.error("Unable to connect to the database:", error);
 }
 
-const store_table = sequelize.define("store_table", {
-  id: {
-    type: sequelize.BIGINT,
-    allowNull: false,
-    primaryKey: true,
-      autoIncrement: true,
-  },
-  storeName: {
-    type: sequelize.TEXT,
-    allowNull: false,
-  },
-  location: {
-    type: sequelize.TEXT
-  },
-},
+const store_table = sql.define(
+  "store_table",
   {
-      tableName: "storeName"
-  },
-);
-
-const drink = sequelize.define("drink", {
     id: {
-      type: sequelize.BIGINT,
+      type: Sequelize.BIGINT,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
     },
     storeName: {
-      type: sequelize.TEXT,
+      type: Sequelize.TEXT,
       allowNull: false,
     },
     location: {
-      type: sequelize.TEXT
+      type: Sequelize.TEXT,
     },
-    {
-        tableName: "drink"
+  },
+  {
+    tableName: "storeName",
+  }
+);
+
+const drink = sql.define(
+  "drink",
+  {
+    id: {
+      type: Sequelize.BIGINT,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
     },
-  );
+    drinkName: {
+      type: Sequelize.TEXT,
+      allowNull: false,
+    },
+  },
+  {
+    tableName: "drink",
+  }
+);
+
+module.exports = {
+  sql: sql,
+  store_table: store_table,
+  drink: drink,
+};
