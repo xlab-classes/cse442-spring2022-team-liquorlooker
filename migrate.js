@@ -89,8 +89,9 @@ const drinkPrice = sql.define(
       primaryKey: true,
     },
     drink_price: {
-      type: Sequelize.INTEGER,
-      allowNull: false,
+      type: Sequelize.DOUBLE,
+      allowNull: true,
+      defaultValue: 0,
     },
   },
   {
