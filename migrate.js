@@ -29,7 +29,7 @@ const storeTable = sql.define(
     },
   },
   {
-    tableName: "storeTabler",
+    tableName: "storeTable",
   }
 );
 
