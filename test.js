@@ -1,11 +1,3 @@
-// const { authenticateUser } = require("./userCRUD");
-// const adder = require("./userCRUD");
-// //adder.addUser("david", 1234);
-// authenticateUser("david", "1234").then(
-//   (value) => {
-//     console.log(value);
-//   },
-//   (reason) => {
-//     console.log("failed", reason);
-//   }
-// );
+const { addStore } = require("./storeCRUD");
+
+addStore("Premier Wine & Spirits", "42.99180939829081, -78.81982022818012");
