@@ -11,8 +11,8 @@ try {
   console.error("Unable to connect to the database:", error);
 }
 
-const store_table = sql.define(
-  "store_table",
+const storeTable = sql.define(
+  "storeTable",
   {
     id: {
       type: Sequelize.BIGINT,
@@ -29,7 +29,7 @@ const store_table = sql.define(
     },
   },
   {
-    tableName: "storeName",
+    tableName: "storeTabler",
   }
 );
 
@@ -52,8 +52,32 @@ const drink = sql.define(
   }
 );
 
+const drinkPrice = sql.define(
+  "drinkPrice",
+  {
+    store_id: {
+      type: Sequelize.BIGINT,
+      allowNull: false,
+      primaryKey: true,
+    },
+    drink_id: {
+      type: Sequelize.BIGINT,
+      allowNull: false,
+      primaryKey: true,
+    },
+    drink_price: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+    },
+  },
+  {
+    tableName: "drinkPrice",
+  }
+);
+
 module.exports = {
   sql: sql,
-  store_table: store_table,
+  storeTable: storeTable,
   drink: drink,
+  drinkPrice: drinkPrice,
 };
