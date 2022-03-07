@@ -52,6 +52,29 @@ const drink = sql.define(
   }
 );
 
+const User = sql.define(
+  "User",
+  {
+    id: {
+      type: Sequelize.BIGINT,
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    userName: {
+      type: Sequelize.TEXT,
+      allowNull: false,
+    },
+    hash: {
+      type: Sequelize.STRING(60),
+      allowNull: false,
+    },
+  },
+  {
+    tableName: "User",
+  }
+);
+
 const drinkPrice = sql.define(
   "drinkPrice",
   {
@@ -80,4 +103,5 @@ module.exports = {
   storeTable: storeTable,
   drink: drink,
   drinkPrice: drinkPrice,
+  User: User,
 };

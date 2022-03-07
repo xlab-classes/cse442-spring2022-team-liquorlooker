@@ -1,4 +1,3 @@
-const { drink } = require("./migrate");
 const db = require("./migrate");
 async function addDrink(elDrink) {
   const newDrink = await db.drink.create({ drinkName: elDrink });
