@@ -2,7 +2,7 @@ import React from "react";
 import TextField from "@mui/material/TextField";
 import "../styles/Home.css";
 import MyList from "../components/List/List";
-import Map from "../assets/maps.png";
+//import Map from "../assets/maps.png";
 
 const Home = () => {
   return (
