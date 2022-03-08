@@ -12,15 +12,17 @@ const Home = () => {
         <style>{"body { background-color: #363636; }"}</style>
       </Helmet>
       <div className="sidebar">
-        <TextField
-          id="radius-tf"
-          label="Radius"
-          variant="outlined"
-          size="small"
-          InputLabelProps={{
-            style: { color: "azure" },
-          }}
-        />
+        <div className="radius">
+          <TextField
+            id="radius-tf"
+            label="Radius"
+            variant="outlined"
+            size="small"
+            InputLabelProps={{
+              style: { color: "azure" },
+            }}
+          />
+        </div>
         <MyList />
       </div>
 

@@ -6,11 +6,9 @@
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #363636;
     width: 100%;
-    border-style: solid;
-    border-color: azure;
-    border-width: 1px;
+    max-width: 97.8vw;
+    border-bottom: 1px solid azure;
     border-radius: 5px;
-    margin: 0;
     padding: 1px 5px;
 
 }

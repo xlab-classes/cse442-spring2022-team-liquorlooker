@@ -2,38 +2,37 @@
     display: flex;
     justify-content:space-between;
     text-align: center;
-    margin: 10px;
-    width: 100%;
-    height: 100%;
-    padding: 10px;
+    width:max-content;
+    height: max-content;
+    padding: 7px;
     max-width: 90vw;
     max-height: 90vh;
 }
 
 .right{
    flex-grow: 1;
-   border-radius: 5px;
+   padding-left: 10px;
+   width: fit-content;
+   height: fit-content;
+}
+
+.search, .radius {
+    padding-bottom: 10px;
 }
 
 
-#search-tf{
+
+#search-tf, #radius-tf{
     background-color: #514E4E;
     border-style: solid;
     border-color: azure;
     border-width: 1px;
     border-radius: 5px;
 
-}
-#radius-tf{
-    background-color: #514E4E;
-    border-style: solid;
-    border-color: azure;
-    border-width: 1px;
-    border-radius: 5px;
 }
 
 .map {
-    padding: 10px;
+    padding: 3px;
     height: 80vh;
     width: 77vw;
     max-width:90vw;
