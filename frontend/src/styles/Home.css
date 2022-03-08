@@ -1,0 +1,19 @@
+.main {
+    display: flex;
+    justify-content:space-between;
+    text-align: center;
+    margin: 30px auto;
+    padding: 10px;
+}
+
+.right{
+   flex-grow: 1;
+   
+}
+
+
+.map {
+    height: 90vh;
+    max-width:max-content;
+    max-height: 90vh;
+}
