@@ -15,13 +15,17 @@ const MyList = (props) => {
       sx={{
         width: "100%",
         maxWidth: 360,
-        bgcolor: "background.paper",
+        color: 'azure',
+        bgcolor: "#363636",
         position: "relative",
         overflow: "auto",
         maxHeight: '80vh',
         minWidth:'20vw',
         maxWidth: '100vw',
         overflow: 'auto',
+        border: 1, 
+        borderColor: 'white',
+        borderRadius: 2,
         "& ul": { padding: 0 },
       }}
     >
