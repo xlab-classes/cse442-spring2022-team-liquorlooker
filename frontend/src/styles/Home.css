@@ -2,18 +2,20 @@
     display: flex;
     justify-content:space-between;
     text-align: center;
-    margin: 30px auto;
+    margin: 10px;
     padding: 10px;
+    max-width: 90vw;
+    max-height: 90vh;
 }
 
 .right{
    flex-grow: 1;
-   
 }
 
-
 .map {
-    height: 90vh;
-    max-width:max-content;
+    padding: 10px;
+    height: 80vh;
+    width: 77vw;
+    max-width:90vw;
     max-height: 90vh;
 }

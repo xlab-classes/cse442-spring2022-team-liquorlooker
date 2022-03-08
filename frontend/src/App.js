@@ -7,16 +7,18 @@ import Layout from "./components/Navbar/Layout"
 
 function App() {
   return (
-  <>
+  <>  
+      <div className="App">
       <Routes>
 
         <Route path='/' element={<Layout />}>
           <Route index element={<Home />} />
-          
           <Route path="*" element={<NoMatch />} />
         </Route>
         <Route path='/login' element={<Login />} />
+        
       </Routes>
+      </div>
   </>
   );
 }

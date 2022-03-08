@@ -18,7 +18,9 @@ const MyList = (props) => {
         bgcolor: "background.paper",
         position: "relative",
         overflow: "auto",
-        maxHeight: '90vh',
+        maxHeight: '80vh',
+        minWidth:'20vw',
+        maxWidth: '100vw',
         overflow: 'auto',
         "& ul": { padding: 0 },
       }}
