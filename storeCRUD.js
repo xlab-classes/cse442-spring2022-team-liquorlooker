@@ -16,7 +16,30 @@ async function deleteStore(storeName) {
   });
 }
 
+async function getStoreLocation(storeName) {
+  const store = await db.storeTable.findOne({
+    where: {
+      storeName: storeName,
+    },
+  });
+  return store.location;
+}
+
+async function updateStoreLocation(storeName, newLocation) {
+  const answer = await db.storeTable.update(
+    { location: newLocation },
+    {
+      where: {
+        storeName: storeName,
+      },
+    }
+  );
+  console.log(answer);
+}
+
 module.exports = {
   addStore: addStore,
   deleteStore: deleteStore,
+  getStoreLocation: getStoreLocation,
+  updateStoreLocation: updateStoreLocation,
 };
