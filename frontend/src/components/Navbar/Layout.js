@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Outlet, Link } from "react-router-dom";
 import "./Layout.css"
+import { TextField } from "@mui/material";
 
 const Layout = () => {
     return (
@@ -11,6 +12,17 @@ const Layout = () => {
           <nav className="navbar">
             <Link to="/" className="logo">LiquorLooker</Link>
             <ul className="nav-links">
+            <div className="navbar-search">
+              <TextField
+                id="navbar-search-tf"
+                label="Search"
+                variant="outlined"
+                size="small"
+                InputLabelProps={{
+                  style: { color: "azure" },
+                }}
+              />
+            </div>
               <li className="nav-item">
                 <Link to="/login" className="link">Login</Link>
               </li>

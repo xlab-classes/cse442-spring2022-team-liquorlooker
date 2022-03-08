@@ -27,6 +27,14 @@
     font-weight: 600;
 }
 
+#navbar-search-tf{
+    background-color: #514E4E;
+    border-style: solid;
+    /* border-color: azure; */
+    border-width: 1px;
+    border-radius: 5px;
+}
+
 .link {
     text-decoration: none;
     color:azure
