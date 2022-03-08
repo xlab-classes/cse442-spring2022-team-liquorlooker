@@ -9,11 +9,11 @@ import { User } from './users/users.entity';
 @Module({
   imports: [AuthModule, UsersModule, TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
+      host: 'oceanus',
       port: 3306,
-      username: 'root',
-      password: 'tunafish',
-      database: 'liquorlookers',
+      username: 'mcfocacc',
+      password: 'sunGl@ss1824',
+      database: 'mcfocacc_db',
       entities: [User],
       autoLoadEntities: true,
       synchronize: true,
