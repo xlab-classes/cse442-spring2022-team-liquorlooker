@@ -6,22 +6,21 @@ import ListItemText from '@mui/material/ListItemText';
 
 const MyList = (props) => {
   return (
-    // <ul>
-    //     {data.map((item) => (
-    //         <li key={item.id}>{item.text}</li>
-    //     ))}
-    // </ul>
     <List
       sx={{
         width: "100%",
         maxWidth: 360,
-        bgcolor: "background.paper",
+        color: 'azure',
+        bgcolor: "#363636",
         position: "relative",
         overflow: "auto",
-        maxHeight: '80vh',
+        maxHeight: '79vh',
         minWidth:'20vw',
         maxWidth: '100vw',
         overflow: 'auto',
+        border: 1, 
+        borderColor: 'white',
+        borderRadius: 2,
         "& ul": { padding: 0 },
       }}
     >

@@ -3,33 +3,45 @@ import TextField from "@mui/material/TextField";
 import "../styles/Home.css";
 import MyList from "../components/List/List";
 import Map from "../assets/maps.png";
+import { Helmet } from "react-helmet";
 
 const Home = () => {
   return (
-      <main className="main">
-        <div className="sidebar">
+    <main className="main">
+      <Helmet>
+        <style>{"body { background-color: #363636; }"}</style>
+      </Helmet>
+      <div className="sidebar">
+        <div className="radius">
           <TextField
-            id="outlined-basic"
+            id="radius-tf"
             label="Radius"
             variant="outlined"
             size="small"
+            InputLabelProps={{
+              style: { color: "azure" },
+            }}
           />
-          <MyList />
         </div>
+        <MyList />
+      </div>
 
-        <div className="right">
-          <div className="search">
-            <TextField
-              id="outlined-basic"
-              label="Search Drink"
-              variant="outlined"
-              fullWidth="true"
-              size="small"
-            />
-          </div>
-          <img className="map" src={Map} alt="Map"/>
+      <div className="right">
+        <div className="search">
+          <TextField
+            id="search-tf"
+            label="Search Drink"
+            variant="outlined"
+            fullWidth="true"
+            size="small"
+            InputLabelProps={{
+              style: { color: "azure" },
+            }}
+          />
         </div>
-      </main>
+        <img className="map" src={Map} alt="Map" />
+      </div>
+    </main>
   );
 };
 

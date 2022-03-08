@@ -1,28 +1,38 @@
-nav {
-    width: 100%;
-    margin:0,0
-}
 
 .navbar{
     display: flex;
     justify-content: space-between;
     align-items:baseline;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #363636;
     width: 100%;
-    margin: 0;
+    max-width: 97.8vw;
+    border-bottom: 1px solid azure;
+    border-radius: 5px;
+    padding: 1px 5px;
+
 }
 
 .logo {
    text-decoration: none;
    font-size:xx-large; 
-   font-weight: 700;
+   font-weight: 600;
    color:azure;
 }
 
 .nav-links{
     display: flex;
     list-style-type: none;
+    font-size:large;
+    font-weight: 600;
+}
+
+#navbar-search-tf{
+    background-color: #514E4E;
+    border-style: solid;
+    /* border-color: azure; */
+    border-width: 1px;
+    border-radius: 5px;
 }
 
 .link {
