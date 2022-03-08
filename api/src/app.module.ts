@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -7,13 +8,17 @@ import { UsersModule } from './users/users.module';
 import { User } from './users/users.entity';
 
 @Module({
-  imports: [AuthModule, UsersModule, TypeOrmModule.forRoot({
+  imports: [
+    ConfigModule.forRoot(),
+    AuthModule,
+    UsersModule,
+    TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'oceanus',
-      port: 3306,
-      username: 'mcfocacc',
-      password: 'sunGl@ss1824',
-      database: 'mcfocacc_db',
+      host: process.env.DB_HOST,
+      port: parseInt(process.env.DB_PORT),
+      username: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
       entities: [User],
       autoLoadEntities: true,
       synchronize: true,
