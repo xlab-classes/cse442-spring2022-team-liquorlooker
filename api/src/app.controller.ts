@@ -21,4 +21,10 @@ export class AppController {
     const {email, password} = credentials;
     return await this.authService.register(email, password);
   }
+
+  @Post('auth/login')
+  async login(@Body() credentials: AuthDto): Promise<User> {
+    const {email, password} = credentials;
+    return await this.authService.login(email, password);
+  }
 }
