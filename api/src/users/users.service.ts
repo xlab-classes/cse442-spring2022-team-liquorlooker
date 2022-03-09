@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './users.entity';
@@ -10,11 +10,15 @@ export class UsersService {
     private usersRepository: Repository<User>,
   ) {}
 
-  async userWithEmailExists(email: string): Promise<boolean> {
-    const user = await this.usersRepository
+  async getUserByEmail(email: string): Promise<User> {
+    return await this.usersRepository
       .createQueryBuilder('user')
       .where('user.email = :email', { email: email })
       .getOne();
+  }
+
+  async userWithEmailExists(email: string): Promise<boolean> {
+    const user = await this.getUserByEmail(email);
     if (user) {
       return true;
     }
@@ -23,7 +27,7 @@ export class UsersService {
 
   async createUser(email: string, password: string): Promise<User> {
     if (await this.userWithEmailExists(email)) {
-      return null;
+      throw HttpStatus.BAD_REQUEST;
     }
     const user = await this.usersRepository.create({
       email: email,
