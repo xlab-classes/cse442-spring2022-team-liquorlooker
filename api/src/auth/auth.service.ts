@@ -1,10 +1,14 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { UsersService } from 'src/users/users.service';
 import { User } from 'src/users/users.entity';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
-    constructor(private readonly usersService: UsersService) {}
+    constructor(
+        private readonly usersService: UsersService,
+        private readonly jwtService: JwtService
+    ) {}
 
     async register(email: string, password: string): Promise<User> {
         return await this.usersService.createUser(email, password);
