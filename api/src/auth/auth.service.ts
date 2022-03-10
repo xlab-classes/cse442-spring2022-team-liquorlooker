@@ -10,11 +10,11 @@ export class AuthService {
         return await this.usersService.createUser(email, password);
     }
 
-    async login(email: string, password: string): Promise<User> {
+    async validateUser(email: string, password: string): Promise<User> {
         const user = await this.usersService.getUserByEmail(email);
         if (user && user.password === password) {
             return user;
         }
-        throw HttpStatus.UNAUTHORIZED;
+        return null;
     }
 }
