@@ -18,16 +18,4 @@ export class AppController {
   getHello(): string {
     return this.appService.getHello();
   }
-
-  @Post('auth/register')
-  async register(@Body() credentials: AuthDto): Promise<User> {
-    const { email, password } = credentials;
-    return await this.authService.register(email, password);
-  }
-
-  @UseGuards(LocalAuthGuard)
-  @Post('auth/login')
-  async login(@Request() req) {
-    return this.authService.login(req.user);
-  }
 }
