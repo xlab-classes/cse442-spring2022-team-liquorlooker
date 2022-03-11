@@ -4,10 +4,18 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { Drink } from './drinks/drinks.entity';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
+import { User } from './users/users.entity';
+import { AuthService } from './auth/auth.service';
+import { DrinksModule } from './drinks/drinks.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
+    AuthModule,
+    UsersModule,
+    DrinksModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: process.env.DB_HOST,
@@ -15,12 +23,12 @@ import { Drink } from './drinks/drinks.entity';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      entities: [Drink],
+      entities: [User,Drink],
       autoLoadEntities: true,
       synchronize: true,
-    }),
+    })
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, AuthService],
 })
 export class AppModule {}
