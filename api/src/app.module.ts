@@ -9,6 +9,7 @@ import { UsersModule } from './users/users.module';
 import { User } from './users/users.entity';
 import { AuthService } from './auth/auth.service';
 import { DrinksModule } from './drinks/drinks.module';
+import { drinkPrice } from './drinkPrice/drinkPrice.entity';
 
 @Module({
   imports: [
@@ -23,10 +24,10 @@ import { DrinksModule } from './drinks/drinks.module';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      entities: [User,Drink],
+      entities: [User, Drink, drinkPrice],
       autoLoadEntities: true,
       synchronize: true,
-    })
+    }),
   ],
   controllers: [AppController],
   providers: [AppService, AuthService],
