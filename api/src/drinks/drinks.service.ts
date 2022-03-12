@@ -10,11 +10,11 @@ export class DrinksService {
     private drinksRepository: Repository<Drink>,
   ) {}
 
-  async getDrinkIdByName(drinkName: string): Promise<Drink> {
-    return await this.drinksRepository
-      .createQueryBuilder('drink')
-      .where('drink.drinkName = :drinkName', { drinkName: drinkName })
-      .getOne();
+  async getDrinkIdByName(drinkName: string): Promise<Drink[]> {
+    return await this.drinksRepository.find({
+      select: ['id'],
+      where: [{ drinkName: drinkName }],
+    });
   }
 
   async addDrink(drinkName: string): Promise<Drink> {
