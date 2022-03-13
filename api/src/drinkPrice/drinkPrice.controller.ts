@@ -4,7 +4,10 @@ import {
   Get,
   UseInterceptors,
   Param,
+  Post,
+  Body,
 } from '@nestjs/common';
+import { drinkPriceDto } from './drinkPrice.dto';
 import { drinkPrice } from './drinkPrice.entity';
 import { drinkPriceService } from './drinkPrice.service';
 
@@ -12,8 +15,16 @@ import { drinkPriceService } from './drinkPrice.service';
 @UseInterceptors(ClassSerializerInterceptor)
 export class drinkPriceController {
   constructor(private readonly drinkPriceService: drinkPriceService) {}
-  @Get('getDrink/:drinkName')
+  @Get(':drinkName')
   async getDrink(@Param() drink): Promise<drinkPrice[]> {
     return await this.drinkPriceService.getDrinkPricesByName(drink.drinkName);
+  }
+  @Post('addDrinkPrice/')
+  async addDrinkprice(@Body() drinkPriceDto: drinkPriceDto) {
+    return await this.drinkPriceService.addDrinkPrice(
+      drinkPriceDto.storeName,
+      drinkPriceDto.drinkName,
+      drinkPriceDto.drinkPrice,
+    );
   }
 }

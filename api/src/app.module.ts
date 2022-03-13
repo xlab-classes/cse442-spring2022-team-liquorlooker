@@ -11,13 +11,16 @@ import { AuthService } from './auth/auth.service';
 import { DrinksModule } from './drinks/drinks.module';
 import { drinkPrice } from './drinkPrice/drinkPrice.entity';
 import { store } from './store/store.entity';
-
+import { storeModule } from './store/store.module';
+import { DrinksPriceModule } from './drinkPrice/drinkPrice.module';
 @Module({
   imports: [
     ConfigModule.forRoot(),
     AuthModule,
     UsersModule,
     DrinksModule,
+    storeModule,
+    DrinksPriceModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: process.env.DB_HOST,

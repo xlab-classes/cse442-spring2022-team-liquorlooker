@@ -10,11 +10,21 @@ export class DrinksService {
     private drinksRepository: Repository<Drink>,
   ) {}
 
-  async getDrinkIdByName(drinkName: string): Promise<Drink[]> {
-    return await this.drinksRepository.find({
+  async getDrinkIdByName(drinkName: string): Promise<Drink> {
+    return await this.drinksRepository.findOne({
       select: ['id'],
       where: [{ drinkName: drinkName }],
     });
+  }
+
+  async drinkExists(drinkName: string): Promise<boolean> {
+    const count = await this.drinksRepository.count({ drinkName: drinkName });
+
+    if (count === 0) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
   async addDrink(drinkName: string): Promise<Drink> {

@@ -20,7 +20,10 @@ export class DrinksController {
   async getDrink(@Param() params) {
     return await this.drinksService.getDrinkIdByName(params.drinkName);
   }
-
+  @Get('exists/:drinkName')
+  async drinkExists(@Param() params) {
+    return await this.drinksService.drinkExists(params.drinkName);
+  }
   @Post('addDrink')
   async addDrink(@Body() drink: drinkDto) {
     return this.drinksService.addDrink(drink.drinkName);
