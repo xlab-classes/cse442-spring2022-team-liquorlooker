@@ -20,6 +20,10 @@ export class storeController {
   async getStore(@Param() store): Promise<store> {
     return await this.storeService.getStoreIdByName(store.storeName);
   }
+  @Get('getLocation')
+  async getStoreLocation(@Body() storeDto: storeDto): Promise<store> {
+    return await this.storeService.getStoreLocation(storeDto.storeName);
+  }
   @Post('addStore')
   async addStore(@Body() storeDto: storeDto): Promise<store> {
     return await this.storeService.addStore(
