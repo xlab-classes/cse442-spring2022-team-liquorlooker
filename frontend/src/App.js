@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import NoMatch from './pages/NoMatch';
 import DrinkDetail from "./pages/DrinkDetail";
 import Layout from "./components/Navbar/Layout"
+import Registration from "./pages/Registration"
 
 function App() {
   return (
@@ -16,8 +17,21 @@ function App() {
           <Route index element={<Home />} />
           <Route path="*" element={<NoMatch />} />
         </Route>
-        <Route path='/login' element={<Login />} />
-        <Route path='/drinkDetail' element={<DrinkDetail />} />
+
+        <Route path='/login' element={<Layout />}>
+          <Route index element={<Login />} />
+          <Route path="*" element={<NoMatch />} />
+        </Route>
+
+        <Route path='/drinkDetail' element={<Layout />}>
+          <Route index element={<DrinkDetail />} />
+          <Route path="*" element={<NoMatch />} />
+        </Route>
+
+        <Route path='/registration' element={<Layout />}>
+          <Route index element={<Registration />} />
+          <Route path="*" element={<NoMatch />} />
+        </Route>
       </Routes>
       </div>
   </>
