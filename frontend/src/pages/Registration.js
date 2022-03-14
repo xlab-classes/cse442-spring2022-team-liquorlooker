@@ -8,7 +8,7 @@ import Button from '@mui/material/TextField'
 
 const Registration = () => {
   return (
-    <body>
+    <main>
       <Helmet>
           <style>{'body {background-color: #363636; }'}</style>
       </Helmet>
@@ -16,11 +16,11 @@ const Registration = () => {
         <h1><span className={styles.Register}>Register</span></h1>
       </div>
 
-      <div className={styles.usernameLocation}>
-        <div className={styles.username}>
+      <div className={styles.emailLocation}>
+        <div className={styles.email}>
           <TextField
-            id="username-tf"
-            label="Enter Username"
+            id="email-tf"
+            label="Enter Email"
             variant="outlined"
             size="normal"
             InputLabelProps={{
@@ -63,7 +63,7 @@ const Registration = () => {
           <Button type="submit"></Button>
         </Link>
       </div>
-    </body>
+    </main>
   );
 }
 

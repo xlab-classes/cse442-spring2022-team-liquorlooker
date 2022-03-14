@@ -1,12 +1,13 @@
 .Register{
-    position: absolute;
-    top: 130px;
-    left: 653px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
     font-size: 64px;
     color: rgba(255,255,255,1);
 }
 
-#username-tf, #password-tf, #reeneterpassword-tf{
+#email-tf, #password-tf, #reeneterpassword-tf{
     background-color: #514E4E;
     border-style: solid;
     border-color: azure;
@@ -14,30 +15,19 @@
     border-radius: 5px;
 }
 
-.username, .password, .reeneterpassword {
-    padding-bottom: 10px;
+.email, .password, .reeneterpassword {
+    padding-bottom: 12px;
 }
 
-.usernameLocation{
-    position: absolute;
-    top: 220px;
-    left: 650px;
-}
-
-.passwordLocation{
-    position: absolute;
-    top: 300px;
-    left: 650px;
-}
-
-.reenterpasswordLocation{
-    position: absolute;
-    top: 380px;
-    left: 650px;
+.emailLocation, .passwordLocation, .reenterpasswordLocation{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .submit{
-    position: absolute;
-    top: 460px;
-    left: 720px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
 }

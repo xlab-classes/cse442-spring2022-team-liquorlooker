@@ -10,17 +10,17 @@ const Login = () => {
   return (
     <body>
       <Helmet>
-          <style>{'body {background-color: #363636; }'}</style>
+        <style>{'body {background-color: #363636; }'}</style>
       </Helmet>
       <div>
         <h1><span className={styles.Login}>Login</span></h1>
       </div>
 
-      <div className={styles.usernameLocation}>
-        <div className={styles.username}>
+      <div className={styles.emailLocation}>
+        <div className={styles.email}>
           <TextField
-            id="username-tf"
-            label="Enter Username"
+            id="email-tf"
+            label="Enter Email"
             variant="outlined"
             size="normal"
             InputLabelProps={{
@@ -46,6 +46,12 @@ const Login = () => {
 
       <div className={styles.submit}>
         <Link to="/">
+          <Button type="submit"></Button>
+        </Link>
+      </div>
+
+      <div className={styles.register}>
+        <Link to="/registration">
           <Button type="submit"></Button>
         </Link>
       </div>
