@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useState } from "react";
 import TextField from "@mui/material/TextField";
 import "../styles/Home.css";
 import MyList from "../components/List/List";
@@ -7,8 +7,10 @@ import data from "../components/List/store.json";
 import { Helmet } from "react-helmet";
 
 const Home = () => {
+  const [value, setValue] = useState(0);
+
   return (
-    <main className="main">
+    <body className="main">
       <Helmet>
         <style>{"body { background-color: #363636; }"}</style>
       </Helmet>
@@ -22,9 +24,19 @@ const Home = () => {
             InputLabelProps={{
               style: { color: "azure" },
             }}
+            InputProps={{
+              style: { color: "azure" },
+            }}
+            defaultValue= "5"
+            onChange={(event) =>
+              event.target.value < 1
+                ? (event.target.value = "")
+                : event.target.value
+            }
+            type="number"
           />
         </div>
-        <MyList data={data}/>
+        <MyList data={data} />
       </div>
 
       <div className="right">
@@ -38,11 +50,15 @@ const Home = () => {
             InputLabelProps={{
               style: { color: "azure" },
             }}
+            InputProps={{
+              style: { color: "azure" },
+            }}
+            type="search"
           />
         </div>
         <img className="map" src={Map} alt="Map" />
       </div>
-    </main>
+    </body>
   );
 };
 

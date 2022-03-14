@@ -30,7 +30,7 @@
 #navbar-search-tf{
     background-color: #514E4E;
     border-style: solid;
-    /* border-color: azure; */
+    border-color: rgb(117, 117, 117);
     border-width: 1px;
     border-radius: 5px;
 }
