@@ -15,9 +15,11 @@ import { drinkPriceService } from './drinkPrice.service';
 @UseInterceptors(ClassSerializerInterceptor)
 export class drinkPriceController {
   constructor(private readonly drinkPriceService: drinkPriceService) {}
-  @Get(':drinkName')
-  async getDrink(@Param() drink): Promise<drinkPrice[]> {
-    return await this.drinkPriceService.getDrinkPricesByName(drink.drinkName);
+  @Get('getPrices')
+  async getDrink(@Body() drinkPriceDto: drinkPriceDto): Promise<drinkPrice[]> {
+    return await this.drinkPriceService.getDrinkPricesByName(
+      drinkPriceDto.drinkName,
+    );
   }
   @Post('addDrinkPrice/')
   async addDrinkprice(@Body() drinkPriceDto: drinkPriceDto) {
