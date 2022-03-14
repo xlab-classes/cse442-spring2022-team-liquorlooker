@@ -16,9 +16,9 @@ import { storeDto } from './store.dto';
 export class storeController {
   constructor(private readonly storeService: storeService) {}
 
-  @Get('getStore/:storeName')
-  async getStore(@Param() store): Promise<store> {
-    return await this.storeService.getStoreIdByName(store.storeName);
+  @Get('getStore')
+  async getStore(@Body() storeDto: storeDto): Promise<store> {
+    return await this.storeService.getStoreIdByName(storeDto.storeName);
   }
   @Get('getLocation')
   async getStoreLocation(@Body() storeDto: storeDto): Promise<store> {
