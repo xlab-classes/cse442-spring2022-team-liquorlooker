@@ -21,7 +21,7 @@ export class drinkPriceService {
     const drinkID = await this.drinkService.getDrinkIdByName(drinkName);
     return await this.drinkPriceRepository.find({
       select: ['store_id', 'drinkPrice'],
-      where: [{ drink_id: drinkID }],
+      where: [{ drink_id: drinkID.id }],
     });
   }
 
