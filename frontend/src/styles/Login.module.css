@@ -7,16 +7,10 @@
     color: rgba(255,255,255,1);
 }
 
-#email-tf, #password-tf{
-    background-color: #514E4E;
-    border-style: solid;
-    border-color: azure;
-    border-width: 1px;
-    border-radius: 5px;
-}
-
 .email, .password {
     padding-bottom: 12px;
+    background-color: #514E4E;
+    background-clip: content-box;
 }
 
 .emailLocation, .passwordLocation{

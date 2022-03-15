@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import styles from "../styles/Login.module.css"
 import {Helmet} from "react-helmet"
 import TextField from '@mui/material/TextField'
-import Button from '@mui/material/TextField'
 
 
 const Login = () => {
@@ -19,7 +18,6 @@ const Login = () => {
       <div className={styles.emailLocation}>
         <div className={styles.email}>
           <TextField
-            id="email-tf"
             label="Enter Email"
             variant="outlined"
             size="normal"
@@ -33,7 +31,6 @@ const Login = () => {
       <div className={styles.passwordLocation}>
         <div className={styles.password}>
           <TextField
-            id="password-tf"
             label="Enter Password"
             variant="outlined"
             size="normal"
@@ -46,13 +43,13 @@ const Login = () => {
 
       <div className={styles.submit}>
         <Link to="/">
-          <Button type="submit"></Button>
+          <button type="submit">Login</button>
         </Link>
       </div>
 
       <div className={styles.register}>
         <Link to="/registration">
-          <Button type="submit"></Button>
+          <button type="submit">Register</button>
         </Link>
       </div>
     </body>
