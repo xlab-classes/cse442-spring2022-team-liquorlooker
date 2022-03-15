@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, Double } from 'typeorm';
 
 @Entity()
 export class store {
@@ -8,6 +8,9 @@ export class store {
   @Column({ nullable: false })
   storeName: string;
 
-  @Column({ nullable: false })
-  location: string;
+  @Column({ type: 'double', nullable: false })
+  latitude: number;
+
+  @Column({ type: 'double', nullable: false })
+  longitude: number;
 }

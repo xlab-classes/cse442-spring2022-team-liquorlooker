@@ -1,7 +1,6 @@
-import { Double } from 'typeorm';
-
-export class storeDto {
+export class updateStoreDto {
   storeName: string;
+  newStoreName: string;
   latitude: number;
   longitude: number;
 }

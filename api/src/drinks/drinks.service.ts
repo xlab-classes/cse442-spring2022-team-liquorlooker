@@ -1,6 +1,6 @@
 import { HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { Drink } from './drinks.entity';
 
 @Injectable()
@@ -34,5 +34,26 @@ export class DrinksService {
 
     await this.drinksRepository.save(drink);
     return drink;
+  }
+
+  async deleteDrink(drinkName: string): Promise<DeleteResult> {
+    return await this.drinksRepository
+      .createQueryBuilder()
+      .delete()
+      .from(Drink)
+      .where('drinkName = :drinkName', { drinkName: drinkName })
+      .execute();
+  }
+
+  async updateDrink(
+    drinkName: string,
+    newDrinkName: string,
+  ): Promise<UpdateResult> {
+    return await this.drinksRepository
+      .createQueryBuilder()
+      .update(Drink)
+      .set({ drinkName: newDrinkName })
+      .where('drinkName = :drinkName', { drinkName: drinkName })
+      .execute();
   }
 }

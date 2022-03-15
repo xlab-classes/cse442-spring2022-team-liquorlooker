@@ -6,6 +6,7 @@ import {
   Param,
   Post,
   Body,
+  Delete,
 } from '@nestjs/common';
 import { DrinksService } from './drinks.service';
 import { Drink } from './drinks.entity';
@@ -28,5 +29,16 @@ export class DrinksController {
   @Post('addDrink')
   async addDrink(@Body() drinkDto: drinkDto) {
     return this.drinksService.addDrink(drinkDto.drinkName);
+  }
+  @Delete('deleteDrink')
+  async deleteDrink(@Body() drinkDto: drinkDto) {
+    return this.drinksService.deleteDrink(drinkDto.drinkName);
+  }
+  @Post('updateDrinkName')
+  async updateDrinkName(@Param() params) {
+    return this.drinksService.updateDrink(
+      params.drinkName,
+      params.newDrinkName,
+    );
   }
 }

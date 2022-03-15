@@ -6,10 +6,13 @@ import {
   Param,
   Post,
   Body,
+  Delete,
 } from '@nestjs/common';
 import { storeService } from './store.service';
 import { store } from './store.entity';
 import { storeDto } from './store.dto';
+import { updateStoreDto } from './updateStoreDto.dto';
+import { radiusDto } from './radiusDto.dto';
 
 @Controller('store')
 @UseInterceptors(ClassSerializerInterceptor)
@@ -28,7 +31,31 @@ export class storeController {
   async addStore(@Body() storeDto: storeDto): Promise<store> {
     return await this.storeService.addStore(
       storeDto.storeName,
-      storeDto.location,
+      storeDto.latitude,
+      storeDto.longitude,
+    );
+  }
+  @Delete('deleteStore')
+  async deleteStore(@Body() storeDto: storeDto) {
+    await this.storeService.deleteStore(storeDto.storeName);
+  }
+
+  @Post('updateStoreDetails')
+  async updatestore(@Body() updateStoreDto: updateStoreDto) {
+    await this.storeService.updateStore(
+      updateStoreDto.storeName,
+      updateStoreDto.newStoreName,
+      updateStoreDto.latitude,
+      updateStoreDto.longitude,
+    );
+  }
+
+  @Get('getStoresInRadius')
+  async getStoresinrad(@Body() radiusDto: radiusDto): Promise<store[]> {
+    return await this.storeService.getStoreWithinRadius(
+      radiusDto.radius,
+      radiusDto.latitude,
+      radiusDto.longitude,
     );
   }
 }

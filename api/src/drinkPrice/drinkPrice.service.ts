@@ -19,10 +19,11 @@ export class drinkPriceService {
 
   async getDrinkPricesByName(drinkName: string): Promise<drinkPrice[]> {
     const drinkID = await this.drinkService.getDrinkIdByName(drinkName);
-    return await this.drinkPriceRepository.find({
-      select: ['store_id', 'drinkPrice'],
+    const drinkPrices = await this.drinkPriceRepository.find({
+      select: ['storeName', 'drinkName', 'drinkPrice'],
       where: [{ drink_id: drinkID.id }],
     });
+    return drinkPrices;
   }
 
   async addDrinkPrice(
@@ -34,7 +35,9 @@ export class drinkPriceService {
     const drinkID = await this.drinkService.getDrinkIdByName(drinkName);
     const toBeAdded = await this.drinkPriceRepository.create({
       store_id: storeID.id,
+      storeName: storeName,
       drink_id: drinkID.id,
+      drinkName: drinkName,
       drinkPrice: drinkPrice,
     });
 
