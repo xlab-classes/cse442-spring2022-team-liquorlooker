@@ -21,6 +21,10 @@ const Layout = () => {
                 InputLabelProps={{
                   style: { color: "azure" },
                 }}
+                InputProps={{
+                  style: { color: "azure"},
+                }}
+                type="search"
               />
             </div>
               <li className="nav-item">

@@ -8,8 +8,8 @@ import {
     Body
 } from "@nestjs/common";
 import { AuthService } from "./auth.service";
-import { LocalAuthGuard } from "./local.auth-guard";
-import { AuthDto } from "./auth.dto";
+import { LocalAuthGuard } from "./jwt/local.auth-guard";
+import { AuthDto } from "./dto/auth.dto";
 import { User } from "src/users/users.entity";
 
 
