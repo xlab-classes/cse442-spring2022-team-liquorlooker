@@ -1,16 +1,20 @@
-import React from "react";
+import { React } from "react";
 import TextField from "@mui/material/TextField";
 import "../styles/Home.css";
 import MyList from "../components/List/List";
-import Map from "../assets/maps.png";
+import Map from "../images/maps.png";
+import data from "../components/List/store.json";
 import { Helmet } from "react-helmet";
 
 const Home = () => {
+
   return (
-    <main className="main">
+    <body className="main">
+
       <Helmet>
         <style>{"body { background-color: #363636; }"}</style>
       </Helmet>
+
       <div className="sidebar">
         <div className="radius">
           <TextField
@@ -21,9 +25,19 @@ const Home = () => {
             InputLabelProps={{
               style: { color: "azure" },
             }}
+            InputProps={{
+              style: { color: "azure" },
+            }}
+            defaultValue= "5"
+            onChange={(event) =>
+              event.target.value < 1
+                ? (event.target.value = "")
+                : event.target.value
+            }
+            type="number"
           />
         </div>
-        <MyList />
+        <MyList data={data} />
       </div>
 
       <div className="right">
@@ -37,11 +51,16 @@ const Home = () => {
             InputLabelProps={{
               style: { color: "azure" },
             }}
+            InputProps={{
+              style: { color: "azure" },
+            }}
+            type="search"
           />
         </div>
         <img className="map" src={Map} alt="Map" />
       </div>
-    </main>
+
+    </body>
   );
 };
 
