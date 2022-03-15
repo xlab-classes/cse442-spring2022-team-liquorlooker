@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React } from "react";
 import TextField from "@mui/material/TextField";
 import "../styles/Home.css";
 import MyList from "../components/List/List";
@@ -7,13 +7,14 @@ import data from "../components/List/store.json";
 import { Helmet } from "react-helmet";
 
 const Home = () => {
-  const [value, setValue] = useState(0);
 
   return (
     <body className="main">
+
       <Helmet>
         <style>{"body { background-color: #363636; }"}</style>
       </Helmet>
+
       <div className="sidebar">
         <div className="radius">
           <TextField
@@ -58,6 +59,7 @@ const Home = () => {
         </div>
         <img className="map" src={Map} alt="Map" />
       </div>
+
     </body>
   );
 };
