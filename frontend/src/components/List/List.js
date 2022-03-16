@@ -1,8 +1,8 @@
 import React from "react";
-import data from "./store.json";
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
+import { ListItemButton } from "@mui/material";
 
 const MyList = (props) => {
   return (
@@ -26,9 +26,11 @@ const MyList = (props) => {
     >
       
     <ul>
-        {data.map((item) => (
+        {props.data.map((item) => (
             <ListItem key={`${item.id}`}>
-                <ListItemText primary={`${item.text}`} />
+                <ListItemButton>
+                  <ListItemText primary={`${item.text}`} />
+                </ListItemButton>
             </ListItem>
         ))}
     </ul>

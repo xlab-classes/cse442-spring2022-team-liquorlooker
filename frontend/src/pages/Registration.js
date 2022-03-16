@@ -1,18 +1,18 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import styles from "../styles/Login.module.css"
+import styles from "../styles/Registration.module.css"
 import {Helmet} from "react-helmet"
 import TextField from '@mui/material/TextField'
 
 
-const Login = () => {
+const Registration = () => {
   return (
-    <body>
+    <main>
       <Helmet>
-        <style>{'body {background-color: #363636; }'}</style>
+          <style>{'body {background-color: #363636; }'}</style>
       </Helmet>
       <div>
-        <h1><span className={styles.Login}>Login</span></h1>
+        <h1><span className={styles.Register}>Register</span></h1>
       </div>
 
       <div className={styles.emailLocation}>
@@ -41,19 +41,26 @@ const Login = () => {
         </div>
       </div>
 
-      <div className={styles.submit}>
-        <Link to="/">
-          <button type="submit">Login</button>
-        </Link>
+      <div className={styles.reenterpasswordLocation}>
+        <div className={styles.reenterpassword}>
+          <TextField
+            label="Re-Enter Password"
+            variant="outlined"
+            size="normal"
+            InputLabelProps={{
+              style: { color: "azure" },
+            }}
+          />
+        </div>
       </div>
 
-      <div className={styles.register}>
-        <Link to="/registration">
+      <div className={styles.submit}>
+        <Link to="/">
           <button type="submit">Register</button>
         </Link>
       </div>
-    </body>
+    </main>
   );
 }
 
-export default Login;
+export default Registration;

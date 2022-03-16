@@ -1,3 +1,4 @@
 .App{
-    overflow-y: hidden;
+    width: 99vw;
+    height: 99vh;
 }

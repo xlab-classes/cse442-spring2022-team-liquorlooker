@@ -1,0 +1,34 @@
+.Login{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
+    font-size: 64px;
+    color: rgba(255,255,255,1);
+}
+
+.email, .password {
+    padding-bottom: 12px;
+    background-color: #514E4E;
+    background-clip: content-box;
+}
+
+.emailLocation, .passwordLocation{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.submit{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+}
+
+.register{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+}

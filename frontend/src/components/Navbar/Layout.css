@@ -6,7 +6,7 @@
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #363636;
     width: 100%;
-    max-width: 97.8vw;
+    max-width: 98vw;
     border-bottom: 1px solid azure;
     border-radius: 5px;
     padding: 1px 5px;
@@ -30,7 +30,7 @@
 #navbar-search-tf{
     background-color: #514E4E;
     border-style: solid;
-    /* border-color: azure; */
+    border-color: rgb(117, 117, 117);
     border-width: 1px;
     border-radius: 5px;
 }
