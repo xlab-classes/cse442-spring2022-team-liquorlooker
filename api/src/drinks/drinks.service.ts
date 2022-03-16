@@ -31,9 +31,11 @@ export class DrinksService {
     const drink = await this.drinksRepository.create({
       drinkName: drinkName,
     });
-
-    await this.drinksRepository.save(drink);
-    return drink;
+    try {
+      return await this.drinksRepository.save(drink);
+    } catch (error) {
+      return error;
+    }
   }
 
   async deleteDrink(drinkName: string): Promise<DeleteResult> {

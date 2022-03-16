@@ -18,12 +18,16 @@ export class drinkPriceService {
   ) {}
 
   async getDrinkPricesByName(drinkName: string): Promise<drinkPrice[]> {
-    const drinkID = await this.drinkService.getDrinkIdByName(drinkName);
-    const drinkPrices = await this.drinkPriceRepository.find({
-      select: ['storeName', 'drinkName', 'drinkPrice'],
-      where: [{ drink_id: drinkID.id }],
-    });
-    return drinkPrices;
+    try {
+      const drinkID = await this.drinkService.getDrinkIdByName(drinkName);
+      const drinkPrices = await this.drinkPriceRepository.find({
+        select: ['storeName', 'drinkName', 'drinkPrice'],
+        where: [{ drink_id: drinkID.id }],
+      });
+      return drinkPrices;
+    } catch (error) {
+      return error;
+    }
   }
 
   async addDrinkPrice(
@@ -40,9 +44,12 @@ export class drinkPriceService {
       drinkName: drinkName,
       drinkPrice: drinkPrice,
     });
-
-    await this.drinkPriceRepository.save(toBeAdded);
-    return toBeAdded;
+    try {
+      await this.drinkPriceRepository.save(toBeAdded);
+      return toBeAdded;
+    } catch (error) {
+      return error;
+    }
   }
 
   async deleteDrinkPrice(
@@ -51,13 +58,17 @@ export class drinkPriceService {
   ): Promise<DeleteResult> {
     const storeID = await this.storeService.getStoreIdByName(storeName);
     const drinkID = await this.drinkService.getDrinkIdByName(drinkName);
-    return await this.drinkPriceRepository
-      .createQueryBuilder()
-      .delete()
-      .from(drinkPrice)
-      .where('store_id = :store_id', { store_id: storeID.id })
-      .andWhere('drink_id = :drink_id', { drink_id: drinkID.id })
-      .execute();
+    try {
+      return await this.drinkPriceRepository
+        .createQueryBuilder()
+        .delete()
+        .from(drinkPrice)
+        .where('store_id = :store_id', { store_id: storeID.id })
+        .andWhere('drink_id = :drink_id', { drink_id: drinkID.id })
+        .execute();
+    } catch (error) {
+      return error;
+    }
   }
 
   async updateDrinkPrice(
@@ -67,12 +78,16 @@ export class drinkPriceService {
   ): Promise<UpdateResult> {
     const storeID = await this.storeService.getStoreIdByName(storeName);
     const drinkID = await this.drinkService.getDrinkIdByName(drinkName);
-    return await this.drinkPriceRepository
-      .createQueryBuilder()
-      .update(drinkPrice)
-      .set({ drinkPrice: newDrinkPrice })
-      .where('store_id = :store_id', { store_id: storeID.id })
-      .andWhere('drink_id = :drink_id', { drink_id: drinkID.id })
-      .execute();
+    try {
+      return await this.drinkPriceRepository
+        .createQueryBuilder()
+        .update(drinkPrice)
+        .set({ drinkPrice: newDrinkPrice })
+        .where('store_id = :store_id', { store_id: storeID.id })
+        .andWhere('drink_id = :drink_id', { drink_id: drinkID.id })
+        .execute();
+    } catch (error) {
+      return error;
+    }
   }
 }
