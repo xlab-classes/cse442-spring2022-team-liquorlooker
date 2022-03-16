@@ -56,4 +56,8 @@ export class DrinksService {
       .where('drinkName = :drinkName', { drinkName: drinkName })
       .execute();
   }
+
+  async getAllDrinkNames(): Promise<Drink[]> {
+    return await this.drinksRepository.query('SELECT drinkName FROM drink');
+  }
 }

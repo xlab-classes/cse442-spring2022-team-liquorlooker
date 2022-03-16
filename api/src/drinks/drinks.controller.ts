@@ -18,6 +18,10 @@ import { storeDto } from 'src/store/store.dto';
 export class DrinksController {
   constructor(private readonly drinksService: DrinksService) {}
 
+  @Get('getAllDrinkNames')
+  async getAllNames() {
+    return await this.drinksService.getAllDrinkNames();
+  }
   @Get('getDrinkid')
   async getDrink(@Body() drinkDto: drinkDto) {
     return await this.drinksService.getDrinkIdByName(drinkDto.drinkName);
