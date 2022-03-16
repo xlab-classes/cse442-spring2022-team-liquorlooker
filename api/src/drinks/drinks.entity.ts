@@ -5,6 +5,6 @@ export class Drink {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ nullable: false })
+  @Column({ unique: true, nullable: false })
   drinkName: string;
 }
