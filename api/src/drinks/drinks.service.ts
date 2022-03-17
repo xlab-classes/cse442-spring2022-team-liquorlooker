@@ -11,19 +11,25 @@ export class DrinksService {
   ) {}
 
   async getDrinkIdByName(drinkName: string): Promise<Drink> {
-    return await this.drinksRepository.findOne({
-      select: ['id'],
-      where: [{ drinkName: drinkName }],
-    });
+    try {
+      return await this.drinksRepository.findOne({
+        select: ['id'],
+        where: [{ drinkName: drinkName }],
+      });
+    } catch (error) {
+      return error;
+    }
   }
 
-  async drinkExists(drinkName: string): Promise<boolean> {
+  async drinkExists(drinkName: string): Promise<String> {
     const count = await this.drinksRepository.count({ drinkName: drinkName });
 
     if (count === 0) {
-      return false;
+      const obj = { drinkExists: false };
+      return JSON.stringify(obj);
     } else {
-      return true;
+      const obj = { drinkExists: true };
+      return JSON.stringify(obj);
     }
   }
 
