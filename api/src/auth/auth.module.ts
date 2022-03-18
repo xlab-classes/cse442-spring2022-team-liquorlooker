@@ -10,6 +10,7 @@ import { JwtStrategy } from './jwt/jwt.strategy';
 
 @Module({
   imports: [
+    ConfigModule,
     UsersModule,
     PassportModule,
     JwtModule.registerAsync({
