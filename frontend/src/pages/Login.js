@@ -1,11 +1,36 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import styles from "../styles/Login.module.css"
 import {Helmet} from "react-helmet"
 import TextField from '@mui/material/TextField'
 
+function getData(loginEm, loginPsw){
+  var myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+
+  var urlencoded = new URLSearchParams();
+  urlencoded.append("email", loginEm);
+  urlencoded.append("password", loginPsw);
+
+  var requestOptions = {
+    method: 'GET',
+    headers: myHeaders,
+    body: urlencoded,
+    redirect: 'follow'
+  };
+
+  fetch("localhost:3000/auth/login", requestOptions)
+    .then(response => response.text())
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));
+}
+
+
 
 const Login = () => {
+  const [loginEmail, setLoginEmail] = useState("")
+  const [loginPassword, setLoginPassword] = useState("")
+
   return (
     <body>
       <Helmet>
@@ -24,6 +49,8 @@ const Login = () => {
             InputLabelProps={{
               style: { color: "azure" },
             }}
+            value={loginEmail}
+            onChange = {(event) => setLoginEmail(event.target.value)}
           />
         </div>
       </div>
@@ -37,13 +64,15 @@ const Login = () => {
             InputLabelProps={{
               style: { color: "azure" },
             }}
+            value={loginPassword}
+            onChange = {(event) => setLoginPassword(event.target.value)}
           />
         </div>
       </div>
 
       <div className={styles.submit}>
         <Link to="/">
-          <button type="submit">Login</button>
+          <button type="submit" onClick={() => getData(loginEmail, loginPassword)}>Login</button>
         </Link>
       </div>
 
