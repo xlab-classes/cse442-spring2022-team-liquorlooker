@@ -20,14 +20,9 @@ import { JwtStrategy } from './jwt/jwt.strategy';
       }),
       inject: [ConfigService],
     }),
-<<<<<<< HEAD
-],
-  providers: [AuthService, LocalStrategy, JwtStrategy],
-=======
     ConfigModule,
   ],
   providers: [AuthService, LocalStrategy],
->>>>>>> sprint2-issue#64
   controllers: [AuthController],
   exports: [AuthService, JwtModule],
 })
