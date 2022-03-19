@@ -1,4 +1,4 @@
-import { React } from "react";
+import { React , useState } from "react";
 import TextField from "@mui/material/TextField";
 import "../styles/Home.css";
 import MyList from "../components/List/List";
@@ -7,20 +7,28 @@ import data from "../components/List/store.json";
 import { Helmet } from "react-helmet";
 import Autocomplete from "@mui/material/Autocomplete";
 import { Paper } from "@mui/material";
+import useDrinks from "../hooks/use-drinks";
+import useDrinkPrice from "../hooks/use-drink-price";
 
 const Home = () => {
+  const drinks = useDrinks();
+  const drinkPrices = useDrinkPrice();
+
   return (
+    
     <body className="main">
+      
       <Helmet>
         <style>{"body { background-color: #363636; }"}</style>
       </Helmet>
+
+      <h1>{"DrinkID: " + drinkPrices.drinkPrice.map((e) => e.drinkPrice)}</h1>
 
       <div className="sidebar">
         <div className="radius">
           <TextField
             id="radius-tf"
             label="Radius"
-            variant="outlined"
             size="small"
             InputLabelProps={{
               style: { color: "azure" },
@@ -37,19 +45,22 @@ const Home = () => {
             type="number"
           />
         </div>
+
         <MyList data={data} />
       </div>
 
       <div className="right">
         <div className="search">
           <Autocomplete
-          id="combo-box"
+            id="combo-box"
             freeSolo
             disableClearable
             size="small"
             PaperComponent={({ children }) => (
               <Paper
                 style={{
+                  fontFamily:
+                    "'Segoe UI', 'Tahoma', 'Geneva', 'Verdana', 'sans-serif'",
                   background: "#363636",
                   color: "azure",
                 }}
@@ -57,7 +68,7 @@ const Home = () => {
                 {children}
               </Paper>
             )}
-            options={data.map((option) => option.text)}
+            options={drinks.drinks.map((option) => option.drinkName)}
             renderInput={(params) => (
               <TextField
                 {...params}
@@ -72,6 +83,9 @@ const Home = () => {
                   ...params.InputProps,
                   style: { color: "azure" },
                   type: "search",
+                }}
+                onChange = {(event) => {
+                  
                 }}
               />
             )}

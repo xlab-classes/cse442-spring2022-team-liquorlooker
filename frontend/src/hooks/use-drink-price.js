@@ -1,24 +1,17 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import qs from "qs";
 
-const useDrinkPrice = () => {
+const useDrinkPrice = (drinkName) => {
   const [drinkPrice, setDrinkPrice] = useState([]);
 
   const fetchDrinkPrice = async () => {
-    var data = qs.stringify({
-      drinkName: "Gin",
-    });
-
-    console.log(`Data:"${data}`);
-
     var config = {
       method: "GET",
       url: "http://localhost:3000/drinkPrice/getPrices",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
       },
-      params: { 'drinkName': "Gin" },
+      params: { drinkName: "Gin" },
       // data: data,
     };
 
@@ -37,7 +30,7 @@ const useDrinkPrice = () => {
   }, []);
 
   return {
-    drinkPrice
+    drinkPrice,
   };
 };
 
