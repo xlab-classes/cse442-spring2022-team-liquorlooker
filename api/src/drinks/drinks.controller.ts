@@ -23,11 +23,11 @@ export class DrinksController {
     return await this.drinksService.getAllDrinkNames();
   }
   @Get('getDrinkid')
-  async getDrink(@Body() drinkDto: drinkDto) {
+  async getDrink(@Param() drinkDto: drinkDto) {
     return await this.drinksService.getDrinkIdByName(drinkDto.drinkName);
   }
   @Get('exists')
-  async drinkExists(@Body() drinkDto: drinkDto) {
+  async drinkExists(@Param() drinkDto: drinkDto) {
     return await this.drinksService.drinkExists(drinkDto.drinkName);
   }
   @Post('addDrink')
