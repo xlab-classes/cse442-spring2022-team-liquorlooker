@@ -7,6 +7,7 @@ import {
   Post,
   Body,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { UpdateDateColumn } from 'typeorm';
 import { drinkPriceDto } from './drinkPrice.dto';
@@ -18,10 +19,8 @@ import { drinkPriceService } from './drinkPrice.service';
 export class drinkPriceController {
   constructor(private readonly drinkPriceService: drinkPriceService) {}
   @Get('getPrices')
-  async getDrink(@Body() drinkPriceDto: drinkPriceDto): Promise<drinkPrice[]> {
-    return await this.drinkPriceService.getDrinkPricesByName(
-      drinkPriceDto.drinkName,
-    );
+  async getDrink(@Query() query): Promise<drinkPrice[]> {
+    return await this.drinkPriceService.getDrinkPricesByName(query.drinkName);
   }
   @Post('addDrinkPrice/')
   async addDrinkprice(@Body() drinkPriceDto: drinkPriceDto) {
