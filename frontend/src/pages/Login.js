@@ -6,7 +6,6 @@ import TextField from '@mui/material/TextField'
 import {createHash} from "crypto-js"
 
 async function getData(loginEm, loginPsw){
-  //var hashedLoginPsw = createHash('sha256').update(loginPsw).digest('hex')
 
   var axios = require('axios');
   var qs = require('qs');
