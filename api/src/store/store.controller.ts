@@ -7,6 +7,7 @@ import {
   Post,
   Body,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { storeService } from './store.service';
 import { store } from './store.entity';
@@ -20,12 +21,12 @@ export class storeController {
   constructor(private readonly storeService: storeService) {}
 
   @Get('getStore')
-  async getStore(@Body() storeDto: storeDto): Promise<store> {
-    return await this.storeService.getStoreIdByName(storeDto.storeName);
+  async getStore(@Query() query): Promise<store> {
+    return await this.storeService.getStoreIdByName(query.storeName);
   }
   @Get('getLocation')
-  async getStoreLocation(@Body() storeDto: storeDto): Promise<store> {
-    return await this.storeService.getStoreLocation(storeDto.storeName);
+  async getStoreLocation(@Query() query): Promise<store> {
+    return await this.storeService.getStoreLocation(query.storeName);
   }
   @Post('addStore')
   async addStore(@Body() storeDto: storeDto): Promise<store> {
@@ -51,11 +52,11 @@ export class storeController {
   }
 
   @Get('getStoresInRadius')
-  async getStoresinrad(@Body() radiusDto: radiusDto): Promise<store[]> {
+  async getStoresinrad(@Query() query): Promise<store[]> {
     return await this.storeService.getStoreWithinRadius(
-      radiusDto.radius,
-      radiusDto.latitude,
-      radiusDto.longitude,
+      query.radius,
+      query.latitude,
+      query.longitude,
     );
   }
 }
