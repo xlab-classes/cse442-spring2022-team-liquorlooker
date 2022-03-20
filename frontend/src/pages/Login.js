@@ -3,26 +3,33 @@ import { Link } from 'react-router-dom';
 import styles from "../styles/Login.module.css"
 import {Helmet} from "react-helmet"
 import TextField from '@mui/material/TextField'
+import {createHash} from "crypto-js"
 
-function getData(loginEm, loginPsw){
-  var myHeaders = new Headers();
-  myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+async function getData(loginEm, loginPsw){
+  //var hashedLoginPsw = createHash('sha256').update(loginPsw).digest('hex')
 
-  var urlencoded = new URLSearchParams();
-  urlencoded.append("email", loginEm);
-  urlencoded.append("password", loginPsw);
-
-  var requestOptions = {
-    method: 'GET',
-    headers: myHeaders,
-    body: urlencoded,
-    redirect: 'follow'
+  var axios = require('axios');
+  var qs = require('qs');
+  var data = qs.stringify({
+    'email': loginEm,
+    'password': loginPsw
+  });
+  var config = {
+    method: 'post',
+    url: 'http://localhost:3000/auth/login',
+    headers: { 
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    data : data
   };
-
-  fetch("localhost:3000/auth/login", requestOptions)
-    .then(response => response.text())
-    .then(result => console.log(result))
-    .catch(error => console.log('error', error));
+    
+  axios(config)
+  .then(function (response) {
+    console.log(JSON.stringify(response.data));
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 }
 
 
