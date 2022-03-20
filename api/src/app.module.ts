@@ -2,7 +2,6 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { Drink } from './drinks/drinks.entity';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
@@ -13,8 +12,13 @@ import { drinkPrice } from './drinkPrice/drinkPrice.entity';
 import { store } from './store/store.entity';
 import { storeModule } from './store/store.module';
 import { DrinksPriceModule } from './drinkPrice/drinkPrice.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 @Module({
   imports: [
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'build'),
+    }),
     ConfigModule.forRoot(),
     AuthModule,
     UsersModule,
@@ -34,6 +38,6 @@ import { DrinksPriceModule } from './drinkPrice/drinkPrice.module';
     }),
   ],
   controllers: [AppController],
-  providers: [AppService, AuthService],
+  providers: [AuthService],
 })
 export class AppModule {}
