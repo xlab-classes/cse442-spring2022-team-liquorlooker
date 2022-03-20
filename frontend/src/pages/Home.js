@@ -1,9 +1,9 @@
-import { React , useState } from "react";
+import { React, useState } from "react";
 import TextField from "@mui/material/TextField";
 import "../styles/Home.css";
 import MyList from "../components/List/List";
 import Map from "../images/maps.png";
-import data from "../components/List/store.json";
+import stores from "../components/List/store.json";
 import { Helmet } from "react-helmet";
 import Autocomplete from "@mui/material/Autocomplete";
 import { Paper } from "@mui/material";
@@ -11,18 +11,18 @@ import useDrinks from "../hooks/use-drinks";
 import useDrinkPrice from "../hooks/use-drink-price";
 
 const Home = () => {
+  const enter = 13;
   const drinks = useDrinks();
-  const drinkPrices = useDrinkPrice();
+  const [drinkName, setDrinkName] = useState("");
+  const drinkPrices = useDrinkPrice(drinkName);
 
   return (
-    
     <body className="main">
-      
       <Helmet>
         <style>{"body { background-color: #363636; }"}</style>
       </Helmet>
 
-      <h1>{"DrinkID: " + drinkPrices.drinkPrice.map((e) => e.drinkPrice)}</h1>
+      {/* <h1>{drinkPrices.drink.map((e) => e.drinkName)}</h1> */}
 
       <div className="sidebar">
         <div className="radius">
@@ -46,7 +46,9 @@ const Home = () => {
           />
         </div>
 
-        <MyList data={data} />
+        {/* <MyList data={stores} /> */}
+
+        <MyList data={drinkPrices} name={drinkName} />
       </div>
 
       <div className="right">
@@ -56,6 +58,9 @@ const Home = () => {
             freeSolo
             disableClearable
             size="small"
+            onChange={(e, newval, reason) => {
+              setDrinkName(newval);
+            }}
             PaperComponent={({ children }) => (
               <Paper
                 style={{
@@ -84,8 +89,11 @@ const Home = () => {
                   style: { color: "azure" },
                   type: "search",
                 }}
-                onChange = {(event) => {
-                  
+                value={drinkName}
+                onKeyDown={(event) => {
+                  if (event.key === enter) {
+                    setDrinkName(event.target.value);
+                  }
                 }}
               />
             )}
