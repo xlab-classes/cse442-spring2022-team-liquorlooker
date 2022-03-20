@@ -43,7 +43,7 @@ const MyList = (props) => {
           {/* {props.map((e) => ( */}
             <ListItem>
               <ListItemButton>
-                <ListItemText primary={`${props.name}\n$${Object.values(props.data[0])[2]}`} />
+                <ListItemText primary={`${Object.values(props.data[0])[1]} \n  $${Object.values(props.data[0])[2]}`} />
               </ListItemButton>
             </ListItem>
           {/* // ))} */}
