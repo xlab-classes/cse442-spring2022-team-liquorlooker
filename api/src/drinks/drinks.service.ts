@@ -11,19 +11,25 @@ export class DrinksService {
   ) {}
 
   async getDrinkIdByName(drinkName: string): Promise<Drink> {
-    return await this.drinksRepository.findOne({
-      select: ['id'],
-      where: [{ drinkName: drinkName }],
-    });
+    try {
+      return await this.drinksRepository.findOne({
+        select: ['id'],
+        where: [{ drinkName: drinkName }],
+      });
+    } catch (error) {
+      return error;
+    }
   }
 
-  async drinkExists(drinkName: string): Promise<boolean> {
+  async drinkExists(drinkName: string): Promise<String> {
     const count = await this.drinksRepository.count({ drinkName: drinkName });
 
     if (count === 0) {
-      return false;
+      const obj = { drinkExists: false };
+      return JSON.stringify(obj);
     } else {
-      return true;
+      const obj = { drinkExists: true };
+      return JSON.stringify(obj);
     }
   }
 
@@ -31,9 +37,11 @@ export class DrinksService {
     const drink = await this.drinksRepository.create({
       drinkName: drinkName,
     });
-
-    await this.drinksRepository.save(drink);
-    return drink;
+    try {
+      return await this.drinksRepository.save(drink);
+    } catch (error) {
+      return error;
+    }
   }
 
   async deleteDrink(drinkName: string): Promise<DeleteResult> {
@@ -55,5 +63,9 @@ export class DrinksService {
       .set({ drinkName: newDrinkName })
       .where('drinkName = :drinkName', { drinkName: drinkName })
       .execute();
+  }
+
+  async getAllDrinkNames(): Promise<Drink[]> {
+    return await this.drinksRepository.query('SELECT drinkName FROM drink');
   }
 }

@@ -7,24 +7,30 @@ import {
   Post,
   Body,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { DrinksService } from './drinks.service';
 import { Drink } from './drinks.entity';
 import { drinkDto } from './drink.dto';
 import { storeDto } from 'src/store/store.dto';
+import { query } from 'express';
 
 @Controller('drinks')
 @UseInterceptors(ClassSerializerInterceptor)
 export class DrinksController {
   constructor(private readonly drinksService: DrinksService) {}
 
+  @Get('getAllDrinkNames')
+  async getAllNames() {
+    return await this.drinksService.getAllDrinkNames();
+  }
   @Get('getDrinkid')
-  async getDrink(@Body() drinkDto: drinkDto) {
-    return await this.drinksService.getDrinkIdByName(drinkDto.drinkName);
+  async getDrink(@Query() query) {
+    return await this.drinksService.getDrinkIdByName(query.drinkName);
   }
   @Get('exists')
-  async drinkExists(@Body() drinkDto: drinkDto) {
-    return await this.drinksService.drinkExists(drinkDto.drinkName);
+  async drinkExists(@Query() query) {
+    return await this.drinksService.drinkExists(query.drinkName);
   }
   @Post('addDrink')
   async addDrink(@Body() drinkDto: drinkDto) {

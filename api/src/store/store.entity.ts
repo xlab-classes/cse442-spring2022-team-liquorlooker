@@ -5,7 +5,7 @@ export class store {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ nullable: false })
+  @Column({ unique: true, nullable: false })
   storeName: string;
 
   @Column({ type: 'double', nullable: false })
