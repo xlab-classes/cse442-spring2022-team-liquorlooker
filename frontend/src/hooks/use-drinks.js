@@ -4,6 +4,7 @@ import axios from "axios";
 const useDrinks = () => {
   const [drinks, setDrinks] = useState([]);
 
+  console.log(drinks)
   const fetchDrinks = async () => {
     var config = {
       method: "get",

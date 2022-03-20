@@ -2,23 +2,24 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const useDrinkPrice = (drinkName) => {
-  const [drinkPrice, setDrinkPrice] = useState([]);
+  const [drink, setDrink] = useState([]);
 
+  console.log(drink)
   const fetchDrinkPrice = async () => {
     var config = {
       method: "GET",
       url: "http://localhost:3000/drinkPrice/getPrices",
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
+        "Content-Type": "application/x-www-form-urlencoded",
       },
-      params: { drinkName: "Gin" },
+      params: { drinkName: drinkName },
       // data: data,
     };
 
     axios(config)
       .then(function (response) {
         console.log(JSON.stringify(response.data));
-        setDrinkPrice(response.data);
+        setDrink(response.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -27,11 +28,9 @@ const useDrinkPrice = (drinkName) => {
 
   useEffect(() => {
     fetchDrinkPrice();
-  }, []);
+  }, [drinkName]);
 
-  return {
-    drinkPrice,
-  };
+  return(drink);
 };
 
 export default useDrinkPrice;
