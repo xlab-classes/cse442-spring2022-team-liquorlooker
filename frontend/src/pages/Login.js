@@ -15,7 +15,7 @@ async function getData(loginEm, loginPsw){
   });
   var config = {
     method: 'post',
-    url: 'http://localhost:3000/auth/login',
+    url: 'http://cheshire.cse.buffalo.edu:1812/auth/login',
     headers: { 
       'Content-Type': 'application/x-www-form-urlencoded'
     },

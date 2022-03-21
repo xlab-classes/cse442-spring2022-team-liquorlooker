@@ -46,7 +46,7 @@ async function sendData(em, psw, repsw){
     });
     var config = {
       method: 'post',
-      url: 'http://localhost:3000/auth/register',
+      url: 'http://cheshire.cse.buffalo.edu:1812/auth/register',
       headers: { 
         'Content-Type': 'application/x-www-form-urlencoded'
       },
