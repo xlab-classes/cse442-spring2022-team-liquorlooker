@@ -8,7 +8,7 @@ const useDrinkPrice = (drinkName) => {
   const fetchDrinkPrice = async () => {
     var config = {
       method: "GET",
-      url: "http://localhost:3000/drinkPrice/getPrices",
+      url: "http://cheshire.cse.buffalo.edu:1812/drinkPrice/getPrices",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },

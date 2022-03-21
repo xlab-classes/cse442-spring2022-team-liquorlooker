@@ -8,7 +8,7 @@ const useDrinks = () => {
   const fetchDrinks = async () => {
     var config = {
       method: "get",
-      url: "http://localhost:3000/drinks/getAllDrinkNames",
+      url: "http://cheshire.cse.buffalo.edu:1812/drinks/getAllDrinkNames",
       headers: {},
     };
 
