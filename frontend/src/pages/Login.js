@@ -13,7 +13,7 @@ async function getData(loginEm, loginPsw) {
   });
   var config = {
     method: "post",
-    url: "http://cheshire.cse.buffalo.edu:1812/auth/login",
+    url: "http://localhost:3000/auth/login",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
     },
@@ -68,6 +68,7 @@ const Login = () => {
             InputLabelProps={{
               style: { color: "azure" },
             }}
+            type="password"
             value={loginPassword}
             onChange={(event) => setLoginPassword(event.target.value)}
           />

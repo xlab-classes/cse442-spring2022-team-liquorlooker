@@ -1,0 +1,30 @@
+.StoreName{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  color: rgba(255,255,255,1);
+  font-family:'Segoe UI', 'Tahoma', 'Geneva', 'Verdana', 'sans-serif';
+}
+
+.Location{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  color: rgba(255,255,255,1);
+  font-family:'Segoe UI', 'Tahoma', 'Geneva', 'Verdana', 'sans-serif';
+}
+
+.Table{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.AddDrink{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}

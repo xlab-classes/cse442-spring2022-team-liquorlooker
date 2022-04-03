@@ -15,27 +15,11 @@ async function sendData(em, psw, repsw) {
     alert("Passwords do not match, Please try registering again");
     return;
   }
-  //var hashedPsw = createHash('sha256').update(psw).digest('hex')
 
   /*
-  var myHeaders = new Headers();
-  myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
-
-  var urlencoded = new URLSearchParams();
-  urlencoded.append("email", em);
-  urlencoded.append("password", psw)
-
-  var requestOptions = {
-    method: 'POST',
-    headers: myHeaders,
-    body: urlencoded,
-    redirect: 'follow'
-  };
-
-  fetch("localhost:3000/auth/register", requestOptions)
-    .then(response => response.text())
-    .then(result => console.log(result))
-    .catch(error => console.log('error', error));
+  const bcrypt = require('bcrypt');
+  const saltRounds = 10;
+  const hashedPsw = bcrypt.hashSync(psw, saltRounds);
   */
 
   var axios = require("axios");
@@ -46,7 +30,7 @@ async function sendData(em, psw, repsw) {
   });
   var config = {
     method: "post",
-    url: "http://cheshire.cse.buffalo.edu:1812/auth/register",
+    url: "http://localhost:3000/auth/register",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
     },
@@ -102,6 +86,7 @@ const Registration = () => {
             InputLabelProps={{
               style: { color: "azure" },
             }}
+            type="password"
             value={password}
             onChange={(event) => setPassword(event.target.value)}
           />
@@ -117,6 +102,7 @@ const Registration = () => {
             InputLabelProps={{
               style: { color: "azure" },
             }}
+            type="password"
             value={reenterPassword}
             onChange={(event) => setReenterPassword(event.target.value)}
           />
