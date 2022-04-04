@@ -22,6 +22,10 @@ export class drinkPriceController {
   async getDrink(@Query() query): Promise<drinkPrice[]> {
     return await this.drinkPriceService.getDrinkPricesByName(query.drinkName);
   }
+  @Get('getStoreInventory')
+  async getStoreInventory(@Query() query): Promise<drinkPrice[]> {
+    return await this.drinkPriceService.getStoreInvetoryByName(query.storeName);
+  }
   @Post('addDrinkPrice/')
   async addDrinkprice(@Body() drinkPriceDto: drinkPriceDto) {
     return await this.drinkPriceService.addDrinkPrice(

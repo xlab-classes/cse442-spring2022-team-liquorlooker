@@ -30,6 +30,18 @@ export class drinkPriceService {
     }
   }
 
+  async getStoreInvetoryByName(storeName: string): Promise<drinkPrice[]> {
+    try {
+      const storeID = await this.storeService.getStoreIdByName(storeName);
+      const inventory = await this.drinkPriceRepository.find({
+        where: [{ store_id: storeID.id }],
+      });
+      return inventory;
+    } catch (error) {
+      return error;
+    }
+  }
+
   async addDrinkPrice(
     storeName: string,
     drinkName: string,
