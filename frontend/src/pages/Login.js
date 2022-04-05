@@ -1,48 +1,47 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "../styles/Login.module.css";
-import {Helmet} from "react-helmet";
+import { Helmet } from "react-helmet";
 import TextField from "@mui/material/TextField";
 
-async function getData(loginEm, loginPsw){
-
-  var axios = require('axios');
-  var qs = require('qs');
+async function getData(loginEm, loginPsw) {
+  var axios = require("axios");
+  var qs = require("qs");
   var data = qs.stringify({
-    'email': loginEm,
-    'password': loginPsw
+    email: loginEm,
+    password: loginPsw,
   });
   var config = {
-    method: 'post',
-    url: 'http://cheshire.cse.buffalo.edu:1812/auth/login',
-    headers: { 
-      'Content-Type': 'application/x-www-form-urlencoded'
+    method: "post",
+    url: "http://localhost:3000/auth/login",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
     },
-    data : data
+    data: data,
   };
-    
+
   axios(config)
-  .then(function (response) {
-    console.log(JSON.stringify(response.data));
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
+    .then(function (response) {
+      console.log(JSON.stringify(response.data));
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
 }
 
-
-
 const Login = () => {
-  const [loginEmail, setLoginEmail] = useState("")
-  const [loginPassword, setLoginPassword] = useState("")
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
 
   return (
     <body>
       <Helmet>
-        <style>{'body {background-color: #363636; }'}</style>
+        <style>{"body {background-color: #363636; }"}</style>
       </Helmet>
       <div>
-        <h1><span className={styles.Login}>Login</span></h1>
+        <h1>
+          <span className={styles.Login}>Login</span>
+        </h1>
       </div>
 
       <div className={styles.emailLocation}>
@@ -55,7 +54,7 @@ const Login = () => {
               style: { color: "azure" },
             }}
             value={loginEmail}
-            onChange = {(event) => setLoginEmail(event.target.value)}
+            onChange={(event) => setLoginEmail(event.target.value)}
           />
         </div>
       </div>
@@ -69,15 +68,21 @@ const Login = () => {
             InputLabelProps={{
               style: { color: "azure" },
             }}
+            type="password"
             value={loginPassword}
-            onChange = {(event) => setLoginPassword(event.target.value)}
+            onChange={(event) => setLoginPassword(event.target.value)}
           />
         </div>
       </div>
 
       <div className={styles.submit}>
         <Link to="/">
-          <button type="submit" onClick={() => getData(loginEmail, loginPassword)}>Login</button>
+          <button
+            type="submit"
+            onClick={() => getData(loginEmail, loginPassword)}
+          >
+            Login
+          </button>
         </Link>
       </div>
 
@@ -88,6 +93,6 @@ const Login = () => {
       </div>
     </body>
   );
-}
+};
 
 export default Login;

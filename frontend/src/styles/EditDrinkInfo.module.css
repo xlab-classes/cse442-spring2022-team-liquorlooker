@@ -1,0 +1,27 @@
+.EditDrink{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  color: rgba(255,255,255,1);
+  font-family:'Segoe UI', 'Tahoma', 'Geneva', 'Verdana', 'sans-serif';
+}
+
+.DrinkName, .Price{
+  padding-bottom: 12px;
+  background-color: #514E4E;
+  background-clip: content-box;
+}
+
+.DrinkNameLocation, .PriceLocation{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.EditDrinkButton, .AddDrinkButton, .RemoveDrinkButton{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+}
