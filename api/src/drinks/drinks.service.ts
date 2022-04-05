@@ -68,4 +68,8 @@ export class DrinksService {
   async getAllDrinkNames(): Promise<Drink[]> {
     return await this.drinksRepository.query('SELECT drinkName FROM drink');
   }
+
+  async partialSearchByName(partialName: string): Promise<Drink[]> {
+    return await this.drinksRepository.query(`SELECT drinkName from drink WHERE drinkName LIKE %${partialName}%`)
+  }
 }
