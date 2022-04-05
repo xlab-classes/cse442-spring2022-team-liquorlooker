@@ -4,8 +4,6 @@ import axios from "axios";
 const useStoreLocations = (data) => {
   const [stores, setStores] = useState([]);
 
-  var axios = require("axios");
-
   var config = {
     method: "get",
     url: `http://${process.env.REACT_APP_DEV_URL}/store/getLocation`,
