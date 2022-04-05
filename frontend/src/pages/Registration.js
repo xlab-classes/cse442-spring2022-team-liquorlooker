@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
-import styles from "../styles/Registration.module.css"
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import styles from "../styles/Registration.module.css";
 import {Helmet} from "react-helmet"
-import TextField from '@mui/material/TextField'
-// import {createHash} from "crypto-js"
+import TextField from "@mui/material/TextField";
 
 async function sendData(em, psw, repsw){
   var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
