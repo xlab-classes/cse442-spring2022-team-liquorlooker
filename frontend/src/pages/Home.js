@@ -1,20 +1,29 @@
 import { React, useState } from "react";
+import { useLoadScript } from "@react-google-maps/api";
 import TextField from "@mui/material/TextField";
 import "../styles/Home.css";
 import MyList from "../components/List/List";
-import Map from "../images/maps.png";
+// import Map from "../images/maps.png";
 import stores from "../components/List/store.json";
 import { Helmet } from "react-helmet";
 import Autocomplete from "@mui/material/Autocomplete";
 import { Paper } from "@mui/material";
 import useDrinks from "../hooks/use-drinks";
 import useDrinkPrice from "../hooks/use-drink-price";
+import Map from "../components/Map/Map";
 
 const Home = () => {
   const enter = 13;
   const drinks = useDrinks();
   const [drinkName, setDrinkName] = useState("");
   const drinkPrices = useDrinkPrice(drinkName);
+
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+    // libraries: ["places"],
+  });
+
+  if (!isLoaded) return <div>Loading...</div>;
 
   return (
     <body className="main">
@@ -99,8 +108,9 @@ const Home = () => {
             )}
           />
         </div>
-
-        <img className="map" src={Map} alt="Map" />
+        
+        <Map />
+        {/* <img className="map" src={Map} alt="Map" /> */}
       </div>
     </body>
   );

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styles from "../styles/Login.module.css"
 import {Helmet} from "react-helmet"
 import TextField from '@mui/material/TextField'
-import {createHash} from "crypto-js"
+// import {createHash} from "crypto-js"
 
 async function getData(loginEm, loginPsw){
 
