@@ -20,6 +20,11 @@ import { query } from 'express';
 export class DrinksController {
   constructor(private readonly drinksService: DrinksService) {}
 
+  @Get('search')
+  async searchDrink(@Query() query) {
+    return await this.drinksService.partialSearchByName(query.partialName);
+  }
+
   @Get('getAllDrinkNames')
   async getAllNames() {
     return await this.drinksService.getAllDrinkNames();
