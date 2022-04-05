@@ -70,6 +70,6 @@ export class DrinksService {
   }
 
   async partialSearchByName(partialName: string): Promise<Drink[]> {
-    return await this.drinksRepository.query(`SELECT drinkName from drink WHERE drinkName LIKE %${partialName}%`)
+    return await this.drinksRepository.query(`SELECT drinkName from drink WHERE drinkName LIKE '%${partialName}%'`)
   }
 }
