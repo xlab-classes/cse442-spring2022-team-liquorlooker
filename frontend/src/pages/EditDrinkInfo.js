@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import styles from "../styles/AddDrink.module.css";
+import styles from "../styles/EditDrinkInfo.module.css";
 import { TextField } from "@mui/material";
 
-const AddDrink = () => {
+const EditDrinkInfo = () => {
   return(
     <main>
       <Helmet>
@@ -12,7 +12,7 @@ const AddDrink = () => {
       </Helmet>
       <div>
         <h1>
-          <span className={styles.AddDrink}>Add Drink</span>
+          <span className={styles.EditDrink}>Edit Drink Info</span>
         </h1>
       </div>
 
@@ -42,26 +42,25 @@ const AddDrink = () => {
         </div>
       </div>
 
-      <div className={styles.AbvLocation}>
-        <div className={styles.Abv}>
-          <TextField
-            label="Enter Alcohol Percentage"
-            variant="outlined"
-            size="normal"
-            InputLabelProps={{
-              style: { color: "azure" },
-            }}
-          />
-        </div>
-      </div>
-
       <div className={styles.AddDrinkButton}>
         <Link to="/businessInventory">
           <button type="submit">Add Drink</button>
+        </Link>
+      </div>
+
+      <div className={styles.RemoveDrinkButton}>
+        <Link to="/businessInventory">
+          <button type="submit">Remove Drink</button>
+        </Link>
+      </div>
+
+      <div className={styles.EditDrinkButton}>
+        <Link to="/businessInventory">
+          <button type="submit">Edit Drink</button>
         </Link>
       </div>
     </main>
   );
 };
 
-export default AddDrink;
+export default EditDrinkInfo;

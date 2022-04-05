@@ -7,7 +7,7 @@ import DrinkDetail from "./pages/DrinkDetail";
 import Layout from "./components/Navbar/Layout";
 import Registration from "./pages/Registration";
 import BusinessInventory from "./pages/BusinessInventory";
-import AddDrink from "./pages/AddDrink";
+import EditDrinkInfo from "./pages/EditDrinkInfo";
 
 function App() {
   return (
@@ -40,8 +40,8 @@ function App() {
           {/* <Route path="*" element={<NoMatch />} /> */}
         </Route>
 
-        <Route path='/addDrink' element={<Layout />}>
-          <Route index element={<AddDrink />} />
+        <Route path='/editDrinkInfo' element={<Layout />}>
+          <Route index element={<EditDrinkInfo />} />
           {/* <Route path="*" element={<NoMatch />} /> */}
         </Route>
         {/* <Route path="*" element={<NoMatch/>}/> */}

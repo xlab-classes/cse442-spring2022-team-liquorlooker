@@ -1,4 +1,4 @@
-.AddDrink{
+.EditDrink{
   display: flex;
   align-items: center;
   justify-content: center;
@@ -7,19 +7,19 @@
   font-family:'Segoe UI', 'Tahoma', 'Geneva', 'Verdana', 'sans-serif';
 }
 
-.DrinkName, .Price, .Abv{
+.DrinkName, .Price{
   padding-bottom: 12px;
   background-color: #514E4E;
   background-clip: content-box;
 }
 
-.DrinkNameLocation, .PriceLocation, .AbvLocation{
+.DrinkNameLocation, .PriceLocation{
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.AddDrinkButton{
+.EditDrinkButton, .AddDrinkButton, .RemoveDrinkButton{
   display: flex;
   align-items: center;
   justify-content: center;

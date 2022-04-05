@@ -3,20 +3,19 @@ import { Link } from "react-router-dom";
 import styles from "../styles/BusinessInventory.module.css";
 import { Helmet } from "react-helmet";
 import { TableContainer,Table,TableHead,TableRow,TableBody,TableCell } from "@mui/material";
-
-function createData(drinkName, price, percentage) {
-  return { drinkName, price, percentage};
-}
-
-const rows = [
-  createData('Everclear 750ml', 21.59, 60),
-  createData('Blue Light 18pk', 14.99, 4.5),
-  createData('Titos 375ml', 13.99, 40),
-  createData('Pink Whitney 750ml', 10.99, 35),
-  createData('Jose Cuervo 750ml', 26.99, 40),
-];
+import useStoreData from "../hooks/use-store-data";
 
 const BusinessInventory = () => {
+  function createData(drinkName, price) {
+    return { drinkName, price };
+  }
+
+  const rows = [];
+  const storeData = useStoreData("Premier");
+  storeData.forEach(element => {
+    rows.push(createData(element.drinkName, element.drinkPrice))
+  });
+
   return(
     <main>
       <Helmet>
@@ -24,22 +23,21 @@ const BusinessInventory = () => {
       </Helmet>
       <div>
         <h1>
-          <span className={styles.StoreName}>Store Name</span>
+          <span className={styles.StoreName}>Premier</span>
         </h1>
       </div>
       <div>
         <h2>
-          <span className={styles.Location}>Location</span>
+          <span className={styles.Location}>3900 Maple Rd, Amherst, NY 14226</span>
         </h2>
       </div>
       <div>
       <TableContainer className={styles.Table}>
-      <Table sx={{ maxWidth: 650, backgroundColor: "#514E4E", border: "1.5px solid black"}}aria-label="drink table">
+      <Table sx={{ maxWidth: 550, backgroundColor: "#514E4E", border: "1.5px solid black"}}aria-label="drink table">
         <TableHead>
           <TableRow>
             <TableCell sx={{color: "white", fontFamily: 'Segoe UI'}}>Drink Name</TableCell>
-            <TableCell sx={{color: "white", fontFamily: 'Segoe UI'}} align="center">Price&nbsp;($$$)</TableCell>
-            <TableCell sx={{color: "white", fontFamily: 'Segoe UI'}} align="center">Abv&nbsp;(%)</TableCell>
+            <TableCell sx={{color: "white", fontFamily: 'Segoe UI'}} align="right">Price&nbsp;($$$)</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -51,8 +49,7 @@ const BusinessInventory = () => {
               <TableCell sx={{color: "white"}} component="th" scope="row">
                 {row.drinkName}
               </TableCell>
-              <TableCell sx={{color: "white"}} align="center">{row.price}</TableCell>
-              <TableCell sx={{color: "white"}} align="center">{row.percentage}</TableCell>
+              <TableCell sx={{color: "white"}} align="right">{row.price}</TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -60,9 +57,9 @@ const BusinessInventory = () => {
     </TableContainer>
 
     </div>
-      <div className={styles.AddDrink}>
-        <Link to="/addDrink">
-          <button type="submit">Add Drink</button>
+      <div className={styles.EditDrink}>
+        <Link to="/editDrinkInfo">
+          <button type="submit">Edit Drink Info</button>
         </Link>
       </div>
     </main>
