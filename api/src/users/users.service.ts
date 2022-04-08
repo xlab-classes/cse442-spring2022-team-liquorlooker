@@ -17,6 +17,10 @@ export class UsersService {
       .getOne();
   }
 
+  async getUserById(id: number): Promise<User> {
+    return await this.usersRepository.findOne(id)
+  }
+
   async userWithEmailExists(email: string): Promise<boolean> {
     const user = await this.getUserByEmail(email);
     if (user) {
