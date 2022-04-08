@@ -40,4 +40,17 @@ export class UsersService {
     await this.usersRepository.save(user);
     return user;
   }
+
+  async createBusiness(email: string, password: string): Promise<User> {
+    if (await this.userWithEmailExists(email)) {
+      throw HttpStatus.BAD_REQUEST;
+    }
+    const user = await this.usersRepository.create({
+      email: email,
+      password: password,
+      type: "business"
+    });
+    await this.usersRepository.save(user);
+    return user;
+  }
 }
