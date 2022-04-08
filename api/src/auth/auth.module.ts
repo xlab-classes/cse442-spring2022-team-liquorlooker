@@ -22,7 +22,7 @@ import { JwtStrategy } from './jwt/jwt.strategy';
     }),
     ConfigModule,
   ],
-  providers: [AuthService, LocalStrategy],
+  providers: [AuthService, LocalStrategy, JwtStrategy],
   controllers: [AuthController],
   exports: [AuthService, JwtModule],
 })
