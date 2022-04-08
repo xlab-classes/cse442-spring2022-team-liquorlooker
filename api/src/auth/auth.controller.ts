@@ -20,10 +20,16 @@ import { JwtAuthGuard } from "./jwt/jwt.auth-guard";
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @Post('register')
-  async register(@Body() credentials: AuthDto): Promise<User> {
+  @Post('user/register')
+  async registerUser(@Body() credentials: AuthDto): Promise<User> {
     const { email, password } = credentials;
-    return await this.authService.register(email, password);
+    return await this.authService.registerUser(email, password);
+  }
+
+  @Post('business/register')
+  async registerBusiness(@Body() credentials: AuthDto): Promise<User> {
+    const { email, password } = credentials;
+    return await this.authService.registerBusiness(email, password);
   }
 
   @UseGuards(LocalAuthGuard)
