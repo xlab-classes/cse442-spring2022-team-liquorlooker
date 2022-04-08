@@ -12,4 +12,7 @@ export class User {
   @Exclude()
   @Column({ nullable: false })
   password: string;
+
+  @Column({nullable: false, default: "standard"})
+  type: string;
 }
