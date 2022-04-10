@@ -17,8 +17,8 @@ function Map(props) {
   const [latitude, setLatitude] = useState(0);
   const stores = useStoreLocations(props.radius, longitude, latitude);
 
-  console.log(`lng=${longitude}, lat=${latitude}`);
-  console.log(stores);
+  // console.log(`lng=${longitude}, lat=${latitude}`);
+  // console.log(stores);
 
   // center gives lat and long to center the map at
   const center = useMemo(() => ({ lat: latitude, lng: longitude }), []);

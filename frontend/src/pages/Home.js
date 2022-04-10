@@ -8,14 +8,14 @@ import stores from "../components/List/store.json";
 import { Helmet } from "react-helmet";
 import Autocomplete from "@mui/material/Autocomplete";
 import { Paper } from "@mui/material";
-import useDrinks from "../hooks/use-drink-names";
+import useDrinkNames from "../hooks/use-drink-names";
 import useDrinkPrice from "../hooks/use-drink-price";
 import Map from "../components/Map/Map";
 
 
 const Home = () => {
   const enter = 13;
-  const drinks = useDrinks();
+  const drinkNames = useDrinkNames();
   const [drinkName, setDrinkName] = useState("");
   const drinkPrices = useDrinkPrice(drinkName);
   const [radius, setRadius] = useState(1);
@@ -88,7 +88,7 @@ const Home = () => {
                 {children}
               </Paper>
             )}
-            options={drinks.drinks.map((option) => option.drinkName)}
+            options={drinkNames.map?.((drink) => drink.drinkName)}
             renderInput={(params) => (
               <TextField
                 {...params}

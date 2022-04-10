@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-function useDrinks() {
-  const [drinks, setDrinks] = useState([]);
+function useDrinkNames() {
+  const [drinkNames, setDrinkNames] = useState([]);
 
-  console.log(drinks)
   const fetchDrinks = async () => {
     var config = {
       method: "get",
@@ -15,7 +14,7 @@ function useDrinks() {
     axios(config)
       .then((response) => {
         console.log(JSON.stringify(response.data));
-        setDrinks(response.data);
+        setDrinkNames(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -26,9 +25,9 @@ function useDrinks() {
     fetchDrinks();
   }, []);
 
-  return {
-    drinks,
-  };
+  console.log(`drinks: ${drinkNames}`)
+  return drinkNames;
+ 
 };
 
-export default useDrinks;
+export default useDrinkNames;
