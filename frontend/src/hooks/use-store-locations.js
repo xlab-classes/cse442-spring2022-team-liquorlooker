@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const useStoreLocations = (data) => {
+function useStoreLocations(radius, longitude, latitude) {
   const [stores, setStores] = useState([]);
 
   var config = {
     method: "get",
-    url: `http://${process.env.REACT_APP_DEV_URL}/store/getLocation`,
+    url: `http://localhost:3000/store/getStoresInRadius`,
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
     },
-    params: {
-      radius: 5,
-      latitude: 42,
-      longitude: -78,
-    },
+    params: { 
+      radius: radius,
+      latitude: latitude,
+      longitude: longitude,
+   },
   };
 
   const fetchStoreLocations = async () => {
@@ -26,9 +26,9 @@ const useStoreLocations = (data) => {
 
   useEffect(() => {
     fetchStoreLocations();
-  }, []);
+  }, [radius]);
 
-  return stores;
+    return stores;
 };
 
 export default useStoreLocations;
