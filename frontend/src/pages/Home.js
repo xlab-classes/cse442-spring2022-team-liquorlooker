@@ -8,7 +8,7 @@ import stores from "../components/List/store.json";
 import { Helmet } from "react-helmet";
 import Autocomplete from "@mui/material/Autocomplete";
 import { Paper } from "@mui/material";
-import useDrinks from "../hooks/use-drinks";
+import useDrinks from "../hooks/use-drink-names";
 import useDrinkPrice from "../hooks/use-drink-price";
 import Map from "../components/Map/Map";
 
