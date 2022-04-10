@@ -8,14 +8,20 @@ import {
 } from "@react-google-maps/api";
 import "./Map.css";
 import Locate from "../Location/Locate";
+import useStoreLocations from "../../hooks/use-store-locations";
 
 const METERS = 1609.34;
 
-function Map() {
-  const [marker, setMarkers] = useState();
+function Map(props) {
+  const [longitude, setLongitude] = useState(0);
+  const [latitude, setLatitude] = useState(0);
+  const stores = useStoreLocations(props.radius, longitude, latitude);
+
+  console.log(`lng=${longitude}, lat=${latitude}`);
+  console.log(stores);
 
   // center gives lat and long to center the map at
-  const center = useMemo(() => ({ lat: 42.886448, lng: -78.878372 }), []);
+  const center = useMemo(() => ({ lat: latitude, lng: longitude }), []);
 
   // creates a map reference to use
   const mapRef = useRef();
@@ -35,11 +41,17 @@ function Map() {
     mapRef.current.setZoom(15);
   }, []);
 
+  const gpsOptions = {
+    enableHighAccuracy: true,
+  };
+
   // optimize rendering of maps
   const onLoad = useCallback((map) => {
     mapRef.current = map;
     navigator.geolocation.getCurrentPosition(
       (position) => {
+        setLatitude(position.coords.latitude);
+        setLongitude(position.coords.longitude);
         panTo({
           lat: position.coords.latitude,
           lng: position.coords.longitude,
@@ -50,47 +62,24 @@ function Map() {
     );
   });
 
-  const gpsOptions = {
-    enableHighAccuracy: true,
-  };
+  // const locations = [
+  //   {
+  //     name: "Location 1",
+  //     location: {
+  //       lat: 42.8,
+  //       lng: -78.8,
+  //     },
+  //   },
+  //   {
+  //     name: "Location 2",
+  //     location: {
+  //       lat: 41.3917,
+  //       lng: 2.1649,
+  //     },
+  //   },
+  // ];
 
-  const getCurLoc = () => {
-    var loc = {
-      lat: 0,
-      lng: 0,
-    };
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        var lat = position.coords.latitude;
-        var lng = position.coords.longitude;
-        loc.lat = lat;
-        loc.lng = lng;
-      },
-      () => null,
-      gpsOptions
-    );
-
-    return loc;
-  };
-
-  var curLocation = getCurLoc();
-
-  const locations = [
-    {
-      name: "Location 1",
-      location: {
-        lat: 42.8,
-        lng: -78.8,
-      },
-    },
-    {
-      name: "Location 2",
-      location: {
-        lat: 41.3917,
-        lng: 2.1649,
-      },
-    },
-  ];
+  var curLocation = { lat: latitude, lng: longitude };
 
   return (
     <>
@@ -102,10 +91,14 @@ function Map() {
         options={options}
         onLoad={onLoad}
       >
-        <Marker position={{ lat: curLocation.lat, lng: curLocation.lng }} />
+        {props.drinkName != "" && stores.map?.((item) => (
+          <Marker position={{ lat: item.latitude, lng: item.longitude }} />
+        ))}
+
         <Circle
-          center={{ lat: curLocation.lat, lng: curLocation.lng }}
-          radius={milesToMeters(5)}
+          center={curLocation}
+          radius={milesToMeters(props.radius)}
+          options={closeOptions}
         />
         {/* {locations.map?.((store) => {
           return <Marker key={store.name} position={store.location} />;
@@ -116,7 +109,7 @@ function Map() {
 }
 
 const defaultOptions = {
-  strokeOpacity: 0.5,
+  strokeOpacity: 0.9,
   strokeWeight: 2,
   clickable: false,
   draggable: false,
