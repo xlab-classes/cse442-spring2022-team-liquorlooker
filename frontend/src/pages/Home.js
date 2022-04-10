@@ -12,11 +12,13 @@ import useDrinks from "../hooks/use-drinks";
 import useDrinkPrice from "../hooks/use-drink-price";
 import Map from "../components/Map/Map";
 
+
 const Home = () => {
   const enter = 13;
   const drinks = useDrinks();
   const [drinkName, setDrinkName] = useState("");
   const drinkPrices = useDrinkPrice(drinkName);
+  const [radius, setRadius] = useState(1);
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -45,12 +47,16 @@ const Home = () => {
             InputProps={{
               style: { color: "azure" },
             }}
-            defaultValue="5"
-            onChange={(event) =>
-              event.target.value < 1
-                ? (event.target.value = "")
-                : event.target.value
-            }
+            defaultValue="1"
+            onChange={(event) => {
+              if(event.target.value < 1){
+                event.target.value = ""
+                return event.target.value;
+              }else{
+                setRadius(event.target.value)
+                return event.target.value
+              }
+            }}
             type="number"
           />
         </div>
@@ -108,8 +114,8 @@ const Home = () => {
             )}
           />
         </div>
-        
-        <Map />
+
+        <Map radius={radius} drinkName={drinkName}/>
         {/* <img className="map" src={Map} alt="Map" /> */}
       </div>
     </body>
