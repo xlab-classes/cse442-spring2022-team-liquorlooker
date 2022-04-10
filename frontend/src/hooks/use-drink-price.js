@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const useDrinkPrice = (drinkName) => {
+function useDrinkPrice(drinkName) {
   const [drink, setDrink] = useState([]);
 
   console.log(drink)
   const fetchDrinkPrice = async () => {
     var config = {
       method: "GET",
-      url: "http://{cheshire.cse.buffalo.edu:1812}/drinkPrice/getPrices",
+      url: `http://localhost:3000/drinkPrice/getPrices`,
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
