@@ -1,13 +1,18 @@
 import { HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { DeleteResult, Double, Repository, UpdateResult } from 'typeorm';
+import { DeleteResult, Double, In, Repository, UpdateResult } from 'typeorm';
 import { store } from './store.entity';
+import { Drink } from 'src/drinks/drinks.entity';
+import { DrinksService } from 'src/drinks/drinks.service';
+import { drinkPriceService } from 'src/drinkPrice/drinkPrice.service';
+import { drinkPrice } from 'src/drinkPrice/drinkPrice.entity';
 
 @Injectable()
 export class storeService {
   constructor(
     @InjectRepository(store)
     private storeRepository: Repository<store>,
+    private drinkService: DrinksService,
   ) {}
 
   //Add store to store table with location and store name
@@ -76,9 +81,12 @@ export class storeService {
     radius: number,
     currLat: number,
     currLong: number,
-  ): Promise<store[]> {
-    return await this.storeRepository.query(
-      `SELECT *, ( 3959 * acos( cos( radians(${currLat}) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(${currLong}) ) + sin( radians(${currLat}) ) * sin( radians( latitude ) ) ) ) AS distance FROM store HAVING distance < ${radius} ORDER BY distance;`,
+    drinkName: string,
+  ) {
+    const drinkID = await this.drinkService.getDrinkIdByName(drinkName);
+    const storeIDs = await this.storeRepository.query(
+      `SELECT id, ( 3959 * acos( cos( radians(${currLat}) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(${currLong}) ) + sin( radians(${currLat}) ) * sin( radians( latitude ) ) ) ) AS distance FROM store HAVING distance < ${radius} ORDER BY distance;`,
     );
+    return [drinkID, storeIDs];
   }
 }
