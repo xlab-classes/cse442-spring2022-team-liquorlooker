@@ -15,7 +15,7 @@ async function addEditDrink(drinkName, drinkPrice, drinkExists) {
     });
     var config = {
       method: 'post',
-      url: 'http://localhost:3000/drinks/addDrink',
+      url: `http://${process.env.REACT_APP_DEV_URL}/drinks/addDrink`,
       headers: { 
         'Content-Type': 'application/x-www-form-urlencoded'
       },
@@ -41,7 +41,7 @@ async function addEditDrink(drinkName, drinkPrice, drinkExists) {
   });
   var config = {
     method: 'post',
-    url: 'http://localhost:3000/drinkPrice/addDrinkPrice',
+    url: `http://${process.env.REACT_APP_DEV_URL}/drinkPrice/addDrinkPrice`,
     headers: { 
       'Content-Type': 'application/x-www-form-urlencoded'
     },
@@ -67,7 +67,7 @@ async function newDrinkAddEdit(drinkName, drinkPrice){
   });
   var config = {
     method: 'post',
-    url: 'http://localhost:3000/drinkPrice/addDrinkPrice',
+    url: `http://${process.env.REACT_APP_DEV_URL}/drinkPrice/addDrinkPrice`,
     headers: { 
       'Content-Type': 'application/x-www-form-urlencoded'
     },
@@ -92,7 +92,7 @@ async function removeDrink(drinkName) {
   });
   var config = {
     method: 'delete',
-    url: 'http://localhost:3000/drinkPrice/deleteDrinkPrice',
+    url: `http://${process.env.REACT_APP_DEV_URL}/drinkPrice/deleteDrinkPrice`,
     headers: { 
       'Content-Type': 'application/x-www-form-urlencoded'
     },

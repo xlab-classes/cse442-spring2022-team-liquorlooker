@@ -13,7 +13,7 @@ async function getData(loginEm, loginPsw) {
   });
   var config = {
     method: "post",
-    url: "http://localhost:3000/auth/login",
+    url: `http://${process.env.REACT_APP_DEV_URL}/auth/login`,
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
     },

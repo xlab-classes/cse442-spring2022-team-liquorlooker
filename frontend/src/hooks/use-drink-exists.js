@@ -11,7 +11,7 @@ const UseDrinkExists = (drinkName) => {
     });
     var config = {
       method: 'get',
-      url: 'http://localhost:3000/drinks/exists',
+      url: `http://${process.env.REACT_APP_DEV_URL}/drinks/exists`,
       headers: { 
         'Content-Type': 'application/x-www-form-urlencoded'
       },
