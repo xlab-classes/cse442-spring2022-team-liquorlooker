@@ -14,7 +14,7 @@ function useDrinkPrice(drinkName) {
       },
       params: { drinkName: drinkName },
       // data: data,
-    };
+    }; 
 
     axios(config)
       .then(function (response) {

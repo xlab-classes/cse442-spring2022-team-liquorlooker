@@ -114,8 +114,7 @@ const Home = () => {
             )}
           />
         </div>
-
-        <Map radius={radius} drinkName={drinkName}/>
+          <Map radius={radius} drinkName={drinkName}/>
         {/* <img className="map" src={Map} alt="Map" /> */}
       </div>
     </body>

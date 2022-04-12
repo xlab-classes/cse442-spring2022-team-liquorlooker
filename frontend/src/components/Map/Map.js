@@ -8,14 +8,19 @@ import {
 } from "@react-google-maps/api";
 import "./Map.css";
 import Locate from "../Location/Locate";
-import useStoreLocations from "../../hooks/use-store-locations";
+import useDrinksInRadius from "../../hooks/use-drink-in-radius";
+import useStoreCoordinates from "../../hooks/use-store-coodinates";
+import axios from "axios";
 
 const METERS = 1609.34;
 
 function Map(props) {
   const [longitude, setLongitude] = useState(0);
   const [latitude, setLatitude] = useState(0);
-  const stores = useStoreLocations(props.radius, longitude, latitude);
+  
+  var stores = useDrinksInRadius(props.radius, longitude, latitude, props.drinkName).map?.(store => store.storeName);
+  var storeCoords = useStoreCoordinates(stores, props.drinkName, props.radius);
+
 
   // console.log(`lng=${longitude}, lat=${latitude}`);
   // console.log(stores);
@@ -48,6 +53,8 @@ function Map(props) {
   // optimize rendering of maps
   const onLoad = useCallback((map) => {
     mapRef.current = map;
+
+    // get gps info
     navigator.geolocation.getCurrentPosition(
       (position) => {
         setLatitude(position.coords.latitude);
@@ -62,24 +69,10 @@ function Map(props) {
     );
   });
 
-  // const locations = [
-  //   {
-  //     name: "Location 1",
-  //     location: {
-  //       lat: 42.8,
-  //       lng: -78.8,
-  //     },
-  //   },
-  //   {
-  //     name: "Location 2",
-  //     location: {
-  //       lat: 41.3917,
-  //       lng: 2.1649,
-  //     },
-  //   },
-  // ];
 
   var curLocation = { lat: latitude, lng: longitude };
+  // console.log(`storeCoords: ${storeCoords.map?.(coord=>coord.latitude)}`)
+  console.log(storeCoords);
 
   return (
     <>
@@ -91,9 +84,16 @@ function Map(props) {
         options={options}
         onLoad={onLoad}
       >
-        {props.drinkName != "" && stores.map?.((item) => (
-          <Marker position={{ lat: item.latitude, lng: item.longitude }} />
-        ))}
+        { 
+        // storeCoords.map?.((coords) => {
+        //   <Marker position={coords}/>
+
+        // })
+
+
+          // <Marker position={{ lat: item.latitude, lng: item.longitude }} />
+
+        }
 
         <Circle
           center={curLocation}
@@ -124,6 +124,7 @@ const closeOptions = {
   strokeColor: "#8BC34A",
   fillColor: "#8BC34A",
 };
+
 
 function milesToMeters(miles) {
   return miles * METERS;

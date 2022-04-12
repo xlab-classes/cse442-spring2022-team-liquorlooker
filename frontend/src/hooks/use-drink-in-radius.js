@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-function useStoreLocations(radius, longitude, latitude) {
+function useDrinksInRadius(radius, longitude, latitude, drinkName) {
   const [stores, setStores] = useState([]);
 
   var config = {
     method: "get",
-    url: `http://localhost:3000/store/getStoresInRadius`,
+    url: `http://localhost:3000/drinkPrice/drinkInRadius`,
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
     },
@@ -14,21 +14,22 @@ function useStoreLocations(radius, longitude, latitude) {
       radius: radius,
       latitude: latitude,
       longitude: longitude,
+      drinkName: drinkName,
    },
   };
 
-  const fetchStoreLocations = async () => {
+  const fetchDrinksInRadius = async () => {
     axios(config).then(function (response) {
       console.log(JSON.stringify(response.data));
       setStores(response.data);
     });
   };
-
+  
   useEffect(() => {
-    fetchStoreLocations();
-  }, [radius]);
+    fetchDrinksInRadius();
+  }, [radius, drinkName]);
 
     return stores;
 };
 
-export default useStoreLocations;
+export default useDrinksInRadius;

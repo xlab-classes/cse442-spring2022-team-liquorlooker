@@ -25,7 +25,6 @@ function useDrinkNames() {
     fetchDrinks();
   }, []);
 
-  console.log(`drinks: ${drinkNames}`)
   return drinkNames;
  
 };
