@@ -19,7 +19,7 @@
   justify-content: center;
 }
 
-.EditDrinkButton, .AddDrinkButton, .RemoveDrinkButton{
+.AddDrinkButton, .RemoveDrinkButton{
   display: flex;
   align-items: center;
   justify-content: center;
