@@ -30,7 +30,7 @@ async function sendData(em, psw, repsw) {
   });
   var config = {
     method: "post",
-    url: "http://localhost:3000/auth/register",
+    url: `http://${process.env.REACT_APP_DEV_URL}/auth/register`,
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
     },

@@ -9,7 +9,7 @@ const useStoreData = (storeName) => {
     
     var config = {
       method: 'get',
-      url: 'http://localhost:3000/drinkPrice/getStoreInventory?storeName=' + storeName,
+      url: `http://${process.env.REACT_APP_DEV_URL}/drinkPrice/getStoreInventory?storeName=` + storeName,
       headers: {}
     };
   

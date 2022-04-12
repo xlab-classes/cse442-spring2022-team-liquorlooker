@@ -121,9 +121,15 @@ export class drinkPriceService {
     for (let id in storeIDs) {
       use.push(parseInt(id));
     }
-    return await this.drinkPriceRepository.find({
-      select: ['storeName', 'drinkPrice'],
-      where: [{ store_id: In(use) }, { drink_id: drinkID.id }],
-    });
+    console.log(storeIDs);
+    // return await this.drinkPriceRepository
+    //   .createQueryBuilder('store')
+    //   .innerJoinAndSelect('store.id', 'dp', 'dp.store_id = store.id')
+    //   .where('store.store_id IN (:...id)', { id: use })
+    //   .getMany();
+
+    return await this.drinkPriceRepository.query(
+      `SELECT * FROM store INNER JOIN drink_price ON drink_price.store_id=store.id WHERE store_id IN (${use})`,
+    );
   }
 }
