@@ -13,6 +13,8 @@ import { LocalAuthGuard } from "./jwt/local.auth-guard";
 import { AuthDto } from "./dto/auth.dto";
 import { User } from "src/users/users.entity";
 import { JwtAuthGuard } from "./jwt/jwt.auth-guard";
+import { Roles } from "./auth.role.decorator";
+import { Role } from "./auth.role.enum";
 
 
 @Controller('auth')
@@ -42,5 +44,11 @@ export class AuthController {
   @Get('profile')
   async profile(@Request() req) {
     return this.authService.getSelf(req.user.id);
+  }
+
+  @Get('roleTest')
+  @Roles(Role.User)
+  async roleTest() {
+    return "Only standard users here"
   }
 }

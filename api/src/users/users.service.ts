@@ -2,6 +2,7 @@ import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './users.entity';
+import { Role } from '../auth/auth.role.enum'
 
 @Injectable()
 export class UsersService {
@@ -35,7 +36,8 @@ export class UsersService {
     }
     const user = await this.usersRepository.create({
       email: email,
-      password: password
+      password: password,
+      role: Role.User
     });
     await this.usersRepository.save(user);
     return user;
@@ -48,7 +50,7 @@ export class UsersService {
     const user = await this.usersRepository.create({
       email: email,
       password: password,
-      type: "business"
+      role: Role.Business
     });
     await this.usersRepository.save(user);
     return user;

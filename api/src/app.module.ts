@@ -14,6 +14,8 @@ import { storeModule } from './store/store.module';
 import { DrinksPriceModule } from './drinkPrice/drinkPrice.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { APP_GUARD } from '@nestjs/core';
+import { RolesGuard } from './auth/auth.role.guard';
 @Module({
   imports: [
     ServeStaticModule.forRoot({
@@ -38,6 +40,11 @@ import { join } from 'path';
     }),
   ],
   controllers: [AppController],
-  providers: [AuthService],
+  providers: [AuthService, 
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
+    },
+  ],
 })
 export class AppModule {}

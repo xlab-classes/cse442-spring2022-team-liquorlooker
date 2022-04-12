@@ -14,6 +14,8 @@ import { store } from './store.entity';
 import { storeDto } from './store.dto';
 import { updateStoreDto } from './updateStoreDto.dto';
 import { radiusDto } from './radiusDto.dto';
+import { Roles } from 'src/auth/auth.role.decorator';
+import { Role } from 'src/auth/auth.role.enum';
 
 @Controller('store')
 @UseInterceptors(ClassSerializerInterceptor)
@@ -28,6 +30,7 @@ export class storeController {
   async getStoreLocation(@Query() query): Promise<store> {
     return await this.storeService.getStoreLocation(query.storeName);
   }
+
   @Post('addStore')
   async addStore(@Body() storeDto: storeDto): Promise<store> {
     return await this.storeService.addStore(
