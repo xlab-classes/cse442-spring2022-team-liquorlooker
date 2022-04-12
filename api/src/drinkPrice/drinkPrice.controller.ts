@@ -9,6 +9,7 @@ import {
   Delete,
   Query,
 } from '@nestjs/common';
+import { query } from 'express';
 import { UpdateDateColumn } from 'typeorm';
 import { drinkPriceDto } from './drinkPrice.dto';
 import { drinkPrice } from './drinkPrice.entity';
@@ -49,6 +50,15 @@ export class drinkPriceController {
       drinkPriceDto.storeName,
       drinkPriceDto.drinkName,
       drinkPriceDto.drinkPrice,
+    );
+  }
+  @Get('drinkInRadius')
+  async drinksInRadius(@Query() query) {
+    return await this.drinkPriceService.getDrinkPricesInRadius(
+      query.radius,
+      query.latitude,
+      query.longitude,
+      query.drinkName,
     );
   }
 }
