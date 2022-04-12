@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { type } from 'os';
+import { store } from 'src/store/store.entity';
+import { Column, Entity, ManyToMany, ManyToOne, PrimaryColumn } from 'typeorm';
 
 @Entity()
 export class drinkPrice {

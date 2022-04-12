@@ -122,10 +122,14 @@ export class drinkPriceService {
       use.push(parseInt(id));
     }
     console.log(storeIDs);
-    return await this.drinkPriceRepository
-      .createQueryBuilder('drink_price')
-      .innerJoinAndSelect('drink_price', 'drink_price.store_id = store.id')
-      .where('drink_price.store_id IN (:...id)', { id: use })
-      .getMany();
+    // return await this.drinkPriceRepository
+    //   .createQueryBuilder('store')
+    //   .innerJoinAndSelect('store.id', 'dp', 'dp.store_id = store.id')
+    //   .where('store.store_id IN (:...id)', { id: use })
+    //   .getMany();
+
+    return await this.drinkPriceRepository.query(
+      `SELECT * FROM store INNER JOIN drink_price ON drink_price.store_id=store.id WHERE store_id IN (${use})`,
+    );
   }
 }
