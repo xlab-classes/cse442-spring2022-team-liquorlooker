@@ -88,7 +88,6 @@ function Map(props) {
           stores.length > 0 && stores.map?.((store) => {
               return <Marker
                 position={{ lat: store.latitude, lng: store.longitude }}
-                cursor={store.storeName}
               />;
             })
         }
