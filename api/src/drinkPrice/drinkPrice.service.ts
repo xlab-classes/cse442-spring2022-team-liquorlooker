@@ -118,10 +118,10 @@ export class drinkPriceService {
     const drinkID = arr[0];
     const storeIDs = arr[1];
     const use = [];
-    for (let id in storeIDs) {
-      use.push(parseInt(id));
+    for (let id of storeIDs) {
+      use.push(parseInt(id.id));
     }
-    console.log(storeIDs);
+    console.log(use);
     // return await this.drinkPriceRepository
     //   .createQueryBuilder('store')
     //   .innerJoinAndSelect('store.id', 'dp', 'dp.store_id = store.id')
@@ -129,7 +129,7 @@ export class drinkPriceService {
     //   .getMany();
 
     return await this.drinkPriceRepository.query(
-      `SELECT * FROM store INNER JOIN drink_price ON drink_price.store_id=store.id WHERE drink_id = ${drinkID.id} AND store_id IN (${use})`,
+      `SELECT * FROM store INNER JOIN drink_price ON drink_price.store_id=store.id WHERE drink_id=${drinkID.id} AND store_id IN (${use})`,
     );
   }
 }
