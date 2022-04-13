@@ -129,7 +129,7 @@ export class drinkPriceService {
     //   .getMany();
 
     return await this.drinkPriceRepository.query(
-      `SELECT * FROM store INNER JOIN drink_price ON drink_price.store_id=store.id WHERE store_id IN (${use})`,
+      `SELECT * FROM store INNER JOIN drink_price ON drink_price.store_id=store.id WHERE drink_id = ${drinkID.id} AND store_id IN (${use})`,
     );
   }
 }
