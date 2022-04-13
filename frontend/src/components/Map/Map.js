@@ -9,18 +9,20 @@ import {
 import "./Map.css";
 import Locate from "../Location/Locate";
 import useDrinksInRadius from "../../hooks/use-drink-in-radius";
-import useStoreCoordinates from "../../hooks/use-store-coodinates";
-import axios from "axios";
+import HomeIcon from '@mui/icons-material/Home';
 
 const METERS = 1609.34;
 
 function Map(props) {
   const [longitude, setLongitude] = useState(0);
   const [latitude, setLatitude] = useState(0);
-  
-  var stores = useDrinksInRadius(props.radius, longitude, latitude, props.drinkName).map?.(store => store.storeName);
-  var storeCoords = useStoreCoordinates(stores, props.drinkName, props.radius);
 
+  const stores = useDrinksInRadius(
+    props.radius,
+    longitude,
+    latitude,
+    props.drinkName
+  );
 
   // console.log(`lng=${longitude}, lat=${latitude}`);
   // console.log(stores);
@@ -69,10 +71,8 @@ function Map(props) {
     );
   });
 
-
   var curLocation = { lat: latitude, lng: longitude };
-  // console.log(`storeCoords: ${storeCoords.map?.(coord=>coord.latitude)}`)
-  console.log(storeCoords);
+
 
   return (
     <>
@@ -84,16 +84,16 @@ function Map(props) {
         options={options}
         onLoad={onLoad}
       >
-        { 
-        // storeCoords.map?.((coords) => {
-        //   <Marker position={coords}/>
-
-        // })
-
-
-          // <Marker position={{ lat: item.latitude, lng: item.longitude }} />
-
+        {
+          stores.length > 0 && stores.map?.((store) => {
+              return <Marker
+                position={{ lat: store.latitude, lng: store.longitude }}
+                cursor={store.storeName}
+              />;
+            })
         }
+          <Marker position={ curLocation } cursor={"Your Location"} label={"Your Location"}/>
+        
 
         <Circle
           center={curLocation}
@@ -124,7 +124,6 @@ const closeOptions = {
   strokeColor: "#8BC34A",
   fillColor: "#8BC34A",
 };
-
 
 function milesToMeters(miles) {
   return miles * METERS;
