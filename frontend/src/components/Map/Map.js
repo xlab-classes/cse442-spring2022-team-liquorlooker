@@ -115,6 +115,7 @@ function Map(props) {
           stores.map?.((store) => {
             return (
               <Marker
+                key={store.storeName}
                 position={{ lat: store.latitude, lng: store.longitude }}
                 onClick={() => getdirections(store)}
               />
