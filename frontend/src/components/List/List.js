@@ -6,6 +6,7 @@ import { ListItemButton } from "@mui/material";
 import { Button } from "@mui/material";
 
 const MyList = (props) => {
+  const stores = props.stores
   // if(props.data.length > 0){
   // return(
   // <Button variant="text" size= "large" sx={{
@@ -19,7 +20,7 @@ const MyList = (props) => {
   // )
   // }
 
-  if(props.data.length > 0){
+  if(stores.length > 0){
     return (
       <List
         sx={{
@@ -40,21 +41,25 @@ const MyList = (props) => {
         }}
       >
         <ul>
+          {
+            stores.map?.((store) => {
+              return <ListItem key={store}>
+                <ListItemButton>
+                  <ListItemText primary={`${store.storeName} \n ${store.drinkName} $ ${store.drinkPrice}`}/>
+                </ListItemButton>
+              </ListItem>
+            })
+          }
+
+
           {/* {props.map((e) => ( */}
-            <ListItem>
+            {/* <ListItem>
               <ListItemButton>
                 <ListItemText primary={`${Object.values(props.data[0])[1]} \n  $${Object.values(props.data[0])[2]}`} />
               </ListItemButton>
-            </ListItem>
+            </ListItem> */}
           {/* // ))} */}
-  
-          {/* {props.data.map((item) => (
-              <ListItem key={`${item.id}`}>
-                  <ListItemButton>
-                    <ListItemText primary={`${item.text}`} />
-                  </ListItemButton>
-              </ListItem>
-          ))} */}
+
         </ul>
       </List>
     );

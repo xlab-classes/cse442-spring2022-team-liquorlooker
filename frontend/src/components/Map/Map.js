@@ -23,7 +23,8 @@ function Map(props) {
     props.radius,
     longitude,
     latitude,
-    props.drinkName
+    props.drinkName,
+    props.onStoreChange
   );
 
   // console.log(`lng=${longitude}, lat=${latitude}`);
@@ -117,6 +118,7 @@ function Map(props) {
               <Marker
                 position={{ lat: store.latitude, lng: store.longitude }}
                 onClick={() => getdirections(store)}
+                label={`${store.storeName}`}
               />
             );
           })}
