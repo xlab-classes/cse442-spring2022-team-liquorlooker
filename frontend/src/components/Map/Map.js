@@ -9,14 +9,16 @@ import {
 import "./Map.css";
 import Locate from "../Location/Locate";
 import useDrinksInRadius from "../../hooks/use-drink-in-radius";
-import HomeIcon from '@mui/icons-material/Home';
+import HomeIcon from "@mui/icons-material/Home";
 
 const METERS = 1609.34;
+const google = window.google;
 
 function Map(props) {
   const [longitude, setLongitude] = useState(0);
   const [latitude, setLatitude] = useState(0);
 
+  const [directions, setDirections] = useState(0);
   const stores = useDrinksInRadius(
     props.radius,
     longitude,
@@ -73,6 +75,30 @@ function Map(props) {
 
   var curLocation = { lat: latitude, lng: longitude };
 
+  function getdirections(store) {
+    const directionService = new google.maps.DirectionsService();
+    directionService.route(
+      {
+        origin: new google.maps.LatLng({
+          lat: latitude,
+          lng: longitude,
+        }),
+        destination: new google.maps.LatLng({
+          lat: store.latitude,
+          lng: store.longitude,
+        }),
+        travelMode: google.maps.TravelMode.DRIVING,
+      },
+      (result, status) => {
+        if (status === google.maps.DirectionsStatus.OK) {
+          console.log(result);
+          setDirections(result);
+        } else {
+          console.error(`error fetching directions ${result}`);
+        }
+      }
+    );
+  }
 
   return (
     <>
@@ -84,21 +110,28 @@ function Map(props) {
         options={options}
         onLoad={onLoad}
       >
-        {
-          stores.length > 0 && stores.map?.((store) => {
-              return <Marker
+        {directions && <DirectionsRenderer directions={directions} />}
+        {stores.length > 0 &&
+          stores.map?.((store) => {
+            return (
+              <Marker
                 position={{ lat: store.latitude, lng: store.longitude }}
-              />;
-            })
-        }
-          <Marker position={ curLocation } cursor={"Your Location"} label={"Your Location"}/>
-        
+                onClick={() => getdirections(store)}
+              />
+            );
+          })}
+        <Marker
+          position={curLocation}
+          cursor={"Your Location"}
+          label={"Your Location"}
+        />
 
         <Circle
           center={curLocation}
           radius={milesToMeters(props.radius)}
           options={closeOptions}
         />
+
         {/* {locations.map?.((store) => {
           return <Marker key={store.name} position={store.location} />;
         })} */}
