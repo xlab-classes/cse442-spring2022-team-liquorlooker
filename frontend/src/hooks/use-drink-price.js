@@ -8,7 +8,7 @@ function useDrinkPrice(drinkName) {
   const fetchDrinkPrice = async () => {
     var config = {
       method: "GET",
-      url: `http://localhost:3000/drinkPrice/getPrices`,
+      url: `http://${process.env.REACT_APP_DEV_URL}/drinkPrice/getPrices`,
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },

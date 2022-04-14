@@ -7,7 +7,7 @@ function useDrinksInRadius(radius, longitude, latitude, drinkName, onStoreChange
   const fetchDrinksInRadius = async () => {
     var config = {
       method: "get",
-      url: `http://localhost:3000/drinkPrice/drinkInRadius`,
+      url: `http://${process.env.REACT_APP_DEV_URL}/drinkPrice/drinkInRadius`,
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
