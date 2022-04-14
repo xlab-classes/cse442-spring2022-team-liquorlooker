@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, useDebugValue } from "react";
 import { useLoadScript } from "@react-google-maps/api";
 import TextField from "@mui/material/TextField";
 import "../styles/Home.css";
@@ -19,6 +19,10 @@ const Home = () => {
   const [drinkName, setDrinkName] = useState("");
   const drinkPrices = useDrinkPrice(drinkName);
   const [radius, setRadius] = useState(1);
+  const [stores, setStores] = useState([]);
+
+  console.log(`HOME store: ${JSON.stringify(stores)}`)
+  useDebugValue(stores ? `HOME: ${stores}` : 'IDK');
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -26,6 +30,10 @@ const Home = () => {
   });
 
   if (!isLoaded) return <div>Loading...</div>;
+
+  const handleStoresChange = (stores) => {
+    setStores(stores);
+  }
 
   return (
     <body className="main">
@@ -63,7 +71,7 @@ const Home = () => {
 
         {/* <MyList data={stores} /> */}
 
-        <MyList data={drinkPrices} name={drinkName} />
+        <MyList data={drinkPrices} name={drinkName} stores={stores}/>
       </div>
 
       <div className="right">
@@ -114,11 +122,12 @@ const Home = () => {
             )}
           />
         </div>
-          <Map radius={radius} drinkName={drinkName}/>
+          <Map radius={radius} drinkName={drinkName} onStoreChange={handleStoresChange}/>
         {/* <img className="map" src={Map} alt="Map" /> */}
       </div>
     </body>
   );
 };
+
 
 export default Home;

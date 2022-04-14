@@ -9,7 +9,6 @@ import {
 import "./Map.css";
 import Locate from "../Location/Locate";
 import useDrinksInRadius from "../../hooks/use-drink-in-radius";
-import HomeIcon from '@mui/icons-material/Home';
 
 const METERS = 1609.34;
 
@@ -21,9 +20,10 @@ function Map(props) {
     props.radius,
     longitude,
     latitude,
-    props.drinkName
+    props.drinkName,
+    props.onStoreChange
   );
-
+  
   // console.log(`lng=${longitude}, lat=${latitude}`);
   // console.log(stores);
 
