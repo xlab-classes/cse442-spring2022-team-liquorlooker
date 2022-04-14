@@ -5,6 +5,7 @@ import {
   DirectionsRenderer,
   Circle,
   MarkerClusterer,
+  InfoWindow,
 } from "@react-google-maps/api";
 import "./Map.css";
 import Locate from "../Location/Locate";
@@ -17,6 +18,7 @@ const google = window.google;
 function Map(props) {
   const [longitude, setLongitude] = useState(0);
   const [latitude, setLatitude] = useState(0);
+  const [selected, setSelected] = useState(null);
 
   const [directions, setDirections] = useState(0);
   const stores = useDrinksInRadius(
@@ -119,10 +121,31 @@ function Map(props) {
                 key={store.storeName}
                 position={{ lat: store.latitude, lng: store.longitude }}
                 onClick={() => getdirections(store)}
-                label={`${store.storeName}`}
+                onMouseOver={() => {
+                  setSelected(store)
+                }}
+                onMouseOut={setTimeout(() => {
+                  setSelected(null)
+                  
+                }, 5000)}
               />
             );
           })}
+
+        {
+          selected && (
+          <InfoWindow position={{lat: selected.latitude + .0015, lng: selected.longitude}}>
+            <div>
+              <h3>
+                {selected.storeName}
+              </h3>
+              <p>
+                {selected.drinkName} {'\n'} 
+                ${selected.drinkPrice}
+              </p>
+            </div>
+          </InfoWindow>)
+        }
         <Marker
           position={curLocation}
           cursor={"Your Location"}
