@@ -4,29 +4,29 @@ const UseDrinkExists = (drinkName) => {
   const [drinkExists, setStoreData] = useState(false);
 
   const fetchDrinkExists = async () => {
-    var axios = require('axios');
-    var qs = require('qs');
+    var axios = require("axios");
+    var qs = require("qs");
     var data = qs.stringify({
-      'drinkName': drinkName
+      drinkName: drinkName,
     });
     var config = {
-      method: 'get',
-      url: `http://${process.env.REACT_APP_DEV_URL}/drinks/exists`,
-      headers: { 
-        'Content-Type': 'application/x-www-form-urlencoded'
+      method: "get",
+      url: `http://${process.env.REACT_APP_URL}/drinks/exists`,
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
       },
-      data : data
+      data: data,
     };
 
     axios(config)
-    .then(function (response) {
-      console.log(JSON.stringify(response.data));
-      setStoreData(response.data);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-  }
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+        setStoreData(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
 
   useEffect(() => {
     fetchDrinkExists();

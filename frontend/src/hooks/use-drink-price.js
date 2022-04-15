@@ -4,17 +4,17 @@ import axios from "axios";
 function useDrinkPrice(drinkName) {
   const [drink, setDrink] = useState([]);
 
-  console.log(drink)
+  console.log(drink);
   const fetchDrinkPrice = async () => {
     var config = {
       method: "GET",
-      url: `http://localhost:3000/drinkPrice/getPrices`,
+      url: `http://${process.env.REACT_APP_URL}/drinkPrice/getPrices`,
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
       params: { drinkName: drinkName },
       // data: data,
-    }; 
+    };
 
     axios(config)
       .then(function (response) {
@@ -30,7 +30,7 @@ function useDrinkPrice(drinkName) {
     fetchDrinkPrice();
   }, [drinkName]);
 
-  return(drink);
-};
+  return drink;
+}
 
 export default useDrinkPrice;

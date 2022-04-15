@@ -7,7 +7,7 @@ function useDrinkNames() {
   const fetchDrinks = async () => {
     var config = {
       method: "get",
-      url: `http://localhost:3000/drinks/getAllDrinkNames`,
+      url: `http://${process.env.REACT_APP_URL}/drinks/getAllDrinkNames`,
       headers: {},
     };
 
@@ -26,7 +26,6 @@ function useDrinkNames() {
   }, []);
 
   return drinkNames;
- 
-};
+}
 
 export default useDrinkNames;

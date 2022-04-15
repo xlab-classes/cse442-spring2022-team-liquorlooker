@@ -80,8 +80,8 @@ function Map(props) {
     directionService.route(
       {
         origin: new google.maps.LatLng({
-          lat: latitude,
-          lng: longitude,
+          lat: curLocation.lat,
+          lng: curLocation.lng,
         }),
         destination: new google.maps.LatLng({
           lat: store.latitude,
