@@ -8,7 +8,7 @@ function useStoreCoordinates(stores, drinkName, radius) {
   const fetchStoreCoodinates = async (storeName) => {
     var config = {
       method: "get",
-      url: `http://${process.env.REACT_APP_URL}/store/getLocation`,
+      url: "http://localhost:3000/store/getLocation",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
@@ -36,9 +36,9 @@ function useStoreCoordinates(stores, drinkName, radius) {
     stores.map?.((store) => {
       fetchStoreCoodinates(store);
       setStoreCoords((prev) => {
-        if (!prev.includes(storeCoord)) {
-          return [...prev, storeCoord];
-        }
+          if(!(prev.includes(storeCoord))){
+            return [...prev, storeCoord];
+          }
       });
     });
   }, [drinkName, radius]);
