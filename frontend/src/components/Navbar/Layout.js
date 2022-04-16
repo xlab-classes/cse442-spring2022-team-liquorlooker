@@ -28,7 +28,7 @@ const Layout = () => {
               />
             </div>
               <li className="nav-item">
-                <Link to="/login" className="link">Login</Link>
+                <Link to="/login" className="link">{localStorage.getItem("logged-in") ? "Profile" : "Login"}</Link>
               </li>
             </ul>
           </nav>

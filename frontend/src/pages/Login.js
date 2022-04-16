@@ -8,12 +8,12 @@ async function getData(loginEm, loginPsw) {
   var axios = require("axios");
   var qs = require("qs");
   var data = qs.stringify({
-    email: loginEm,
-    password: loginPsw,
+    "email": loginEm,
+    "password": loginPsw,
   });
   var config = {
     method: "post",
-    url: `http://${process.env.REACT_APP_DEV_URL}/auth/login`,
+    url: `http://${process.env.REACT_APP_DEV_URL}/auth/validateUser`,
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
     },
@@ -23,6 +23,32 @@ async function getData(loginEm, loginPsw) {
   axios(config)
     .then(function (response) {
       console.log(JSON.stringify(response.data));
+      loginUser(response.data, loginPsw);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+}
+
+async function loginUser(user, userPsw) {
+  var axios = require("axios");
+  var data = JSON.stringify({
+    "email": user.email,
+    "password": userPsw,
+  });
+  var config = {
+    method: "post",
+    url: `http://${process.env.REACT_APP_DEV_URL}/auth/login`,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    data: data,
+  };
+
+  axios(config)
+    .then(function (response) {
+      console.log(JSON.stringify(response.data));
+      localStorage.setItem("logged-in", true)
     })
     .catch(function (error) {
       console.log(error);
