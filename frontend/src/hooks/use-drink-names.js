@@ -1,21 +1,20 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const useDrinks = () => {
-  const [drinks, setDrinks] = useState([]);
+function useDrinkNames() {
+  const [drinkNames, setDrinkNames] = useState([]);
 
-  console.log(drinks)
   const fetchDrinks = async () => {
     var config = {
       method: "get",
-      url: "http://cheshire.cse.buffalo.edu:1812/drinks/getAllDrinkNames",
+      url: `http://${process.env.REACT_APP_DEV_URL}/drinks/getAllDrinkNames`,
       headers: {},
     };
 
     axios(config)
       .then((response) => {
         console.log(JSON.stringify(response.data));
-        setDrinks(response.data);
+        setDrinkNames(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -26,9 +25,8 @@ const useDrinks = () => {
     fetchDrinks();
   }, []);
 
-  return {
-    drinks,
-  };
+  return drinkNames;
+ 
 };
 
-export default useDrinks;
+export default useDrinkNames;

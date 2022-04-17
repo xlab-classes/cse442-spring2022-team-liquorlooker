@@ -5,7 +5,7 @@ import { DrinksModule } from 'src/drinks/drinks.module';
 import { DrinksService } from 'src/drinks/drinks.service';
 import { store } from 'src/store/store.entity';
 import { storeService } from 'src/store/store.service';
-import { DeleteResult, Repository, UpdateResult } from 'typeorm';
+import { DeleteResult, In, Repository, UpdateResult } from 'typeorm';
 import { drinkPrice } from './drinkPrice.entity';
 
 @Injectable()
@@ -101,5 +101,35 @@ export class drinkPriceService {
     } catch (error) {
       return error;
     }
+  }
+
+  async getDrinkPricesInRadius(
+    radius: number,
+    currLat: number,
+    currLong: number,
+    drinkName: string,
+  ): Promise<drinkPrice[]> {
+    const arr = await this.storeService.getStoreWithinRadius(
+      radius,
+      currLat,
+      currLong,
+      drinkName,
+    );
+    const drinkID = arr[0];
+    const storeIDs = arr[1];
+    const use = [];
+    for (let id of storeIDs) {
+      use.push(parseInt(id.id));
+    }
+    console.log(use);
+    // return await this.drinkPriceRepository
+    //   .createQueryBuilder('store')
+    //   .innerJoinAndSelect('store.id', 'dp', 'dp.store_id = store.id')
+    //   .where('store.store_id IN (:...id)', { id: use })
+    //   .getMany();
+
+    return await this.drinkPriceRepository.query(
+      `SELECT * FROM store INNER JOIN drink_price ON drink_price.store_id=store.id WHERE drink_id=${drinkID.id} AND store_id IN (${use})`,
+    );
   }
 }

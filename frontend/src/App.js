@@ -1,11 +1,13 @@
-import "./App.css"
+import "./App.css";
 import { Routes, Route} from "react-router-dom";
 import Login from './pages/Login';
 import Home from "./pages/Home";
 // import NoMatch from './pages/NoMatch';
 import DrinkDetail from "./pages/DrinkDetail";
-import Layout from "./components/Navbar/Layout"
-import Registration from "./pages/Registration"
+import Layout from "./components/Navbar/Layout";
+import Registration from "./pages/Registration";
+import BusinessInventory from "./pages/BusinessInventory";
+import EditDrinkInfo from "./pages/EditDrinkInfo";
 
 function App() {
   return (
@@ -30,6 +32,16 @@ function App() {
 
         <Route path='/registration' element={<Layout />}>
           <Route index element={<Registration />} />
+          {/* <Route path="*" element={<NoMatch />} /> */}
+        </Route>
+
+        <Route path='/businessInventory' element={<Layout />}>
+          <Route index element={<BusinessInventory />} />
+          {/* <Route path="*" element={<NoMatch />} /> */}
+        </Route>
+
+        <Route path='/editDrinkInfo' element={<Layout />}>
+          <Route index element={<EditDrinkInfo />} />
           {/* <Route path="*" element={<NoMatch />} /> */}
         </Route>
         {/* <Route path="*" element={<NoMatch/>}/> */}

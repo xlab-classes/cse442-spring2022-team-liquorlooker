@@ -1,20 +1,39 @@
-import { React, useState } from "react";
+import { React, useState, useDebugValue } from "react";
+import { useLoadScript } from "@react-google-maps/api";
 import TextField from "@mui/material/TextField";
 import "../styles/Home.css";
 import MyList from "../components/List/List";
-import Map from "../images/maps.png";
+// import Map from "../images/maps.png";
 import stores from "../components/List/store.json";
 import { Helmet } from "react-helmet";
 import Autocomplete from "@mui/material/Autocomplete";
 import { Paper } from "@mui/material";
-import useDrinks from "../hooks/use-drinks";
+import useDrinkNames from "../hooks/use-drink-names";
 import useDrinkPrice from "../hooks/use-drink-price";
+import Map from "../components/Map/Map";
+
 
 const Home = () => {
   const enter = 13;
-  const drinks = useDrinks();
+  const drinkNames = useDrinkNames();
   const [drinkName, setDrinkName] = useState("");
   const drinkPrices = useDrinkPrice(drinkName);
+  const [radius, setRadius] = useState(1);
+  const [stores, setStores] = useState([]);
+
+  console.log(`HOME store: ${JSON.stringify(stores)}`)
+  useDebugValue(stores ? `HOME: ${stores}` : 'IDK');
+
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+    // libraries: ["places"],
+  });
+
+  if (!isLoaded) return <div>Loading...</div>;
+
+  const handleStoresChange = (stores) => {
+    setStores(stores);
+  }
 
   return (
     <body className="main">
@@ -36,19 +55,23 @@ const Home = () => {
             InputProps={{
               style: { color: "azure" },
             }}
-            defaultValue="5"
-            onChange={(event) =>
-              event.target.value < 1
-                ? (event.target.value = "")
-                : event.target.value
-            }
+            defaultValue="1"
+            onChange={(event) => {
+              if(event.target.value < 1){
+                event.target.value = ""
+                return event.target.value;
+              }else{
+                setRadius(event.target.value)
+                return event.target.value
+              }
+            }}
             type="number"
           />
         </div>
 
         {/* <MyList data={stores} /> */}
 
-        <MyList data={drinkPrices} name={drinkName} />
+        <MyList data={drinkPrices} name={drinkName} stores={stores}/>
       </div>
 
       <div className="right">
@@ -73,7 +96,7 @@ const Home = () => {
                 {children}
               </Paper>
             )}
-            options={drinks.drinks.map((option) => option.drinkName)}
+            options={drinkNames.map?.((drink) => drink.drinkName)}
             renderInput={(params) => (
               <TextField
                 {...params}
@@ -99,11 +122,12 @@ const Home = () => {
             )}
           />
         </div>
-
-        <img className="map" src={Map} alt="Map" />
+          <Map radius={radius} drinkName={drinkName} onStoreChange={handleStoresChange}/>
+        {/* <img className="map" src={Map} alt="Map" /> */}
       </div>
     </body>
   );
 };
+
 
 export default Home;

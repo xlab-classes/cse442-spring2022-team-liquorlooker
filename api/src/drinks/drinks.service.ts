@@ -1,5 +1,6 @@
 import { HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { storeService } from 'src/store/store.service';
 import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { Drink } from './drinks.entity';
 
@@ -70,6 +71,8 @@ export class DrinksService {
   }
 
   async partialSearchByName(partialName: string): Promise<Drink[]> {
-    return await this.drinksRepository.query(`SELECT drinkName from drink WHERE drinkName LIKE '%${partialName}%'`)
+    return await this.drinksRepository.query(
+      `SELECT drinkName from drink WHERE drinkName LIKE '%${partialName}%'`,
+    );
   }
 }

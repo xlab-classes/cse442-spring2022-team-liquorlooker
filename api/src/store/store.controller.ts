@@ -16,6 +16,7 @@ import { updateStoreDto } from './updateStoreDto.dto';
 import { radiusDto } from './radiusDto.dto';
 import { Roles } from 'src/auth/auth.role.decorator';
 import { Role } from 'src/auth/auth.role.enum';
+import { drinkPrice } from 'src/drinkPrice/drinkPrice.entity';
 
 @Controller('store')
 @UseInterceptors(ClassSerializerInterceptor)
@@ -51,15 +52,6 @@ export class storeController {
       updateStoreDto.newStoreName,
       updateStoreDto.latitude,
       updateStoreDto.longitude,
-    );
-  }
-
-  @Get('getStoresInRadius')
-  async getStoresinrad(@Query() query): Promise<store[]> {
-    return await this.storeService.getStoreWithinRadius(
-      query.radius,
-      query.latitude,
-      query.longitude,
     );
   }
 }

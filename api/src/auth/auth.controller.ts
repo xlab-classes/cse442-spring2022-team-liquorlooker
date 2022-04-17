@@ -34,7 +34,11 @@ export class AuthController {
     const { email, password } = credentials;
     return await this.authService.registerBusiness(email, password);
   }
-
+  @Post('validateUser')
+  async validate(@Body() credentials: AuthDto): Promise<User> {
+    const { email, password } = credentials;
+    return await this.authService.validateUser(email, password);
+  }
   @UseGuards(LocalAuthGuard)
   @Post('login')
   async login(@Request() req) {

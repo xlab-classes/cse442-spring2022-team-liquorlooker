@@ -5,7 +5,7 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const options = {
     "origin": '*', 
-    "methods": ['GET', 'POST', 'UPDATE', 'DEL'],
+    "methods": ['GET', 'POST', 'UPDATE', 'DELETE'],
     "allowedHeaders": ['Content-type']
     // "preflightContinue": false,
     // "optionsSuccessStatus": 204
