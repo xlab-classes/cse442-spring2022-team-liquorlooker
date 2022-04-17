@@ -120,32 +120,32 @@ function Map(props) {
               <Marker
                 key={store.storeName}
                 position={{ lat: store.latitude, lng: store.longitude }}
-                onClick={() => getdirections(store)}
+                onClick={getdirections(store)}
                 onMouseOver={() => {
-                  setSelected(store)
+                  setSelected(store);
                 }}
                 onMouseOut={setTimeout(() => {
-                  setSelected(null)
-                  
+                  setSelected(null);
                 }, 5000)}
               />
             );
           })}
 
-        {
-          selected && (
-          <InfoWindow position={{lat: selected.latitude + .0015, lng: selected.longitude}}>
+        {selected && (
+          <InfoWindow
+            position={{
+              lat: selected.latitude + 0.0015,
+              lng: selected.longitude,
+            }}
+          >
             <div>
-              <h3>
-                {selected.storeName}
-              </h3>
+              <h3>{selected.storeName}</h3>
               <p>
-                {selected.drinkName} {'\n'} 
-                ${selected.drinkPrice}
+                {selected.drinkName} {"\n"}${selected.drinkPrice}
               </p>
             </div>
-          </InfoWindow>)
-        }
+          </InfoWindow>
+        )}
         <Marker
           position={curLocation}
           cursor={"Your Location"}
