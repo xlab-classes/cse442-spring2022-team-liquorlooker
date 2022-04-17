@@ -15,6 +15,7 @@ import { User } from "src/users/users.entity";
 import { JwtAuthGuard } from "./jwt/jwt.auth-guard";
 import { Roles } from "./auth.role.decorator";
 import { Role } from "./auth.role.enum";
+import { RolesGuard } from "./auth.role.guard";
 
 
 @Controller('auth')
@@ -43,12 +44,20 @@ export class AuthController {
   @UseGuards(JwtAuthGuard)
   @Get('profile')
   async profile(@Request() req) {
-    return this.authService.getSelf(req.user.id);
+    return this.authService.getSelf(req.user.email);
   }
 
-  @Get('roleTest')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Get('userRoleTest')
   @Roles(Role.User)
-  async roleTest() {
-    return "Only standard users here"
+  async userRoleTest() {
+    return "Only standard users here";
+  }
+
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Get('businessRoleTest')
+  @Roles(Role.Business)
+  async businessRoleTest() {
+    return "Only business users here";
   }
 }
