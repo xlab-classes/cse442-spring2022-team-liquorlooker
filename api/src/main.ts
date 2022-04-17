@@ -11,8 +11,8 @@ async function bootstrap() {
     // "optionsSuccessStatus": 204
   };
   const httpsOptions = {
-    key: fs.readFileSync('./secrets/private-key.pem'),
-    cert: fs.readFileSync('./secrets/public-certificate.pem'),
+    key: fs.readFileSync('./secrets/key.pem'),
+    cert: fs.readFileSync('./secrets/csr.pem'),
   };
   const app = await NestFactory.create(AppModule, { httpsOptions });
   const configService = app.get<ConfigService>(ConfigService);
