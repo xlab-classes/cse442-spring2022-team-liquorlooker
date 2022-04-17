@@ -31,7 +31,7 @@ export class AuthService {
         return { access_token: this.jwtService.sign(payload), };
     }
 
-    async getSelf(id: number): Promise<User> {
-        return await this.usersService.getUserById(id)
+    async getSelf(email: string): Promise<User> {
+        return await this.usersService.getUserByEmail(email)
     }
 }
