@@ -37,7 +37,7 @@ export class UsersService {
     const user = await this.usersRepository.create({
       email: email,
       password: password,
-      role: Role.User
+      role: "user"
     });
     await this.usersRepository.save(user);
     return user;
@@ -50,7 +50,7 @@ export class UsersService {
     const user = await this.usersRepository.create({
       email: email,
       password: password,
-      role: Role.Business
+      role: "business"
     });
     await this.usersRepository.save(user);
     return user;
