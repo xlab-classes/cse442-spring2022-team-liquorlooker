@@ -20,6 +20,12 @@ PERFORMANCE OF THIS SOFTWARE.
 ***************************************************************************** */
 
 /**
+ * @license bcrypt.js (c) 2013 Daniel Wirtz <dcode@dcode.io>
+ * Released under the Apache License, Version 2.0
+ * see: https://github.com/dcodeIO/bcrypt.js for details
+ */
+
+/**
  * React Router DOM v6.3.0
  *
  * Copyright (c) Remix Software Inc.
