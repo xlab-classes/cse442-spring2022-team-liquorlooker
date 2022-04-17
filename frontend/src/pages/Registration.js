@@ -15,18 +15,16 @@ async function sendData(em, psw, repsw) {
     alert("Passwords do not match, Please try registering again");
     return;
   }
-
-  /*
-  const bcrypt = require('bcrypt');
-  const saltRounds = 10;
-  const hashedPsw = bcrypt.hashSync(psw, saltRounds);
-  */
+  
+  var bcrypt = require("bcryptjs");
+  var salt = bcrypt.genSaltSync(10);
+  var hash = bcrypt.hashSync(psw, salt);
 
   var axios = require("axios");
   var qs = require("qs");
   var data = qs.stringify({
     email: em,
-    password: psw,
+    password: hash,
   });
   var config = {
     method: "post",

@@ -5,6 +5,7 @@ function useDrinksInRadius(radius, longitude, latitude, drinkName, onStoreChange
   const [stores, setStores] = useState([]);
 
   const fetchDrinksInRadius = async () => {
+    if(drinkName === "") return;
     var config = {
       method: "get",
       url: `http://${process.env.REACT_APP_DEV_URL}/drinkPrice/drinkInRadius`,

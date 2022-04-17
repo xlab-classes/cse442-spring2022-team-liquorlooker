@@ -13,9 +13,9 @@ import useDrinksInRadius from "../../hooks/use-drink-in-radius";
 import HomeIcon from "@mui/icons-material/Home";
 
 const METERS = 1609.34;
-const google = window.google;
 
 function Map(props) {
+  const google = window.google;
   const [longitude, setLongitude] = useState(0);
   const [latitude, setLatitude] = useState(0);
   const [selected, setSelected] = useState(null);
