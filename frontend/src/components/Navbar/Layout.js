@@ -12,7 +12,7 @@ const Layout = () => {
           <nav className="navbar">
             <Link to="/" className="logo">LiquorLooker</Link>
             <ul className="nav-links">
-            <div className="navbar-search">
+            {/* <div className="navbar-search">
               <TextField
                 id="navbar-search-tf"
                 label="Search"
@@ -26,7 +26,7 @@ const Layout = () => {
                 }}
                 type="search"
               />
-            </div>
+            </div> */}
               <li className="nav-item">
                 <Link to="/login" className="link">Login</Link>
               </li>

@@ -16,8 +16,8 @@ const METERS = 1609.34;
 
 function Map(props) {
   const google = window.google;
-  const [longitude, setLongitude] = useState(0);
-  const [latitude, setLatitude] = useState(0);
+  const [longitude, setLongitude] = useState(43.000637466942166);
+  const [latitude, setLatitude] = useState(-78.78698849659867);
   const [selected, setSelected] = useState(null);
 
   const [directions, setDirections] = useState(0);
