@@ -31,6 +31,7 @@ async function getData(loginEm, loginPsw) {
 }
 
 async function loginUser(user, userPsw) {
+  console.log(user);
   var axios = require("axios");
   var data = JSON.stringify({
     "email": user.email,
@@ -113,8 +114,14 @@ const Login = () => {
       </div>
 
       <div className={styles.register}>
-        <Link to="/registration">
-          <button type="submit">Register</button>
+        <Link to="/registerUser">
+          <button type="submit">Register User</button>
+        </Link>
+      </div>
+
+      <div className={styles.register}>
+        <Link to="/registerBusiness">
+          <button type="submit">Register Business</button>
         </Link>
       </div>
     </body>

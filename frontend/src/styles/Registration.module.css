@@ -8,13 +8,13 @@
     font-family:'Segoe UI', 'Tahoma', 'Geneva', 'Verdana', 'sans-serif';
 }
 
-.email, .password, .reenterpassword {
+.email, .storeName, .password, .reenterpassword, .latitude, .longitude {
     padding-bottom: 12px;
     background-color: #514E4E;
     background-clip: content-box;
 }
 
-.emailLocation, .passwordLocation, .reenterpasswordLocation{
+.emailLocation, .storeNameLocation, .passwordLocation, .reenterpasswordLocation, .latitudeLocation, .longitudeLocation{
     display: flex;
     align-items: center;
     justify-content: center;

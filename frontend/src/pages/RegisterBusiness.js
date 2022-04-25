@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import styles from "../styles/Registration.module.css";
+import styles from "../styles/Registration.module.css"
 import { Helmet } from "react-helmet";
 import TextField from "@mui/material/TextField";
 
-async function sendData(em, psw, repsw) {
+async function sendAddStore(em, stnm, psw, repsw, lat, long) {
   var re =
     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   if (re.test(em) == false) {
@@ -16,19 +16,46 @@ async function sendData(em, psw, repsw) {
     return;
   }
   
+  var axios = require('axios');
+  var qs = require('qs');
+  var data = qs.stringify({
+    'storeName': stnm,
+    'latitude': lat,
+    'longitude': long 
+  });
+  var config = {
+    method: 'post',
+    url: `http://${process.env.REACT_APP_DEV_URL}/store/addStore`,
+    headers: { 
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    data : data
+  };
+
+  axios(config)
+  .then(function (response) {
+    console.log(JSON.stringify(response.data));
+    registerBusiness(em, psw)
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+}
+
+async function registerBusiness(businessEmail, businessPsw){
   var bcrypt = require("bcryptjs");
   var salt = bcrypt.genSaltSync(10);
-  var hash = bcrypt.hashSync(psw, salt);
+  var hash = bcrypt.hashSync(businessPsw, salt);
 
   var axios = require("axios");
   var qs = require("qs");
   var data = qs.stringify({
-    email: em,
+    email: businessEmail,
     password: hash,
   });
   var config = {
     method: "post",
-    url: `http://${process.env.REACT_APP_DEV_URL}/auth/register`,
+    url: `http://${process.env.REACT_APP_DEV_URL}/auth/business/register`,
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
     },
@@ -44,10 +71,13 @@ async function sendData(em, psw, repsw) {
     });
 }
 
-const Registration = () => {
+const RegisterBusiness = () => {
   const [email, setEmail] = useState("");
+  const [storeName, setStoreName] = useState("");
   const [password, setPassword] = useState("");
   const [reenterPassword, setReenterPassword] = useState("");
+  const [latitude, setLatitude] = useState("");
+  const [longitude, setLongitude] = useState("");
 
   return (
     <main>
@@ -56,7 +86,7 @@ const Registration = () => {
       </Helmet>
       <div>
         <h1>
-          <span className={styles.Register}>Register</span>
+          <span className={styles.Register}>Register Business</span>
         </h1>
       </div>
 
@@ -71,6 +101,21 @@ const Registration = () => {
             }}
             value={email}
             onChange={(event) => setEmail(event.target.value)}
+          />
+        </div>
+      </div>
+
+      <div className={styles.storeNameLocation}>
+        <div className={styles.storeName}>
+          <TextField
+            label="Enter Store Name"
+            variant="outlined"
+            size="normal"
+            InputLabelProps={{
+              style: { color: "azure" },
+            }}
+            value={storeName}
+            onChange={(event) => setStoreName(event.target.value)}
           />
         </div>
       </div>
@@ -107,11 +152,41 @@ const Registration = () => {
         </div>
       </div>
 
+      <div className={styles.latitudeLocation}>
+        <div className={styles.latitude}>
+          <TextField
+            label="Enter Latitude"
+            variant="outlined"
+            size="normal"
+            InputLabelProps={{
+              style: { color: "azure" },
+            }}
+            value={latitude}
+            onChange={(event) => setLatitude(event.target.value)}
+          />
+        </div>
+      </div>
+
+      <div className={styles.longitudeLocation}>
+        <div className={styles.longitude}>
+          <TextField
+            label="Enter Longitude"
+            variant="outlined"
+            size="normal"
+            InputLabelProps={{
+              style: { color: "azure" },
+            }}
+            value={longitude}
+            onChange={(event) => setLongitude(event.target.value)}
+          />
+        </div>
+      </div>
+
       <div className={styles.submit}>
         <Link to="/">
           <button
             type="submit"
-            onClick={() => sendData(email, password, reenterPassword)}
+            onClick={() => sendAddStore(email, storeName, password, reenterPassword, latitude, longitude)}
           >
             Register
           </button>
@@ -121,4 +196,4 @@ const Registration = () => {
   );
 };
 
-export default Registration;
+export default RegisterBusiness;

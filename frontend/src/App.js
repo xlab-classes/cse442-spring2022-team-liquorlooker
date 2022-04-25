@@ -5,7 +5,8 @@ import Home from "./pages/Home";
 // import NoMatch from './pages/NoMatch';
 import DrinkDetail from "./pages/DrinkDetail";
 import Layout from "./components/Navbar/Layout";
-import Registration from "./pages/Registration";
+import RegisterUser from "./pages/RegisterUser";
+import RegisterBusiness from "./pages/RegisterBusiness";
 import BusinessInventory from "./pages/BusinessInventory";
 import EditDrinkInfo from "./pages/EditDrinkInfo";
 
@@ -30,8 +31,13 @@ function App() {
           {/* <Route path="*" element={<NoMatch />} /> */}
         </Route>
 
-        <Route path='/registration' element={<Layout />}>
-          <Route index element={<Registration />} />
+        <Route path='/registerUser' element={<Layout />}>
+          <Route index element={<RegisterUser />} />
+          {/* <Route path="*" element={<NoMatch />} /> */}
+        </Route>
+
+        <Route path='/registerBusiness' element={<Layout />}>
+          <Route index element={<RegisterBusiness />} />
           {/* <Route path="*" element={<NoMatch />} /> */}
         </Route>
 
