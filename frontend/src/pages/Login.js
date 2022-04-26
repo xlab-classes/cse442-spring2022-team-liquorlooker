@@ -49,6 +49,7 @@ async function loginUser(user, userPsw) {
     .then(function (response) {
       console.log(JSON.stringify(response.data));
       localStorage.setItem("logged-in", true)
+      //SET USERNAME OR EMAIL FOR SPECIFIC PAGE LOADING
     })
     .catch(function (error) {
       console.log(error);
@@ -113,8 +114,14 @@ const Login = () => {
       </div>
 
       <div className={styles.register}>
-        <Link to="/registration">
-          <button type="submit">Register</button>
+        <Link to="/registerUser">
+          <button type="submit">Register User</button>
+        </Link>
+      </div>
+
+      <div className={styles.register}>
+        <Link to="/registerBusiness">
+          <button type="submit">Register Business</button>
         </Link>
       </div>
     </body>
