@@ -43,14 +43,15 @@ export class UsersService {
     return user;
   }
 
-  async createBusiness(email: string, password: string): Promise<User> {
+  async createBusiness(email: string, password: string, storeName: string): Promise<User> {
     if (await this.userWithEmailExists(email)) {
       throw HttpStatus.BAD_REQUEST;
     }
     const user = await this.usersRepository.create({
       email: email,
       password: password,
-      role: "business"
+      role: "business",
+      storeName: storeName
     });
     await this.usersRepository.save(user);
     return user;
