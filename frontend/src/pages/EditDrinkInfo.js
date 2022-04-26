@@ -5,7 +5,7 @@ import styles from "../styles/EditDrinkInfo.module.css";
 import { TextField } from "@mui/material";
 import UseDrinkExists from "../hooks/use-drink-exists"
 
-async function addEditDrink(drinkName, drinkPrice, drinkExists) {
+async function addEditDrink(storeName, drinkName, drinkPrice, drinkExists) {
   console.log(drinkExists);
   if(drinkExists == false){
     var axios = require('axios');
@@ -25,7 +25,7 @@ async function addEditDrink(drinkName, drinkPrice, drinkExists) {
     axios(config)
     .then(function (response) {
       console.log(JSON.stringify(response.data));
-      newDrinkAddEdit(drinkName, drinkPrice);
+      newDrinkAddEdit(storeName, drinkName, drinkPrice);
     })
     .catch(function (error) {
       console.log(error);
@@ -35,7 +35,7 @@ async function addEditDrink(drinkName, drinkPrice, drinkExists) {
   var axios = require('axios');
   var qs = require('qs');
   var data = qs.stringify({
-    'storeName': 'Premier',
+    'storeName': storeName,
     'drinkName': drinkName,
     'drinkPrice': drinkPrice 
   });
@@ -57,11 +57,11 @@ async function addEditDrink(drinkName, drinkPrice, drinkExists) {
   });
 }
 
-async function newDrinkAddEdit(drinkName, drinkPrice){
+async function newDrinkAddEdit(storeName, drinkName, drinkPrice){
   var axios = require('axios');
   var qs = require('qs');
   var data = qs.stringify({
-    'storeName': 'Premier',
+    'storeName': storeName,
     'drinkName': drinkName,
     'drinkPrice': drinkPrice 
   });
@@ -83,11 +83,11 @@ async function newDrinkAddEdit(drinkName, drinkPrice){
   });
 }
 
-async function removeDrink(drinkName) {
+async function removeDrink(storeName, drinkName) {
   var axios = require('axios');
   var qs = require('qs');
   var data = qs.stringify({
-    'storeName': 'Premier',
+    'storeName': storeName,
     'drinkName': drinkName
   });
   var config = {
@@ -112,67 +112,76 @@ const EditDrinkInfo = () => {
   const [drinkName, setDrinkName] = useState("");
   const [drinkPrice, setDrinkPrice] = useState("");
   const drinkExistsBool = UseDrinkExists(drinkName).drinkExists;
+  const store = window.location.pathname.split("/")[2]
+  console.log(store)
 
-  return(
-    <main>
-      <Helmet>
-        <style>{"body {background-color: #363636; }"}</style>
-      </Helmet>
-      <div>
-        <h1>
-          <span className={styles.EditDrink}>Edit Drink Info</span>
-        </h1>
-      </div>
-
-      <div className={styles.DrinkNameLocation}>
-        <div className={styles.DrinkName}>
-          <TextField
-            label="Enter Drink Name"
-            variant="outlined"
-            size="normal"
-            InputLabelProps={{
-              style: { color: "azure" },
-            }}
-            value={drinkName}
-            onChange={(event) => setDrinkName(event.target.value)}
-          />
+  if(localStorage.getItem("logged-in")){
+    return(
+      <main>
+        <Helmet>
+          <style>{"body {background-color: #363636; }"}</style>
+        </Helmet>
+        <div>
+          <h1>
+            <span className={styles.EditDrink}>Edit Drink Info</span>
+          </h1>
         </div>
-      </div>
 
-      <div className={styles.PriceLocation}>
-        <div className={styles.Price}>
-          <TextField
-            label="Enter Price"
-            variant="outlined"
-            size="normal"
-            InputLabelProps={{
-              style: { color: "azure" },
-            }}
-            value={drinkPrice}
-            onChange={(event) => setDrinkPrice(event.target.value)}
-          />
+        <div className={styles.DrinkNameLocation}>
+          <div className={styles.DrinkName}>
+            <TextField
+              label="Enter Drink Name"
+              variant="outlined"
+              size="normal"
+              InputLabelProps={{
+                style: { color: "azure" },
+              }}
+              value={drinkName}
+              onChange={(event) => setDrinkName(event.target.value)}
+            />
+          </div>
         </div>
-      </div>
 
-      <div className={styles.AddDrinkButton}>
-        <Link to="/businessInventory">
-          <button 
-            type="submit"
-            onClick={() => addEditDrink(drinkName, drinkPrice, drinkExistsBool)}
-          >Add/Edit Drink</button>
-        </Link>
-      </div>
+        <div className={styles.PriceLocation}>
+          <div className={styles.Price}>
+            <TextField
+              label="Enter Price"
+              variant="outlined"
+              size="normal"
+              InputLabelProps={{
+                style: { color: "azure" },
+              }}
+              value={drinkPrice}
+              onChange={(event) => setDrinkPrice(event.target.value)}
+            />
+          </div>
+        </div>
 
-      <div className={styles.RemoveDrinkButton}>
-        <Link to="/businessInventory">
-          <button 
-            type="submit"
-            onClick={() => removeDrink(drinkName)}
-          >Remove Drink</button>
-        </Link>
-      </div>
-    </main>
-  );
+        <div className={styles.AddDrinkButton}>
+          <Link to={`/businessInventory/${store}`}>
+            <button 
+              type="submit"
+              onClick={() => addEditDrink(store, drinkName, drinkPrice, drinkExistsBool)}
+            >Add/Edit Drink</button>
+          </Link>
+        </div>
+
+        <div className={styles.RemoveDrinkButton}>
+          <Link to={`/businessInventory/${store}`}>
+            <button 
+              type="submit"
+              onClick={() => removeDrink(store, drinkName)}
+            >Remove Drink</button>
+          </Link>
+        </div>
+      </main>
+    );
+  }
+  else{
+    return(
+      <h1>Unauthorized</h1>
+    );
+  }
 };
 
 export default EditDrinkInfo;

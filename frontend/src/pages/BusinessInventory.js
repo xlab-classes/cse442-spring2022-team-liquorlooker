@@ -10,8 +10,9 @@ const BusinessInventory = () => {
     return { drinkName, price };
   }
 
+  const store = window.location.pathname.split("/")[2]
   const rows = [];
-  const storeData = useStoreData("Premier");
+  const storeData = useStoreData(store);
   storeData.forEach(element => {
     rows.push(createData(element.drinkName, element.drinkPrice))
   });
@@ -23,13 +24,8 @@ const BusinessInventory = () => {
       </Helmet>
       <div>
         <h1>
-          <span className={styles.StoreName}>Premier</span>
+          <span className={styles.StoreName}>{store}</span>
         </h1>
-      </div>
-      <div>
-        <h2>
-          <span className={styles.Location}>3900 Maple Rd, Amherst, NY 14226</span>
-        </h2>
       </div>
       <div>
       <TableContainer className={styles.Table}>
@@ -57,11 +53,11 @@ const BusinessInventory = () => {
     </TableContainer>
 
     </div>
-      <div className={styles.EditDrink}>
-        <Link to="/editDrinkInfo">
+      {localStorage.getItem("logged-in") ? <div className={styles.EditDrink}>
+        <Link to={`/editDrinkInfo/${store}`}>
           <button type="submit">Edit Drink Info</button>
         </Link>
-      </div>
+      </div> : null}
     </main>
   );
 };

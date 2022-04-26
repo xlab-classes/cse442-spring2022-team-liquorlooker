@@ -41,12 +41,12 @@ function App() {
           {/* <Route path="*" element={<NoMatch />} /> */}
         </Route>
 
-        <Route path='/businessInventory' element={<Layout />}>
+        <Route path='/businessInventory/:storeName' element={<Layout />}>
           <Route index element={<BusinessInventory />} />
           {/* <Route path="*" element={<NoMatch />} /> */}
         </Route>
 
-        <Route path='/editDrinkInfo' element={<Layout />}>
+        <Route path='/editDrinkInfo/:storeName' element={<Layout />}>
           <Route index element={<EditDrinkInfo />} />
           {/* <Route path="*" element={<NoMatch />} /> */}
         </Route>
