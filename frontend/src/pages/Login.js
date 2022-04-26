@@ -31,7 +31,6 @@ async function getData(loginEm, loginPsw) {
 }
 
 async function loginUser(user, userPsw) {
-  console.log(user);
   var axios = require("axios");
   var data = JSON.stringify({
     "email": user.email,
