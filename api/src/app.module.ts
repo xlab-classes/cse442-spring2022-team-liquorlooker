@@ -5,6 +5,7 @@ import { AppController } from './app.controller';
 import { Drink } from './drinks/drinks.entity';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
+import { CommentsModule } from './comments/comments.module';
 import { User } from './users/users.entity';
 import { AuthService } from './auth/auth.service';
 import { DrinksModule } from './drinks/drinks.module';
@@ -27,6 +28,7 @@ import { RolesGuard } from './auth/auth.role.guard';
     DrinksModule,
     storeModule,
     DrinksPriceModule,
+    CommentsModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: process.env.DB_HOST,
