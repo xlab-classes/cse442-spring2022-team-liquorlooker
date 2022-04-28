@@ -17,6 +17,7 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { APP_GUARD } from '@nestjs/core';
 import { RolesGuard } from './auth/auth.role.guard';
+import { LikesModule } from './likes/likes.module';
 @Module({
   imports: [
     ServeStaticModule.forRoot({
@@ -29,6 +30,7 @@ import { RolesGuard } from './auth/auth.role.guard';
     storeModule,
     DrinksPriceModule,
     CommentsModule,
+    LikesModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: process.env.DB_HOST,
