@@ -7,8 +7,12 @@ import { Button } from "@mui/material";
 
 const MyList = (props) => {
   const compareByPrice = (a, b) => {
-    return (a.drinkPrice < b.drinkPrice) ? 1 : ((b.drinkPrice < a.drinkPrice) ? -1 : 0);
-  }
+    return a.drinkPrice < b.drinkPrice
+      ? 1
+      : b.drinkPrice < a.drinkPrice
+      ? -1
+      : 0;
+  };
   const stores = props.stores.sort(compareByPrice);
   // if(props.data.length > 0){
   // return(
@@ -23,9 +27,7 @@ const MyList = (props) => {
   // )
   // }
 
-
-
-  if(stores.length > 0){
+  if (stores.length > 0) {
     return (
       <List
         sx={{
@@ -46,50 +48,52 @@ const MyList = (props) => {
         }}
       >
         <ul>
-          {
-            stores.map?.((store) => {
-              return <ListItem key={store}>
+          {stores.map?.((store) => {
+            return (
+              <ListItem key={store}>
                 <ListItemButton>
-                  <ListItemText primary={`${store.storeName} \n ${store.drinkName} $ ${store.drinkPrice}`}/>
+                  <ListItemText
+                    primary={`${store.storeName} \n ${
+                      store.drinkName
+                    } $ ${store.drinkPrice.toFixed(2)}`}
+                  />
                 </ListItemButton>
               </ListItem>
-            })
-          }
+            );
+          })}
         </ul>
       </List>
     );
-
-  }else{
-    return(
+  } else {
+    return (
       <List
-      sx={{
-        width: "100%",
-        maxWidth: 360,
-        color: "azure",
-        bgcolor: "#363636",
-        position: "relative",
-        overflow: "auto",
-        maxHeight: "79vh",
-        minWidth: "20vw",
-        maxWidth: "100vw",
-        overflow: "auto",
-        border: 1,
-        borderColor: "white",
-        borderRadius: 2,
-        "& ul": { padding: 0 },
-      }}
-    >
-      <ul>
+        sx={{
+          width: "100%",
+          maxWidth: 360,
+          color: "azure",
+          bgcolor: "#363636",
+          position: "relative",
+          overflow: "auto",
+          maxHeight: "79vh",
+          minWidth: "20vw",
+          maxWidth: "100vw",
+          overflow: "auto",
+          border: 1,
+          borderColor: "white",
+          borderRadius: 2,
+          "& ul": { padding: 0 },
+        }}
+      >
+        <ul>
           <ListItem>
             <ListItemButton>
               <ListItemText primary={"No Price Detected"} />
             </ListItemButton>
           </ListItem>
-      </ul>
-    </List>
+        </ul>
+      </List>
     );
   }
-
 };
 
 export default MyList;
