@@ -24,8 +24,6 @@ function useDrinksInRadius(radius, longitude, latitude, drinkName, onStoreChange
       console.log(`:${JSON.stringify(response.data)}`);
       setStores(response.data);
       onStoreChange(response.data);
-      
-
     });
   };
 

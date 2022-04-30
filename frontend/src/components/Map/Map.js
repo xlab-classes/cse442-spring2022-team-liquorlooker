@@ -11,6 +11,7 @@ import "./Map.css";
 import Locate from "../Location/Locate";
 import useDrinksInRadius from "../../hooks/use-drink-in-radius";
 import HomeIcon from "@mui/icons-material/Home";
+import { Button } from "@mui/material";
 
 const METERS = 1609.34;
 
@@ -20,7 +21,8 @@ function Map(props) {
   const [latitude, setLatitude] = useState(43.000637466942166);
   const [selected, setSelected] = useState(null);
 
-  const [directions, setDirections] = useState(0);
+  const [directions, setDirections] = useState(null);
+
   const stores = useDrinksInRadius(
     props.radius,
     longitude,
@@ -40,13 +42,17 @@ function Map(props) {
 
   // options for useMemo to disable random clickable icons
   // and disable default UI
-  const options = useMemo(
+  const mapOptions = useMemo(
     () => ({
       disableDefaultUI: true,
       clickableIcons: false,
     }),
     []
   );
+
+  const infowindowOptions = {
+    pixelOffset: new google.maps.Size(0, -45)
+  }
 
   const panTo = useCallback(({ lat, lng }) => {
     mapRef.current.panTo({ lat, lng });
@@ -106,14 +112,21 @@ function Map(props) {
   return (
     <>
       <Locate panTo={panTo} />
+      <Button>
+
+      </Button>
       <GoogleMap
         zoom={10}
         center={center}
         mapContainerClassName="map"
-        options={options}
+        options={mapOptions}
         onLoad={onLoad}
+        onClick={() => {
+          setDirections(null);
+        }}
       >
         {directions && <DirectionsRenderer directions={directions} />}
+        
         {stores.length > 0 &&
           stores.map?.((store) => {
             return (
@@ -122,30 +135,31 @@ function Map(props) {
                 position={{ lat: store.latitude, lng: store.longitude }}
                 onClick={() => getdirections(store)}
                 onMouseOver={() => {
-                  setSelected(store)
+                  setSelected(store);
                 }}
                 onMouseOut={setTimeout(() => {
-                  setSelected(null)
-                  
+                  setSelected(null);
                 }, 5000)}
               />
             );
           })}
 
-        {
-          selected && (
-          <InfoWindow position={{lat: selected.latitude + .0015, lng: selected.longitude}}>
+        {selected && (
+          <InfoWindow
+            position={{
+              lat: selected.latitude,
+              lng: selected.longitude,
+            }}
+            options={infowindowOptions}
+          >
             <div>
-              <h3>
-                {selected.storeName}
-              </h3>
+              <h3>{selected.storeName}</h3>
               <p>
-                {selected.drinkName} {'\n'} 
-                ${selected.drinkPrice}
+                {selected.drinkName} {"\n"}${selected.drinkPrice}
               </p>
             </div>
-          </InfoWindow>)
-        }
+          </InfoWindow>
+        )}
         <Marker
           position={curLocation}
           cursor={"Your Location"}
@@ -157,10 +171,6 @@ function Map(props) {
           radius={milesToMeters(props.radius)}
           options={closeOptions}
         />
-
-        {/* {locations.map?.((store) => {
-          return <Marker key={store.name} position={store.location} />;
-        })} */}
       </GoogleMap>
     </>
   );

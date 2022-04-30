@@ -7,7 +7,7 @@ import { Button } from "@mui/material";
 
 const MyList = (props) => {
   const compareByPrice = (a, b) => {
-    return (a.drinkPrice < b.drinkPrice) ? 1 : ((b.drinkPrice < a.drinkPrice) ? -1 : 0);
+    return (a.drinkPrice > b.drinkPrice) ? 1 : ((b.drinkPrice > a.drinkPrice) ? -1 : 0);
   }
   const stores = props.stores.sort(compareByPrice);
   // if(props.data.length > 0){
@@ -50,7 +50,7 @@ const MyList = (props) => {
             stores.map?.((store) => {
               return <ListItem key={store}>
                 <ListItemButton>
-                  <ListItemText primary={`${store.storeName} \n ${store.drinkName} $ ${store.drinkPrice}`}/>
+                  <ListItemText primary={`${store.storeName} ${store.drinkName}   $${store.drinkPrice}`}/>
                 </ListItemButton>
               </ListItem>
             })
