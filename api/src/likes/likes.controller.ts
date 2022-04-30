@@ -24,7 +24,7 @@ export class LikesController {
   }
 
   @Get('getLikes')
-  async getLikes(@Body() body) {
-    return await this.likesService.getLikeCount(body.drinkName);
+  async getLikes(@Query() query) {
+    return await this.likesService.getLikeCount(query.drinkName);
   }
 }
