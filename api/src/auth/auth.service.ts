@@ -15,9 +15,9 @@ export class AuthService {
     return await this.usersService.createUser(email, password);
   }
 
-  async registerBusiness(email: string, password: string): Promise<User> {
-    return await this.usersService.createBusiness(email, password);
-  }
+    async registerBusiness(email: string, password: string, storeName: string): Promise<User> {
+        return await this.usersService.createBusiness(email, password, storeName);
+    }
 
   async validateUser(email: string, password: string): Promise<User> {
     const user = await this.usersService.getUserByEmail(email);
