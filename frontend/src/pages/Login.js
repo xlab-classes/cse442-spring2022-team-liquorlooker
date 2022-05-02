@@ -50,6 +50,7 @@ async function loginUser(user, userPsw) {
       console.log(JSON.stringify(response.data));
       localStorage.setItem("logged-in", true)
       localStorage.setItem("store-name", user.storeName)
+      localStorage.setItem("user-email", user.email)
     })
     .catch(function (error) {
       console.log(error);
