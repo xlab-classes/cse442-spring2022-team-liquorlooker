@@ -112,7 +112,8 @@ const EditDrinkInfo = () => {
   const [drinkName, setDrinkName] = useState("");
   const [drinkPrice, setDrinkPrice] = useState("");
   const drinkExistsBool = UseDrinkExists(drinkName).drinkExists;
-  const store = window.location.pathname.split("/")[2]
+  let store = window.location.pathname.split("/")[2]
+  store = store.replace("%20", " ")
   console.log(store)
 
   if(localStorage.getItem("logged-in") && localStorage.getItem("store-name") === store){
