@@ -26,7 +26,6 @@ export class drinkPriceController {
     return await this.drinkPriceService.getDrinkPricesByName(query.drinkName);
   }
   @Get('getStoreInventory')
-  @UseGuards(AuthGuard())
   async getStoreInventory(@Query() query): Promise<drinkPrice[]> {
     return await this.drinkPriceService.getStoreInvetoryByName(query.storeName);
   }
