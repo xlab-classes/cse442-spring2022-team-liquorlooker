@@ -55,7 +55,7 @@ const MyList = (props) => {
                   <ListItemText
                     primary={`${store.storeName} \n ${
                       store.drinkName
-                    } $ ${store.drinkPrice.toFixed(2)}`}
+                    } $${store.drinkPrice.toFixed(2)}`}
                   />
                 </ListItemButton>
               </ListItem>

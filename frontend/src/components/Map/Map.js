@@ -139,7 +139,7 @@ function Map(props) {
                 }}
                 onMouseOut={setTimeout(() => {
                   setSelected(null);
-                }, 5000)}
+                }, 10000)}
               />
             );
           })}
@@ -155,7 +155,7 @@ function Map(props) {
             <div>
               <h3>{selected.storeName}</h3>
               <p>
-                {selected.drinkName} {"\n"}${selected.drinkPrice}
+                {selected.drinkName} {"\n"}${selected.drinkPrice.toFixed(2)}
               </p>
             </div>
           </InfoWindow>
