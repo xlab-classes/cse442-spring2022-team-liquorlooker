@@ -11,7 +11,7 @@ const BusinessInventory = () => {
   }
 
   let store = window.location.pathname.split("/")[2]
-  store = store.replace("%20", " ")
+  store = store.replaceAll("%20", " ")
   const rows = [];
   const storeData = useStoreData(store);
   storeData.forEach(element => {
