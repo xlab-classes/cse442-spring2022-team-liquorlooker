@@ -49,7 +49,8 @@ async function loginUser(user, userPsw) {
     .then(function (response) {
       console.log(JSON.stringify(response.data));
       localStorage.setItem("logged-in", true)
-      //SET USERNAME OR EMAIL FOR SPECIFIC PAGE LOADING
+      localStorage.setItem("store-name", user.storeName)
+      localStorage.setItem("user-email", user.email)
     })
     .catch(function (error) {
       console.log(error);

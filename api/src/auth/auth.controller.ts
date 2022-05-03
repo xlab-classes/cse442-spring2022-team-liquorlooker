@@ -31,8 +31,8 @@ export class AuthController {
 
   @Post('business/register')
   async registerBusiness(@Body() credentials: AuthDto): Promise<User> {
-    const { email, password } = credentials;
-    return await this.authService.registerBusiness(email, password);
+    const { email, password, storeName } = credentials;
+    return await this.authService.registerBusiness(email, password, storeName);
   }
   @Post('validateUser')
   async validate(@Body() credentials: AuthDto): Promise<User> {

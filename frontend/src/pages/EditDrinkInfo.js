@@ -115,7 +115,7 @@ const EditDrinkInfo = () => {
   const store = window.location.pathname.split("/")[2]
   console.log(store)
 
-  if(localStorage.getItem("logged-in")){
+  if(localStorage.getItem("logged-in") && localStorage.getItem("store-name") === store){
     return(
       <main>
         <Helmet>
