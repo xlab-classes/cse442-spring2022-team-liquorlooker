@@ -10,7 +10,8 @@ const BusinessInventory = () => {
     return { drinkName, price };
   }
 
-  const store = window.location.pathname.split("/")[2]
+  let store = window.location.pathname.split("/")[2]
+  store = store.replace("%20", " ")
   const rows = [];
   const storeData = useStoreData(store);
   storeData.forEach(element => {
