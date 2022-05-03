@@ -8,7 +8,9 @@ import {
   Body,
   Delete,
   Query,
+  UseGuards,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { query } from 'express';
 import { UpdateDateColumn } from 'typeorm';
 import { drinkPriceDto } from './drinkPrice.dto';
@@ -24,6 +26,7 @@ export class drinkPriceController {
     return await this.drinkPriceService.getDrinkPricesByName(query.drinkName);
   }
   @Get('getStoreInventory')
+  @UseGuards(AuthGuard())
   async getStoreInventory(@Query() query): Promise<drinkPrice[]> {
     return await this.drinkPriceService.getStoreInvetoryByName(query.storeName);
   }
