@@ -35,14 +35,14 @@ async function sendAddStore(em, stnm, psw, repsw, lat, long) {
   axios(config)
   .then(function (response) {
     console.log(JSON.stringify(response.data));
-    registerBusiness(em, psw)
+    registerBusiness(em, psw, stnm)
   })
   .catch(function (error) {
     console.log(error);
   });
 }
 
-async function registerBusiness(businessEmail, businessPsw){
+async function registerBusiness(businessEmail, businessPsw, businessName){
   var bcrypt = require("bcryptjs");
   var salt = bcrypt.genSaltSync(10);
   var hash = bcrypt.hashSync(businessPsw, salt);
@@ -52,6 +52,7 @@ async function registerBusiness(businessEmail, businessPsw){
   var data = qs.stringify({
     email: businessEmail,
     password: hash,
+    storeName: businessName,
   });
   var config = {
     method: "post",
