@@ -71,7 +71,7 @@ const Home = () => {
 
         {/* <MyList data={stores} /> */}
 
-        <MyList data={drinkPrices} name={drinkName} stores={stores}/>
+        <MyList drinkPrices={drinkPrices} drinkName={drinkName} stores={stores}/>
       </div>
 
       <div className="right">

@@ -3,9 +3,10 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import { ListItemButton } from "@mui/material";
-import { Button } from "@mui/material";
+import { Link , useNavigate} from "react-router-dom";
 
 const MyList = (props) => {
+  const navigate = useNavigate();
   const compareByPrice = (a, b) => {
     return a.drinkPrice > b.drinkPrice
       ? 1
@@ -26,6 +27,12 @@ const MyList = (props) => {
   // </Button>
   // )
   // }
+
+
+
+  const handleClick = () => {
+    return navigate("/DrinkDetail", {state: {drinkName: props.drinkName}});
+  }
 
   if (stores.length > 0) {
     return (
@@ -51,13 +58,19 @@ const MyList = (props) => {
           {stores.map?.((store) => {
             return (
               <ListItem key={store}>
-                <ListItemButton>
-                  <ListItemText
-                    primary={`${store.storeName} \n ${
-                      store.drinkName
-                    } $${store.drinkPrice.toFixed(2)}`}
-                  />
-                </ListItemButton>
+                <Link
+                  to={"/DrinkDetail"}
+                  state={{ drinkName: props.drinkName }}
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  <ListItemButton>
+                    <ListItemText
+                      primary={`${store.storeName} \n ${
+                        store.drinkName
+                      } $${store.drinkPrice.toFixed(2)}`}
+                    />
+                  </ListItemButton>
+                </Link>
               </ListItem>
             );
           })}

@@ -6,8 +6,14 @@ import Comments from "../components/Comments/Comments";
 import { ButtonGroup, IconButton } from "@mui/material";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
+import useComments from "../hooks/use-comments";
+import { useLocation } from "react-router";
 
 const DrinkDetail = () => {
+  const location = useLocation();
+  const { drinkName } = location.state;
+  const { comments, fetchComments, postComment } = useComments(drinkName);
+  console.log(comments);
   return (
     <body>
       <div>
@@ -15,7 +21,7 @@ const DrinkDetail = () => {
           <style>{"body {background-color: #363636; }"}</style>
         </Helmet>
 
-        <h1 style={{ color: "azure" }}>GIN</h1>
+        <h1 style={{ color: "azure" }}>{drinkName}</h1>
         <ButtonGroup variant="text" aria-label="text button group">
           <IconButton sx={{ color: "azure" }}>
             <ThumbUpIcon fontSize="large" />
@@ -24,7 +30,7 @@ const DrinkDetail = () => {
             <ThumbDownIcon fontSize="large" />
           </IconButton>
         </ButtonGroup>
-        <Comments />
+        <Comments comments={comments}/>
       </div>
     </body>
   );

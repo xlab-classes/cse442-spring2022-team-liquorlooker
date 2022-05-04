@@ -1,6 +1,6 @@
 import { Paper, Grid } from "@mui/material";
-function Comments(props) {
-  const comments = [
+function Comments({comments}) {
+  const data = [
     {
       userName: "Naqi",
       text: "Hi",
@@ -36,10 +36,10 @@ function Comments(props) {
                 <h3 style={{ margin: 0, textAlign: "left" }}>
                   {comment.userName}
                 </h3>
-                <p style={{ textAlign: "left" }}>{comment.text}. </p>
-                <p style={{ textAlign: "left", color: "gray" }}>
+                <p style={{ textAlign: "left" }}>{comment.comment}. </p>
+                {/* <p style={{ textAlign: "left", color: "gray" }}>
                   posted {comment.time} minutes ago
-                </p>
+                </p> */}
               </Grid>
             </Grid>
           </Paper>
