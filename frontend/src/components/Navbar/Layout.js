@@ -4,6 +4,7 @@ import "./Layout.css"
 import { TextField } from "@mui/material";
 
 const Layout = () => {
+  const [searchStore, setSearchStore] = React.useState("")
     return (
       <div className="container">
         {/* A "layout route" is a good place to put markup you want to
@@ -12,7 +13,7 @@ const Layout = () => {
           <nav className="navbar">
             <Link to="/" className="logo">LiquorLooker</Link>
             <ul className="nav-links">
-            {/* <div className="navbar-search">
+            { <div className="navbar-search">
               <TextField
                 id="navbar-search-tf"
                 label="Search"
@@ -21,12 +22,17 @@ const Layout = () => {
                 InputLabelProps={{
                   style: { color: "azure" },
                 }}
+                value={searchStore}
+                onChange={(event) => setSearchStore(event.target.value)}
                 InputProps={{
                   style: { color: "azure"},
+                  endAdornment: <Link to={`/businessInventory/${searchStore}`}>
+                    <button>Search</button>
+                  </Link>
                 }}
                 type="search"
               />
-            </div> */}
+            </div> }
               <li className="nav-item">
                 <Link to="/login" className="link">{localStorage.getItem("logged-in") ? "Profile" : "Login"}</Link>
               </li>

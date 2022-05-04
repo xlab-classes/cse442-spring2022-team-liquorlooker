@@ -8,7 +8,9 @@ import {
   Body,
   Delete,
   Query,
+  UseGuards,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { query } from 'express';
 import { UpdateDateColumn } from 'typeorm';
 import { drinkPriceDto } from './drinkPrice.dto';
