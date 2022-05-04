@@ -3,10 +3,9 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import { ListItemButton } from "@mui/material";
-import { Link , useNavigate} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const MyList = (props) => {
-  const navigate = useNavigate();
   const compareByPrice = (a, b) => {
     return a.drinkPrice > b.drinkPrice
       ? 1
@@ -28,23 +27,16 @@ const MyList = (props) => {
   // )
   // }
 
-
-
-  const handleClick = () => {
-    return navigate("/DrinkDetail", {state: {drinkName: props.drinkName}});
-  }
-
   if (stores.length > 0) {
     return (
       <List
         sx={{
           width: "100%",
-          maxWidth: 360,
           color: "azure",
           bgcolor: "#363636",
           position: "relative",
           overflow: "auto",
-          maxHeight: "79vh",
+          maxHeight: "80vh",
           minWidth: "20vw",
           maxWidth: "100vw",
           overflow: "auto",

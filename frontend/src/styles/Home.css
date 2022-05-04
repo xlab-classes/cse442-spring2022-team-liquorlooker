@@ -42,9 +42,7 @@
 #search-tf,
 #radius-tf {
   background-color: #514e4e;
-  border-style: solid;
   /* border-color: rgb(117, 117, 117); */
-  border-width: 1px;
   border-radius: 5px;
 }
 
@@ -54,7 +52,7 @@
   height: 100%;
   width: 100%;
   max-width: 70vw;
-  max-height: 80vh;
+  max-height: 75vh;
   border-style: solid;
   border-color: azure;
   border-width: 1px;

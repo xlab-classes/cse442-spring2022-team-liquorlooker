@@ -12,6 +12,11 @@ import { useLocation } from "react-router";
 const DrinkDetail = () => {
   const location = useLocation();
   const { drinkName } = location.state;
+  const loggedIn = localStorage.getItem("logged_in");
+  if(loggedIn){
+    const userEmail = localStorage.getItem("user-email");
+    const user = userEmail.substring(0, userEmail.indexOf('@'));
+  }
   const { comments, fetchComments, postComment } = useComments(drinkName);
   console.log(comments);
   return (

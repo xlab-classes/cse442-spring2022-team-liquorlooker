@@ -1,25 +1,10 @@
 import { Paper, Grid } from "@mui/material";
-function Comments({comments}) {
-  const data = [
-    {
-      userName: "Naqi",
-      text: "Hi",
-      time: 2,
-    },
-    {
-      userName: "Kaneki",
-      text: "Hello",
-      time: 4,
-    },
-    {
-      userName: "Shoto",
-      text: "Hello",
-      time: 4,
-    },
-  ];
+function Comments({ comments }) {
   return (
     <div>
-
+      {comments.length === 0 && 
+        <h1 style={{color: 'azure'}}>No ones left any comments 😭</h1>
+      }
       {comments?.map((comment) => {
         return (
           <Paper
@@ -37,9 +22,6 @@ function Comments({comments}) {
                   {comment.userName}
                 </h3>
                 <p style={{ textAlign: "left" }}>{comment.comment}. </p>
-                {/* <p style={{ textAlign: "left", color: "gray" }}>
-                  posted {comment.time} minutes ago
-                </p> */}
               </Grid>
             </Grid>
           </Paper>

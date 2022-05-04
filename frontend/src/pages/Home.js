@@ -12,7 +12,6 @@ import useDrinkNames from "../hooks/use-drink-names";
 import useDrinkPrice from "../hooks/use-drink-price";
 import Map from "../components/Map/Map";
 
-
 const Home = () => {
   const enter = 13;
   const drinkNames = useDrinkNames();
@@ -21,8 +20,8 @@ const Home = () => {
   const [radius, setRadius] = useState(1);
   const [stores, setStores] = useState([]);
 
-  console.log(`HOME store: ${JSON.stringify(stores)}`)
-  useDebugValue(stores ? `HOME: ${stores}` : 'IDK');
+  console.log(`HOME store: ${JSON.stringify(stores)}`);
+  useDebugValue(stores ? `HOME: ${stores}` : "IDK");
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -33,7 +32,7 @@ const Home = () => {
 
   const handleStoresChange = (stores) => {
     setStores(stores);
-  }
+  };
 
   return (
     <body className="main">
@@ -46,9 +45,17 @@ const Home = () => {
       <div className="sidebar">
         <div className="radius">
           <TextField
+            sx={{
+              "& .MuiOutlinedInput-root.Mui-focused": {
+                "& > fieldset": {
+                  borderColor: "black",
+                },
+              },
+            }}
             id="radius-tf"
             label="Radius"
             size="small"
+            // variant="filled"
             InputLabelProps={{
               style: { color: "azure" },
             }}
@@ -57,12 +64,12 @@ const Home = () => {
             }}
             defaultValue="1"
             onChange={(event) => {
-              if(event.target.value < 1){
-                event.target.value = ""
+              if (event.target.value < 1) {
+                event.target.value = "";
                 return event.target.value;
-              }else{
-                setRadius(event.target.value)
-                return event.target.value
+              } else {
+                setRadius(event.target.value);
+                return event.target.value;
               }
             }}
             type="number"
@@ -71,7 +78,11 @@ const Home = () => {
 
         {/* <MyList data={stores} /> */}
 
-        <MyList drinkPrices={drinkPrices} drinkName={drinkName} stores={stores}/>
+        <MyList
+          drinkPrices={drinkPrices}
+          drinkName={drinkName}
+          stores={stores}
+        />
       </div>
 
       <div className="right">
@@ -100,6 +111,13 @@ const Home = () => {
             renderInput={(params) => (
               <TextField
                 {...params}
+                sx={{
+                  "& .MuiOutlinedInput-root.Mui-focused": {
+                    "& > fieldset": {
+                      borderColor: "black",
+                    },
+                  },
+                }}
                 id="search-tf"
                 label="Search Drink"
                 fullWidth="true"
@@ -109,7 +127,10 @@ const Home = () => {
                 }}
                 InputProps={{
                   ...params.InputProps,
-                  style: { color: "azure" },
+                  style: { 
+                    color: "azure",
+                    padding : 3,
+                  },
                   type: "search",
                 }}
                 value={drinkName}
@@ -122,12 +143,14 @@ const Home = () => {
             )}
           />
         </div>
-          <Map radius={radius} drinkName={drinkName} onStoreChange={handleStoresChange}/>
-        {/* <img className="map" src={Map} alt="Map" /> */}
+        <Map
+          radius={radius}
+          drinkName={drinkName}
+          onStoreChange={handleStoresChange}
+        />
       </div>
     </body>
   );
 };
-
 
 export default Home;
