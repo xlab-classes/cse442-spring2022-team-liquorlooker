@@ -17,6 +17,7 @@ export default function DrinkDetail() {
   const [loggedIn, setLoggedIn] = useState(localStorage.getItem("logged-in"));
   const [userEmail, setUserEmail] = useState(localStorage.getItem("user-email"));
   const [user, setUser] = useState("")
+  const [storeName, setStoreName] = useState(localStorage.getItem("store-name"));
 
   // userEmail.substring(0, userEmail.indexOf("@"))
   console.log(loggedIn);
@@ -97,11 +98,18 @@ export default function DrinkDetail() {
               onClick={() => {
                 console.log("button clicked")
                 // setUserEmail(userEmail.substring(0, userEmail.indexOf("@")));
+                console.log(storeName)
                 console.log(`user: ${userEmail}`);
                 console.log(`user: ${user}`);
-
-                if(user === "" || comment === "") return;
-                postComment(user, comment)
+                if(storeName !== "null" && comment !== ""){
+                  postComment(storeName, comment);
+                  return;
+                }else if(user === "" || comment === ""){
+                  return;
+                }else{
+                  postComment(user, comment);
+                  return;
+                }
               }}
             >
               Submit
