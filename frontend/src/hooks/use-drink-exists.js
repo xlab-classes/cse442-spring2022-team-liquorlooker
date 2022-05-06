@@ -1,27 +1,25 @@
 import { useEffect, useState } from "react";
+import axios from "axios";
 
-const UseDrinkExists = (drinkName) => {
-  const [drinkExists, setStoreData] = useState(false);
+export default function useDrinkExists(drinkName) {
+  const [drinkExists, setDrinkExists] = useState(false);
 
   const fetchDrinkExists = async () => {
-    var axios = require('axios');
-    var qs = require('qs');
-    var data = qs.stringify({
-      'drinkName': drinkName
-    });
     var config = {
       method: 'get',
       url: `http://${process.env.REACT_APP_DEV_URL}/drinks/exists`,
       headers: { 
         'Content-Type': 'application/x-www-form-urlencoded'
       },
-      data : data
+      params : {
+        drinkName : drinkName,
+      }
     };
 
     axios(config)
     .then(function (response) {
       console.log(JSON.stringify(response.data));
-      setStoreData(response.data);
+      setDrinkExists(response.data);
     })
     .catch(function (error) {
       console.log(error);
@@ -32,7 +30,5 @@ const UseDrinkExists = (drinkName) => {
     fetchDrinkExists();
   }, [drinkName]);
 
-  return drinkExists;
+  return drinkExists.drinkExists;
 };
-
-export default UseDrinkExists;
