@@ -61,5 +61,5 @@ export default function useLikes(drinkName) {
     fetchLikes();
   }, []);
 
-  return { likes, fetchLikes ,handleClick };
+  return { likes, fetchLikes, handleClick };
 }

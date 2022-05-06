@@ -31,7 +31,7 @@ export default function useComments(drinkName) {
       method: "post",
       url: `http://${process.env.REACT_APP_DEV_URL}/comments/addComment`,
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
+        "Content-Type": "application/json",
       },
       data: {
         userName: userName,
@@ -43,6 +43,7 @@ export default function useComments(drinkName) {
     axios(config)
       .then(function (response) {
         console.log(JSON.stringify(response.data));
+        fetchComments();
       })
       .catch(function (error) {
         console.log(error);

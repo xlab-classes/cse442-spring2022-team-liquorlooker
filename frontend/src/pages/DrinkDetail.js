@@ -1,12 +1,10 @@
-import { React, useState }from "react";
-import styles from "../styles/DrinkDetailCSS.module.css";
-import { Helmet } from "react-helmet";
-import beer from "../images/download.jpg";
-import Comments from "../components/Comments/Comments";
-import { IconButton, Button } from "@mui/material";
-import ThumbUpIcon from "@mui/icons-material/ThumbUp";
-import useComments from "../hooks/use-comments";
+import { React, useState } from "react";
 import { useLocation } from "react-router";
+import { Helmet } from "react-helmet";
+import { IconButton, Button, TextField } from "@mui/material";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import Comments from "../components/Comments/Comments";
+import useComments from "../hooks/use-comments";
 import useLikes from "../hooks/use-drink-likes";
 
 export default function DrinkDetail() {
@@ -14,19 +12,22 @@ export default function DrinkDetail() {
   const { drinkName } = location.state;
   const { comments, fetchComments, postComment } = useComments(drinkName);
   // const [thumbsUp, setThumbsUp] = useState(false);
-  const [disable, setDisable] = useState(false)
   const { likes, fetchLikes, handleClick } = useLikes(drinkName);
+  const [comment, setComment] = useState("");
+  const [loggedIn, setLoggedIn] = useState(localStorage.getItem("logged-in"));
+  const [userEmail, setUserEmail] = useState(localStorage.getItem("user-email"));
+  const [user, setUser] = useState("")
 
-  const loggedIn = localStorage.getItem("logged_in");
+  // userEmail.substring(0, userEmail.indexOf("@"))
+  console.log(loggedIn);
 
-  if (loggedIn) {
-    const userEmail = localStorage.getItem("user-email");
-    const user = userEmail.substring(0, userEmail.indexOf("@"));
-  }
-
+  // const userEmail = localStorage.getItem("user-email");
+  // const user = userEmail.substring(0, userEmail.indexOf("@"));
+  console.log(userEmail);
+  
 
   return (
-    <body>
+    <>
       <div>
         <Helmet>
           <style>{"body {background-color: #363636; }"}</style>
@@ -36,19 +37,79 @@ export default function DrinkDetail() {
         {/* <Button variant="outlined" startIcon={<ThumbUpIcon />} style={{ color: "azure" }} >
           {likes.like_count}
         </Button> */}
-        <IconButton 
-          style={{ color: "azure", display: "flex", flexDirection: "column" }} 
+        <IconButton
+          style={{ color: "azure", display: "flex", flexDirection: "column" }}
           size="small"
-          // disabled={!loggedIn}
+          disabled={!loggedIn}
           onClick={() => {
-            handleClick()
+            handleClick();
           }}
         >
           <ThumbUpIcon fontSize="large" />
           <div>{likes.like_count}</div>
         </IconButton>
+
+        {loggedIn !== null && loggedIn === "true" && (
+          <div
+            style={{
+              maxWidth: "96.2vw",
+              display: "flex",
+              flexDirection: "column",
+              marginLeft: "15px",
+              // justifyContent: "left",
+              alignItems: "center"
+            }}
+          >
+            <TextField
+              sx={{
+                "& .MuiOutlinedInput-root.Mui-focused": {
+                  "& > fieldset": {
+                    borderColor: "black",
+                  },
+                },
+              }}
+              id="filled-textarea"
+              // variant="filled"
+              rows={4}
+              label="Comment"
+              placeholder="Leave a comment"
+              justifyContent="right"
+              margin="normal"
+              onChange={(event) => {
+                setComment(event.target.value);
+                setUser(userEmail.substring(0, userEmail.indexOf("@")))
+                console.log(comment);
+              }}
+              InputLabelProps={{
+                style: { color: "azure" },
+              }}
+              InputProps={{
+                style: { color: "azure" },
+              }}
+              disabled={!loggedIn}
+              multiline
+              fullWidth
+            />
+            <Button 
+              size="medium" 
+              variant="contained" 
+              style={{maxWidth: "20%"}}
+              onClick={() => {
+                console.log("button clicked")
+                // setUserEmail(userEmail.substring(0, userEmail.indexOf("@")));
+                console.log(`user: ${userEmail}`);
+                console.log(`user: ${user}`);
+
+                if(user === "" || comment === "") return;
+                postComment(user, comment)
+              }}
+            >
+              Submit
+            </Button>
+          </div>
+        )}
         <Comments comments={comments} />
       </div>
-    </body>
+    </>
   );
-};
+}
