@@ -8,7 +8,7 @@ function useDrinksInRadius(radius, longitude, latitude, drinkName, onStoreChange
 
   
   const fetchDrinksInRadius = async () => {
-    if(drinkName === "" || !drinkExists) return;
+    if(drinkName === "") return;
     var config = {
       method: "get",
       url: `http://${process.env.REACT_APP_DEV_URL}/drinkPrice/drinkInRadius`,

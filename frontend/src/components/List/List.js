@@ -30,7 +30,7 @@ const MyList = (props) => {
   // }
 
   // if (stores.length > 0) {
-    console.log(drinkExists)
+  console.log(drinkExists);
   return (
     <>
       {drinkExists && stores.length > 0 && (
@@ -74,6 +74,36 @@ const MyList = (props) => {
           </ul>
         </List>
       )}
+      {
+        drinkExists && stores.length === 0 && (
+          <List
+          sx={{
+            width: "100%",
+            maxWidth: 360,
+            color: "azure",
+            bgcolor: "#363636",
+            position: "relative",
+            overflow: "auto",
+            maxHeight: "79vh",
+            minWidth: "20vw",
+            maxWidth: "100vw",
+            overflow: "auto",
+            border: 1,
+            borderColor: "white",
+            borderRadius: 2,
+            "& ul": { padding: 0 },
+          }}
+        >
+          <ul>
+            <ListItem>
+              <ListItemButton>
+                <ListItemText primary={"Try Increasing the Radius"} />
+              </ListItemButton>
+            </ListItem>
+          </ul>
+        </List>
+        )
+      }
       {!drinkExists && (
         <List
           sx={{
