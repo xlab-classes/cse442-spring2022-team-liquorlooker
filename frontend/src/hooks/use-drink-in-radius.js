@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import useDrinkExists from "./use-drink-exists";
 
 function useDrinksInRadius(radius, longitude, latitude, drinkName, onStoreChange) {
   const [stores, setStores] = useState([]);
+  const drinkExists = useDrinkExists(drinkName);
 
+  
   const fetchDrinksInRadius = async () => {
-    if(drinkName === "") return;
+    if(drinkName === "" || !drinkExists) return;
     var config = {
       method: "get",
       url: `http://${process.env.REACT_APP_DEV_URL}/drinkPrice/drinkInRadius`,
@@ -24,7 +27,10 @@ function useDrinksInRadius(radius, longitude, latitude, drinkName, onStoreChange
       console.log(`:${JSON.stringify(response.data)}`);
       setStores(response.data);
       onStoreChange(response.data);
-    });
+    })
+    .catch(function (error) {
+      console.log(error);
+    });;
   };
 
   useEffect(() => {
