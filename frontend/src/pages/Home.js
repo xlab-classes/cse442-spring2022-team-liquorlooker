@@ -3,8 +3,6 @@ import { useLoadScript } from "@react-google-maps/api";
 import TextField from "@mui/material/TextField";
 import "../styles/Home.css";
 import MyList from "../components/List/List";
-// import Map from "../images/maps.png";
-import stores from "../components/List/store.json";
 import { Helmet } from "react-helmet";
 import Autocomplete from "@mui/material/Autocomplete";
 import { Paper } from "@mui/material";

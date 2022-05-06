@@ -9,7 +9,7 @@ export default function useComments(drinkName) {
       method: "get",
       url: `http://${process.env.REACT_APP_DEV_URL}/comments/getComments`,
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
+        "Content-Type": "application/json",
       },
       params: {
         drinkName: drinkName,
@@ -29,7 +29,7 @@ export default function useComments(drinkName) {
   const postComment = async (userName, comment) => {
     var config = {
       method: "post",
-      url: "localhost:3000/comments/addComment",
+      url: `http://${process.env.REACT_APP_DEV_URL}/comments/addComment`,
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },

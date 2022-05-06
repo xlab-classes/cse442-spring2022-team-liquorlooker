@@ -1,24 +1,30 @@
-import React from "react";
+import { React, useState }from "react";
 import styles from "../styles/DrinkDetailCSS.module.css";
 import { Helmet } from "react-helmet";
 import beer from "../images/download.jpg";
 import Comments from "../components/Comments/Comments";
-import { ButtonGroup, IconButton } from "@mui/material";
+import { IconButton, Button } from "@mui/material";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
-import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import useComments from "../hooks/use-comments";
 import { useLocation } from "react-router";
+import useLikes from "../hooks/use-drink-likes";
 
-const DrinkDetail = () => {
+export default function DrinkDetail() {
   const location = useLocation();
   const { drinkName } = location.state;
-  const loggedIn = localStorage.getItem("logged_in");
-  if(loggedIn){
-    const userEmail = localStorage.getItem("user-email");
-    const user = userEmail.substring(0, userEmail.indexOf('@'));
-  }
   const { comments, fetchComments, postComment } = useComments(drinkName);
-  console.log(comments);
+  // const [thumbsUp, setThumbsUp] = useState(false);
+  const [disable, setDisable] = useState(false)
+  const { likes, fetchLikes, handleClick } = useLikes(drinkName);
+
+  const loggedIn = localStorage.getItem("logged_in");
+
+  if (loggedIn) {
+    const userEmail = localStorage.getItem("user-email");
+    const user = userEmail.substring(0, userEmail.indexOf("@"));
+  }
+
+
   return (
     <body>
       <div>
@@ -27,18 +33,22 @@ const DrinkDetail = () => {
         </Helmet>
 
         <h1 style={{ color: "azure" }}>{drinkName}</h1>
-        <ButtonGroup variant="text" aria-label="text button group">
-          <IconButton sx={{ color: "azure" }}>
-            <ThumbUpIcon fontSize="large" />
-          </IconButton>
-          <IconButton sx={{ color: "azure" }}>
-            <ThumbDownIcon fontSize="large" />
-          </IconButton>
-        </ButtonGroup>
-        <Comments comments={comments}/>
+        {/* <Button variant="outlined" startIcon={<ThumbUpIcon />} style={{ color: "azure" }} >
+          {likes.like_count}
+        </Button> */}
+        <IconButton 
+          style={{ color: "azure", display: "flex", flexDirection: "column" }} 
+          size="small"
+          // disabled={!loggedIn}
+          onClick={() => {
+            handleClick()
+          }}
+        >
+          <ThumbUpIcon fontSize="large" />
+          <div>{likes.like_count}</div>
+        </IconButton>
+        <Comments comments={comments} />
       </div>
     </body>
   );
 };
-
-export default DrinkDetail;
