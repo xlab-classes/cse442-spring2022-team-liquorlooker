@@ -139,7 +139,11 @@ function Map(props) {
                 }}
                 onMouseOut={setTimeout(() => {
                   setSelected(null);
+<<<<<<< HEAD
                 }, 10000)}
+=======
+                }, 5000)}
+>>>>>>> sprint4-issue#87
               />
             );
           })}
@@ -147,10 +151,16 @@ function Map(props) {
         {selected && (
           <InfoWindow
             position={{
+<<<<<<< HEAD
               lat: selected.latitude,
               lng: selected.longitude,
             }}
             options={infowindowOptions}
+=======
+              lat: selected.latitude + 0.0015,
+              lng: selected.longitude,
+            }}
+>>>>>>> sprint4-issue#87
           >
             <div>
               <h3>{selected.storeName}</h3>
