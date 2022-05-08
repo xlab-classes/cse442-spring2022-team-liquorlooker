@@ -43,7 +43,7 @@ const Layout = () => {
                 />
               </div> }
                 <li className="nav-item">
-                  <Link to={`/businessInventory/${localStorage.getItem("store-name")}`} className="link">Profile</Link>
+                  <Link to={`/businessInventory/${localStorage.getItem("store-name")}`} className="link">{localStorage.getItem("store-name")}</Link>
                 </li>
                 <div className="nav-item">
                   <li className="link" onClick={() => logout()}>
