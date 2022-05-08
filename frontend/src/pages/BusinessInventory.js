@@ -15,7 +15,7 @@ const BusinessInventory = () => {
   const rows = [];
   const storeData = useStoreData(store);
   storeData.forEach(element => {
-    rows.push(createData(element.drinkName, element.drinkPrice))
+    rows.push(createData(element.drinkName, element.drinkPrice.toFixed(2)))
   });
 
   if(localStorage.getItem("store-name") === store){
