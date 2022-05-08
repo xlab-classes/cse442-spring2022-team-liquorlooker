@@ -35,6 +35,7 @@ const Home = () => {
   return (
     <body className="main">
       <Helmet>
+        <title>Liquor Looker</title>
         <style>{"body { background-color: #363636; }"}</style>
       </Helmet>
 

@@ -31,6 +31,8 @@ export default function DrinkDetail() {
     <>
       <div>
         <Helmet>
+        <title>Liquor Looker</title>
+
           <style>{"body {background-color: #363636; }"}</style>
         </Helmet>
 
