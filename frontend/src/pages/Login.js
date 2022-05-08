@@ -51,6 +51,8 @@ async function loginUser(user, userPsw) {
       localStorage.setItem("logged-in", true)
       localStorage.setItem("store-name", user.storeName)
       localStorage.setItem("user-email", user.email)
+      alert("Logged In")
+      window.location.reload()
     })
     .catch(function (error) {
       console.log(error);
@@ -81,6 +83,9 @@ const Login = () => {
             InputLabelProps={{
               style: { color: "azure" },
             }}
+            InputProps={{
+              style: { color: "azure" },
+            }}
             value={loginEmail}
             onChange={(event) => setLoginEmail(event.target.value)}
           />
@@ -94,6 +99,9 @@ const Login = () => {
             variant="outlined"
             size="normal"
             InputLabelProps={{
+              style: { color: "azure" },
+            }}
+            InputProps={{
               style: { color: "azure" },
             }}
             type="password"

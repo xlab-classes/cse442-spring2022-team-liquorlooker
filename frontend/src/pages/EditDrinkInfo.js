@@ -51,6 +51,7 @@ async function addEditDrink(storeName, drinkName, drinkPrice, drinkExists) {
   axios(config)
   .then(function (response) {
     console.log(JSON.stringify(response.data));
+    window.location.reload()
   })
   .catch(function (error) {
     console.log(error);
@@ -77,6 +78,8 @@ async function newDrinkAddEdit(storeName, drinkName, drinkPrice){
   axios(config)
   .then(function (response) {
     console.log(JSON.stringify(response.data));
+    alert("Added Drink")
+    window.location.reload()
   })
   .catch(function (error) {
     console.log(error);
@@ -102,6 +105,8 @@ async function removeDrink(storeName, drinkName) {
   axios(config)
   .then(function (response) {
     console.log(JSON.stringify(response.data));
+    alert("Removed Drink")
+    window.location.reload()
   })
   .catch(function (error) {
     console.log(error);
@@ -111,7 +116,7 @@ async function removeDrink(storeName, drinkName) {
 const EditDrinkInfo = () => {
   const [drinkName, setDrinkName] = useState("");
   const [drinkPrice, setDrinkPrice] = useState("");
-  const drinkExistsBool = UseDrinkExists(drinkName).drinkExists;
+  const drinkExistsBool = false
   let store = window.location.pathname.split("/")[2]
   store = store.replaceAll("%20", " ")
   console.log(store)
@@ -137,6 +142,9 @@ const EditDrinkInfo = () => {
               InputLabelProps={{
                 style: { color: "azure" },
               }}
+              InputProps={{
+                style: { color: "azure" },
+              }}
               value={drinkName}
               onChange={(event) => setDrinkName(event.target.value)}
             />
@@ -150,6 +158,9 @@ const EditDrinkInfo = () => {
               variant="outlined"
               size="normal"
               InputLabelProps={{
+                style: { color: "azure" },
+              }}
+              InputProps={{
                 style: { color: "azure" },
               }}
               value={drinkPrice}

@@ -38,6 +38,7 @@ async function sendData(em, psw, repsw) {
   axios(config)
     .then(function (response) {
       console.log(JSON.stringify(response.data));
+      alert("Registered")
     })
     .catch(function (error) {
       console.log(error);
@@ -69,6 +70,9 @@ const RegisterUser = () => {
             InputLabelProps={{
               style: { color: "azure" },
             }}
+            InputProps={{
+              style: { color: "azure" },
+            }}
             value={email}
             onChange={(event) => setEmail(event.target.value)}
           />
@@ -82,6 +86,9 @@ const RegisterUser = () => {
             variant="outlined"
             size="normal"
             InputLabelProps={{
+              style: { color: "azure" },
+            }}
+            InputProps={{
               style: { color: "azure" },
             }}
             type="password"
@@ -98,6 +105,9 @@ const RegisterUser = () => {
             variant="outlined"
             size="normal"
             InputLabelProps={{
+              style: { color: "azure" },
+            }}
+            InputProps={{
               style: { color: "azure" },
             }}
             type="password"

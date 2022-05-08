@@ -66,6 +66,7 @@ async function registerBusiness(businessEmail, businessPsw, businessName){
   axios(config)
     .then(function (response) {
       console.log(JSON.stringify(response.data));
+      alert("Registered")
     })
     .catch(function (error) {
       console.log(error);
@@ -100,6 +101,9 @@ const RegisterBusiness = () => {
             InputLabelProps={{
               style: { color: "azure" },
             }}
+            InputProps={{
+              style: { color: "azure" },
+            }}
             value={email}
             onChange={(event) => setEmail(event.target.value)}
           />
@@ -115,6 +119,9 @@ const RegisterBusiness = () => {
             InputLabelProps={{
               style: { color: "azure" },
             }}
+            InputProps={{
+              style: { color: "azure" },
+            }}
             value={storeName}
             onChange={(event) => setStoreName(event.target.value)}
           />
@@ -128,6 +135,9 @@ const RegisterBusiness = () => {
             variant="outlined"
             size="normal"
             InputLabelProps={{
+              style: { color: "azure" },
+            }}
+            InputProps={{
               style: { color: "azure" },
             }}
             type="password"
@@ -146,6 +156,9 @@ const RegisterBusiness = () => {
             InputLabelProps={{
               style: { color: "azure" },
             }}
+            InputProps={{
+              style: { color: "azure" },
+            }}
             type="password"
             value={reenterPassword}
             onChange={(event) => setReenterPassword(event.target.value)}
@@ -162,6 +175,9 @@ const RegisterBusiness = () => {
             InputLabelProps={{
               style: { color: "azure" },
             }}
+            InputProps={{
+              style: { color: "azure" },
+            }}
             value={latitude}
             onChange={(event) => setLatitude(event.target.value)}
           />
@@ -175,6 +191,9 @@ const RegisterBusiness = () => {
             variant="outlined"
             size="normal"
             InputLabelProps={{
+              style: { color: "azure" },
+            }}
+            InputProps={{
               style: { color: "azure" },
             }}
             value={longitude}
