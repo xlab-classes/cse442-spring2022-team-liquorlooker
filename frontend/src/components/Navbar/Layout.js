@@ -13,7 +13,7 @@ function logout(){
 
 const Layout = () => {
   const [searchStore, setSearchStore] = React.useState("")
-  if(localStorage.getItem("logged-in") && localStorage.getItem("store-name") != null){
+  if(localStorage.getItem("logged-in") && localStorage.getItem("store-name") !== "null"){
       return (
         <div className="container">
           {/* A "layout route" is a good place to put markup you want to
@@ -35,13 +35,13 @@ const Layout = () => {
                   onChange={(event) => setSearchStore(event.target.value)}
                   InputProps={{
                     style: { color: "azure"},
-                    endAdornment: <Link to={`/businessInventory/${searchStore}`}>
-                      <button>Search</button>
-                    </Link>
                   }}
                   type="search"
                 />
               </div> }
+                <li className="nav-item">
+                  <Link to={`/businessInventory/${searchStore}`} className="link">Search</Link>
+                </li>
                 <li className="nav-item">
                   <Link to={`/businessInventory/${localStorage.getItem("store-name")}`} className="link">{localStorage.getItem("store-name")}</Link>
                 </li>
@@ -61,7 +61,7 @@ const Layout = () => {
         
       );
     }
-    else if(localStorage.getItem("logged-in") && localStorage.getItem("store-name") === null){
+    else if(localStorage.getItem("logged-in") && localStorage.getItem("store-name") === "null"){
       return (
         <div className="container">
           {/* A "layout route" is a good place to put markup you want to
@@ -83,17 +83,17 @@ const Layout = () => {
                   onChange={(event) => setSearchStore(event.target.value)}
                   InputProps={{
                     style: { color: "azure"},
-                    endAdornment: <Link to={`/businessInventory/${searchStore}`}>
-                      <button>Search</button>
-                    </Link>
                   }}
                   type="search"
                 />
               </div> }
+                <li className="nav-item">
+                  <Link to={`/businessInventory/${searchStore}`} className="link">Search</Link>
+                </li>
                 <div className="nav-item">
-                  <li className="link" onClick={() => logout()}>
-                    Logout
-                  </li>
+                <li className="link" onClick={() => logout()}>
+                  Logout
+                </li>
                 </div>
               </ul>
             </nav>
@@ -126,14 +126,14 @@ const Layout = () => {
                   value={searchStore}
                   onChange={(event) => setSearchStore(event.target.value)}
                   InputProps={{
-                    style: { color: "azure"},
-                    endAdornment: <Link to={`/businessInventory/${searchStore}`}>
-                      <button>Search</button>
-                    </Link>
+                    style: { color: "azure" },
                   }}
                   type="search"
                 />
               </div> }
+                <li className="nav-item">
+                  <Link to={`/businessInventory/${searchStore}`} className="link">Search</Link>
+                </li>
                 <li className="nav-item">
                   <Link to="/login" className="link">Login</Link>
                 </li>
