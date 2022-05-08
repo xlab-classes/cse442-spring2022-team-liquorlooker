@@ -13,6 +13,8 @@ import useDrinksInRadius from "../../hooks/use-drink-in-radius";
 import HomeIcon from "@mui/icons-material/Home";
 import { Button } from "@mui/material";
 
+import logo from "../../images/vodkaBottle.svg";
+
 const METERS = 1609.34;
 
 function Map(props) {
@@ -51,8 +53,8 @@ function Map(props) {
   );
 
   const infowindowOptions = {
-    pixelOffset: new google.maps.Size(0, -45)
-  }
+    pixelOffset: new google.maps.Size(0, -45),
+  };
 
   const panTo = useCallback(({ lat, lng }) => {
     mapRef.current.panTo({ lat, lng });
@@ -112,9 +114,7 @@ function Map(props) {
   return (
     <>
       <Locate panTo={panTo} />
-      <Button>
-
-      </Button>
+      <Button></Button>
       <GoogleMap
         zoom={10}
         center={center}
@@ -126,12 +126,17 @@ function Map(props) {
         }}
       >
         {directions && <DirectionsRenderer directions={directions} />}
-        
+
         {stores.length > 0 &&
           stores.map?.((store) => {
             return (
               <Marker
                 key={store.storeName}
+                icon={{
+                  url: logo,
+                  anchor: new google.maps.Point(17, 46),
+                  scaledSize: new google.maps.Size(50, 50),
+                }}
                 position={{ lat: store.latitude, lng: store.longitude }}
                 onClick={() => getdirections(store)}
                 onMouseOver={() => {

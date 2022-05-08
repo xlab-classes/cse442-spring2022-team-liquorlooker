@@ -1,13 +1,14 @@
 {
   "files": {
-    "main.css": "/static/css/main.a9fe6906.css",
-    "main.js": "/static/js/main.324722a7.js",
+    "main.css": "/static/css/main.6a32a244.css",
+    "main.js": "/static/js/main.bbe9f6bf.js",
+    "static/media/vodkaBottle.svg": "/static/media/vodkaBottle.c30dd57001b60ea521dbecbf21934ca7.svg",
     "index.html": "/index.html",
-    "main.a9fe6906.css.map": "/static/css/main.a9fe6906.css.map",
-    "main.324722a7.js.map": "/static/js/main.324722a7.js.map"
+    "main.6a32a244.css.map": "/static/css/main.6a32a244.css.map",
+    "main.bbe9f6bf.js.map": "/static/js/main.bbe9f6bf.js.map"
   },
   "entrypoints": [
-    "static/css/main.a9fe6906.css",
-    "static/js/main.324722a7.js"
+    "static/css/main.6a32a244.css",
+    "static/js/main.bbe9f6bf.js"
   ]
 }
