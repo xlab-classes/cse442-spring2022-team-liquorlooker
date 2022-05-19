@@ -21,5 +21,16 @@ Under `/frontend` create `.env.development` and `.env.production`. Both of these
 - `REACT_APP_DEV_URL` The URL at which you can view the website. The development URL should be `localhost:<port>`, while the production URL should be the hostname on which it is run.
 - `REACT_APP_GOOGLE_MAPS_API_KEY` First you must [obtain a Google api key](https://developers.google.com/maps/documentation/javascript/get-api-key) then place it here.
 
+## Running the app
+With dependencies installed and environment variables populated in the necessary files, you are ready to run the app. This is a two-step process, and requires two terminal windows. Make sure your database is running and visible.
+
+In the first window `cd` into `/api` and run `npm run start`.
+
+In the second window `cd` into `/frontend` and run `npm start`. For more detailed instructions on testing and production, look [here](frontend/README.md)
+
+If you would like these processes to continue running after you close your terminal, add an `&` after each command, such as `npm run start &` and `npm start &`.
+
+You can view the website by placing the `REACT_APP_DEV_URL` into your browser.
+
 ## Testing
 See testing instructions [here](TESTING.md)
